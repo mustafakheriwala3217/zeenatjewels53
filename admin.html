@@ -156,6 +156,11 @@ textarea { padding: 12px; min-height: 110px; resize: vertical; }
           <span style="font-size: 14px; font-weight: 500">Photos <span class="muted" style="font-weight: 400">(up to 6, first one is the main photo)</span></span>
           <div class="photos" id="photos"></div>
         </div>
+        <div class="field">
+          <label for="f-model">3D model <span class="muted" style="font-weight: 400">(optional, .glb file up to 25 MB)</span></label>
+          <div id="model-now" class="msg" hidden></div>
+          <input id="f-model" type="file" accept=".glb,model/gltf-binary">
+        </div>
         <div class="field"><label for="f-name">Product name</label><input id="f-name" type="text" placeholder="e.g. Ruby Silver Ring" required></div>
         <div class="row2">
           <div class="field"><label for="f-cat">Category</label>
@@ -201,6 +206,7 @@ let categories = [];
 const MAX_PHOTOS = 6;
 let sb = null, products = [], days = 0, editId = null;
 let photos = []; // { url, file? } — file present means not uploaded yet
+let modelUrl = null; // current saved 3D model for the product being edited
 
 function toast(m) { const t = $('toast'); t.textContent = m; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { t.hidden = true; }, 2600); }
 function showMsg(el, text, kind) { el.textContent = text; el.className = 'msg' + (kind ? ' ' + kind : ''); el.hidden = !text; }
@@ -301,6 +307,14 @@ function compress(file) {
   });
 }
 
+function renderModel() {
+  const box = $('model-now');
+  if (!modelUrl) { box.hidden = true; box.innerHTML = ''; return; }
+  box.hidden = false; box.className = 'msg ok';
+  box.innerHTML = '3D model added. <button type="button" class="btn btn-line btn-sm" id="model-rm" style="margin-left: 8px">Remove 3D model</button>';
+  $('model-rm').addEventListener('click', () => { modelUrl = null; renderModel(); });
+}
+
 /* ---------- Product form ---------- */
 $('f-cat').addEventListener('change', () => { if (!editId) $('f-ring').checked = ['gold', 'silver'].includes($('f-cat').value); });
 
@@ -312,6 +326,7 @@ function resetForm() {
   photos.forEach(p => { if (p.file) URL.revokeObjectURL(p.url); });
   photos = [];
   renderPhotos();
+  modelUrl = null; $('f-model').value = ''; renderModel();
   $('form-h').textContent = 'Add a Product';
   $('f-save').textContent = 'Save Product';
   $('cancel-edit').hidden = true;
@@ -330,6 +345,7 @@ function startEdit(p) {
   $('f-ring').checked = !!p.is_ring; $('f-new').checked = !!p.is_new; $('f-visible').checked = p.visible !== false;
   photos = (p.images || []).map(u => ({ url: u }));
   renderPhotos();
+  modelUrl = p.model_url || null; $('f-model').value = ''; renderModel();
   $('form-h').textContent = 'Edit Product';
   $('f-save').textContent = 'Save Changes';
   $('cancel-edit').hidden = false;
@@ -352,6 +368,17 @@ $('pform').addEventListener('submit', async (e) => {
       showMsg($('f-msg'), 'Uploading photo ' + done + ' of ' + pending + '…');
       urls.push(await uploadImage(p.file));
     }
+    let model = modelUrl;
+    const mf = $('f-model').files && $('f-model').files[0];
+    if (mf) {
+      if (!/\.glb$/i.test(mf.name)) throw new Error('3D model must be a .glb file.');
+      if (mf.size > 25 * 1024 * 1024) throw new Error('3D model is larger than 25 MB. Export it smaller and try again.');
+      showMsg($('f-msg'), 'Uploading 3D model…');
+      const mpath = 'models/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.glb';
+      const up = await sb.storage.from('products').upload(mpath, mf, { contentType: 'model/gltf-binary', upsert: false });
+      if (up.error) throw new Error('3D model upload failed: ' + up.error.message);
+      model = sb.storage.from('products').getPublicUrl(mpath).data.publicUrl;
+    }
     showMsg($('f-msg'), 'Saving…');
     const priceRaw = $('f-price').value.trim();
     const row = {
@@ -361,7 +388,10 @@ $('pform').addEventListener('submit', async (e) => {
       sort_order: parseInt($('f-sort').value, 10) || 100,
       is_ring: $('f-ring').checked, is_new: $('f-new').checked, visible: $('f-visible').checked
     };
+    const had = editId ? (products.find(x => x.id === editId) || {}).model_url : null;
+    if (model || had) row.model_url = model; // only sent when 3D is used, so saving works before add-3d.sql is run
     const res = editId ? await sb.from('products').update(row).eq('id', editId) : await sb.from('products').insert(row);
+    if (res.error && /model_url/.test(res.error.message)) throw new Error('3D models are not switched on yet. Run add-3d.sql in Supabase SQL Editor once, then save again.');
     if (res.error) throw new Error(res.error.message);
     const wasEdit = !!editId;
     resetForm();
@@ -460,7 +490,7 @@ async function loadProducts() {
   $('plist').innerHTML = products.length ? products.map((p, i) =>
     '<div class="prow"><div class="thumb">' + (p.images && p.images[0] ? '<img src="' + esc(p.images[0]) + '" alt="">' : '') + '</div><div>' +
     '<h3>' + esc(p.name) + (p.visible ? '' : '<span class="pill off">Hidden</span>') + (p.is_new ? '<span class="pill">New</span>' : '') + '</h3>' +
-    '<div class="meta">' + esc(CATS[p.category] || p.category) + ' · ' + (p.price == null ? 'Price on request' : '₹ ' + Number(p.price).toLocaleString('en-IN')) + ' · ' + (p.images ? p.images.length : 0) + ' photo(s)</div>' +
+    '<div class="meta">' + esc(CATS[p.category] || p.category) + ' · ' + (p.price == null ? 'Price on request' : '₹ ' + Number(p.price).toLocaleString('en-IN')) + ' · ' + (p.images ? p.images.length : 0) + ' photo(s)' + (p.model_url ? ' · 3D model' : '') + '</div>' +
     '<div class="acts"><button class="btn btn-line btn-sm" data-edit="' + i + '">Edit</button>' +
     '<button class="btn btn-line btn-sm" data-vis="' + i + '">' + (p.visible ? 'Hide' : 'Show') + '</button>' +
     '<button class="btn btn-line btn-sm" data-del="' + i + '" style="color: var(--bad); border-color: var(--bad)">Delete</button></div></div></div>'
@@ -482,7 +512,7 @@ $('plist').addEventListener('click', async (e) => {
     if (!window.confirm('Delete "' + p.name + '"? This cannot be undone.')) return;
     const { error } = await sb.from('products').delete().eq('id', p.id);
     if (error) { toast('Could not delete: ' + error.message); return; }
-    const paths = (p.images || []).map(u => u.split('/products/')[1]).filter(Boolean);
+    const paths = (p.images || []).concat(p.model_url ? [p.model_url] : []).map(u => u.split('/products/')[1]).filter(Boolean);
     if (paths.length) sb.storage.from('products').remove(paths).then(() => {}, () => {});
     if (editId === p.id) resetForm();
     toast('Deleted'); loadProducts();

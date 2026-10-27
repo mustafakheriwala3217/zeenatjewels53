@@ -106,6 +106,12 @@ section.block { padding-block: 44px; }
 .prod button.open:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
 .prod .ph { aspect-ratio: 4 / 5; max-width: 100%; background: var(--tile); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--muted); position: relative; overflow: hidden; }
 .prod .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tilt { transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--sc, 1)); transition: transform .3s ease, box-shadow .3s ease; transform-style: preserve-3d; }
+.tilt.on { --sc: 1.03; box-shadow: 0 18px 30px -18px rgba(46, 33, 26, 0.55); transition: transform .08s linear, box-shadow .3s ease; }
+.tilt .glare { position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0; transition: opacity .3s ease; background: radial-gradient(circle at var(--gx, 50%) var(--gy, 30%), rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0) 55%); }
+.tilt.on .glare { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .tilt, .tilt.on { transform: none; transition: none; } }
+.tag3d { position: absolute; top: 8px; right: 8px; z-index: 2; background: var(--night); color: var(--night-gold); font-size: 10px; letter-spacing: 0.16em; padding: 4px 8px; }
 .prod .tag { position: absolute; top: 8px; left: 8px; background: var(--card); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 8px; color: var(--gold-ink); z-index: 1; }
 .prod h3 { font-size: 19px; line-height: 1.2; overflow-wrap: anywhere; }
 .price { font-size: 14px; font-weight: 500; color: var(--muted); }
@@ -140,6 +146,9 @@ footer small { font-size: 12px; color: var(--muted); }
 .gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; background: var(--tile); }
 .gallery > * { flex: 0 0 100%; aspect-ratio: 1 / 1; max-height: 420px; scroll-snap-align: start; }
 .gallery img { width: 100%; height: 100%; object-fit: cover; }
+.gallery .m3d { position: relative; background: var(--tile); }
+.gallery model-viewer { width: 100%; height: 100%; background-color: var(--tile); --poster-color: transparent; }
+.m3d-label { position: absolute; left: 10px; bottom: 10px; background: var(--night); color: var(--night-gold); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 10px; pointer-events: none; }
 .gallery .noimg { display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; color: var(--muted); font-size: 13px; }
 .gallery-hint { font-size: 12px; color: var(--muted); text-align: center; margin-top: -4px; }
 .sheet h2 { font-size: 32px; line-height: 1.1; overflow-wrap: anywhere; }
@@ -438,7 +447,7 @@ function renderGrid() {
     const i = PRODUCTS.indexOf(p);
     const img = (p.images && p.images[0]) ? '<img loading="lazy" src="' + esc(p.images[0]) + '" alt="' + esc(p.name) + '">' :
       '<svg width="40" height="27" style="color:#7A5C17" aria-hidden="true"><use href="#gem" stroke-width="3"/></svg>Photo coming soon';
-    return '<article class="prod"><button class="open" data-open="' + i + '" aria-label="View ' + esc(p.name) + '"><div class="ph">' + (p.is_new ? '<span class="tag">New</span>' : '') + img +
+    return '<article class="prod"><button class="open" data-open="' + i + '" aria-label="View ' + esc(p.name) + '"><div class="ph tilt"><span class="glare"></span>' + (p.is_new ? '<span class="tag">New</span>' : '') + (p.model_url ? '<span class="tag3d">3D</span>' : '') + img +
       '</div><h3>' + esc(p.name) + '</h3><span class="price">' + priceText(p.price) + '</span></button>' +
       '<a class="btn btn-line" data-wa-product="' + i + '" target="_blank" rel="noopener" href="' + esc(wa('Hello, I want to order the ' + p.name + '.')) + '"><svg class="icon" style="width:16px;height:16px" aria-hidden="true"><use href="#wa"/></svg>Enquire</a></article>';
   }).join('') || '<p class="empty">No pieces here yet. Message us on WhatsApp and we\'ll show you what we have.</p>';
@@ -461,10 +470,13 @@ function orderText() {
 function openProduct(i) {
   current = PRODUCTS[i];
   const imgs = current.images || [];
-  $('p-gallery').innerHTML = imgs.length ? imgs.map((u, n) => '<img src="' + esc(u) + '" alt="' + esc(current.name) + ' photo ' + (n + 1) + '">').join('') :
+  const model = current.model_url ? '<div class="m3d"><model-viewer src="' + esc(current.model_url) + '" alt="3D view of ' + esc(current.name) + '" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="20deg" touch-action="pan-y" shadow-intensity="1" exposure="1.1" interaction-prompt="auto" ar' + (imgs[0] ? ' poster="' + esc(imgs[0]) + '"' : '') + '></model-viewer><span class="m3d-label">3D · drag to rotate</span></div>' : '';
+  if (current.model_url) load3D();
+  const slides = (model ? 1 : 0) + imgs.length;
+  $('p-gallery').innerHTML = slides ? model + imgs.map((u, n) => '<img src="' + esc(u) + '" alt="' + esc(current.name) + ' photo ' + (n + 1) + '">').join('') :
     '<div class="noimg"><svg width="90" height="60" style="color: var(--gold-ink)" aria-hidden="true"><use href="#gem" stroke-width="2"/></svg>Photo coming soon</div>';
   $('p-gallery').scrollLeft = 0;
-  $('p-gallery-hint').hidden = imgs.length < 2;
+  $('p-gallery-hint').hidden = slides < 2;
   $('p-cat').textContent = catName(current.category) + (current.stone ? ' · ' + current.stone : '');
   $('p-name').textContent = current.name;
   $('p-price').textContent = priceText(current.price);
@@ -578,6 +590,33 @@ $('copy-upi').addEventListener('click', () => {
   try { navigator.clipboard.writeText(UPI_ID).then(done, fallback); } catch (err) { fallback(); }
 });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.scrim').forEach(s => { if (!s.hidden) closeSheet(s); }); });
+
+/* 3D tilt on product photos (mouse / trackpad) */
+document.addEventListener('pointermove', (e) => {
+  if (e.pointerType === 'touch') return;
+  const t = e.target.closest && e.target.closest('.tilt');
+  document.querySelectorAll('.tilt.on').forEach(el => { if (el !== t) resetTilt(el); });
+  if (!t) return;
+  const r = t.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+  t.classList.add('on');
+  t.style.setProperty('--ry', ((x - 0.5) * 14).toFixed(2) + 'deg');
+  t.style.setProperty('--rx', ((0.5 - y) * 12).toFixed(2) + 'deg');
+  t.style.setProperty('--gx', (x * 100).toFixed(0) + '%');
+  t.style.setProperty('--gy', (y * 100).toFixed(0) + '%');
+});
+function resetTilt(el) { el.classList.remove('on'); el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); }
+document.addEventListener('pointerleave', () => document.querySelectorAll('.tilt.on').forEach(resetTilt));
+
+/* Loads the 3D viewer only when a product with a 3D model is opened */
+function load3D() {
+  if (window.customElements && customElements.get('model-viewer')) return;
+  if (document.getElementById('mv-lib')) return;
+  const sc = document.createElement('script');
+  sc.type = 'module'; sc.id = 'mv-lib';
+  sc.src = 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js';
+  document.head.appendChild(sc);
+}
 
 async function load() {
   renderFilters();
