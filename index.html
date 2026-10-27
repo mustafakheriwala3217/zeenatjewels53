@@ -302,7 +302,7 @@ select { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: v
         <select id="p-size"><option value="">Select your size</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>Not sure, help me</option></select>
       </div>
       <a class="btn btn-wa" id="p-wa" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>Order on WhatsApp</a>
-      <p class="muted center" style="margin: 0; font-size: 13px">Your message includes this product's photo. We'll reply with courier charges for your address.</p>
+      <p class="muted center" style="margin: 0; font-size: 13px">Your message includes this product's photo. We'll reply with payment details and courier charges.</p>
       <dl class="details" id="p-details"></dl>
     </div>
   </div>
@@ -417,7 +417,7 @@ function orderMsg(p, size) {
     (p.stone ? 'Stone: ' + p.stone + '\n' : '') +
     (p.is_ring && size ? 'Ring size: ' + size + '\n' : '') +
     (link ? '\nPhoto: ' + link + '\n' : '') +
-    '\nPlease share the courier charges for my address.';
+    '\nI want to buy this product, please give payment details and courier charges.';
 }
 function orderText() { return orderMsg(current, $('p-size').value); }
 
