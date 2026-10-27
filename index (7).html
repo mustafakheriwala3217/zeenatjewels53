@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zeenat Jewels</title>
+<meta name="description" content="Zeenat Jewels - gold and silver rings, ruby, emerald, pearl and aqeeq gemstones, takhti, kurta buttons and tasbih of original stones. Order on WhatsApp.">
+<meta name="theme-color" content="#F4E6DA">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 120 80%27%3E%3Cg fill=%27none%27 stroke=%27%23B8913A%27 stroke-width=%276%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M24 6h72l20 22-56 46L4 28z%27/%3E%3Cpath d=%27M4 28h112%27/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500&display=swap">
+<style>
+:root {
+  --blush: #F4E6DA; --card: #F8EDE3; --tile: #EBD5C5; --paper: #FAF1E9; --line: #E2CBB8;
+  --ink: #3A2A1F; --muted: #6B5546; --gold: #B8913A; --gold-ink: #7A5C17;
+  --night: #2E211A; --night-gold: #E7CF95; --night-text: #E3D2C4; --wa: #1E7A47;
+  --display: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --body: 'Jost', 'Segoe UI', system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+[hidden] { display: none !important; }
+img { max-width: 100%; display: block; }
+body { background: var(--blush); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--blush); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; margin: 0; text-wrap: balance; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.eyebrow { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-ink); }
+.frame { border: 1px solid var(--gold); padding: 6px; background: var(--card); }
+.frame > .inner { border: 1px solid var(--gold); }
+.btn { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 22px; font: 500 15px/1 var(--body); letter-spacing: 0.05em; text-decoration: none; cursor: pointer; border: 1px solid transparent; transition: transform .15s ease, background .15s ease; }
+.btn:active { transform: scale(0.98); }
+.btn-dark { background: var(--night); color: var(--card); }
+.btn-dark:hover { background: #46332A; }
+.btn-wa { background: var(--wa); color: #FFFFFF; }
+.btn-wa:hover { background: #18663B; }
+.btn-line { border-color: var(--ink); color: var(--ink); background: transparent; }
+.btn-line:hover { background: var(--paper); }
+.icon { width: 20px; height: 20px; flex-shrink: 0; }
+
+.strip { background: var(--night); color: var(--night-gold); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; text-align: center; padding-block: 9px; padding-inline: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; line-height: 1.4; }
+.strip .icon { width: 16px; height: 16px; }
+.ship { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+.ship .icon { color: var(--gold-ink); width: 18px; height: 18px; }
+.steps { display: flex; gap: 8px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.steps span[aria-current="step"] { color: var(--gold-ink); font-weight: 500; }
+.form { display: grid; gap: 12px; }
+.form .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 380px) { .form .two { grid-template-columns: 1fr; } }
+.form input, .form textarea { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: #FFFFFF; color: var(--ink); font: 15px var(--body); padding: 0 12px; border-radius: 0; min-width: 0; }
+.form textarea { padding: 12px; min-height: 92px; resize: vertical; }
+.form .req { color: var(--gold-ink); }
+.err { color: #9B1B30; font-size: 13px; }
+.addr-box { background: var(--paper); border: 1px solid var(--line); padding: 12px 14px; display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; font-size: 14px; }
+.addr-box button { background: none; border: none; color: var(--ink); text-decoration: underline; font: 14px var(--body); cursor: pointer; padding: 4px; min-height: 44px; }
+header.site { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--blush); border-bottom: 1px solid var(--line); }
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 62px; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+.brand span { font-family: var(--display); font-size: 21px; font-weight: 600; letter-spacing: 0.16em; white-space: nowrap; }
+.nav { display: flex; gap: 22px; font-size: 14px; }
+.nav a { text-decoration: none; padding-block: 12px; }
+.nav a:hover { color: var(--gold-ink); }
+.icon-btn { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; color: var(--ink); background: none; border: none; cursor: pointer; }
+@media (max-width: 760px) { .nav { display: none; } }
+
+.hero { padding-block: 22px 40px; }
+.hero .inner { padding: 44px 22px 34px; display: grid; gap: 18px; justify-items: center; text-align: center; }
+.hero h1 { font-size: clamp(48px, 13vw, 88px); line-height: 0.95; letter-spacing: 0.08em; color: var(--gold-ink); }
+.tagline { font-family: var(--display); font-style: italic; font-size: clamp(21px, 4vw, 28px); font-weight: 500; }
+.rule { width: 48px; height: 1px; background: var(--gold); }
+.hero p.lead { margin: 0; max-width: 46ch; color: var(--muted); }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; width: 100%; margin-top: 6px; }
+.cta-row .btn { flex: 1 1 220px; max-width: 320px; }
+.diamond-draw path { stroke-dasharray: 100; stroke-dashoffset: 0; animation: draw 1.6s ease-out both; }
+@keyframes draw { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .diamond-draw path { animation: none; } .btn { transition: none; } }
+
+section.block { padding-block: 44px; }
+.head { display: grid; gap: 6px; justify-items: center; text-align: center; margin-bottom: 22px; }
+.head h2 { font-size: clamp(30px, 6vw, 40px); }
+.cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+@media (min-width: 900px) { .cats { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; } }
+.cat { display: grid; gap: 10px; background: none; border: none; padding: 0; cursor: pointer; color: var(--ink); font: inherit; min-width: 0; }
+.cat .ph { aspect-ratio: 1; max-width: 100%; background: var(--tile); border: 1px solid #DCC0AC; display: flex; align-items: center; justify-content: center; transition: background .2s; position: relative; overflow: hidden; }
+.cat .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.cat:hover .ph img { transform: scale(1.04); }
+@media (prefers-reduced-motion: reduce) { .cat .ph img { transition: none; } }
+.cat:hover .ph { background: #E4CBB8; }
+.cat span { font-family: var(--display); font-size: 20px; font-weight: 600; }
+.stones { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.chip { min-height: 44px; padding: 0 18px; border: 1px solid #CDB09A; border-radius: 999px; background: var(--paper); display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font: 14px var(--body); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--night); border-color: var(--night); color: var(--card); }
+.dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+
+.shop { background: var(--paper); border-block: 1px solid var(--line); }
+.shop-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.shop-head h2 { font-size: clamp(30px, 6vw, 40px); }
+.filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 18px; scrollbar-width: none; }
+.filters .chip { flex-shrink: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 18px 12px; }
+@media (min-width: 900px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 20px; } }
+.prod { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.prod button.open { all: unset; cursor: pointer; display: grid; gap: 8px; }
+.prod button.open:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+.prod .ph { aspect-ratio: 4 / 5; max-width: 100%; background: var(--tile); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--muted); position: relative; overflow: hidden; }
+.prod .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tilt { transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--sc, 1)); transition: transform .3s ease, box-shadow .3s ease; transform-style: preserve-3d; }
+.tilt.on { --sc: 1.03; box-shadow: 0 18px 30px -18px rgba(46, 33, 26, 0.55); transition: transform .08s linear, box-shadow .3s ease; }
+.tilt .glare { position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0; transition: opacity .3s ease; background: radial-gradient(circle at var(--gx, 50%) var(--gy, 30%), rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0) 55%); }
+.tilt.on .glare { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .tilt, .tilt.on { transform: none; transition: none; } }
+.tag3d { position: absolute; top: 8px; right: 8px; z-index: 2; background: var(--night); color: var(--night-gold); font-size: 10px; letter-spacing: 0.16em; padding: 4px 8px; }
+.prod .tag { position: absolute; top: 8px; left: 8px; background: var(--card); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 8px; color: var(--gold-ink); z-index: 1; }
+.prod h3 { font-size: 19px; line-height: 1.2; overflow-wrap: anywhere; }
+.price { font-size: 14px; font-weight: 500; color: var(--muted); }
+.prod .btn { min-height: 44px; font-size: 13px; padding: 0 12px; }
+.empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding-block: 24px; }
+
+.night { background: var(--night); color: var(--card); }
+.promises { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 26px; }
+.promise { display: flex; gap: 16px; align-items: flex-start; }
+.promise h3 { color: var(--night-gold); font-size: 22px; }
+.promise p { margin: 4px 0 0; color: var(--night-text); font-size: 14px; }
+
+.contact .inner { padding: 34px 22px; display: grid; gap: 16px; justify-items: center; text-align: center; }
+.contact h2 { font-size: clamp(30px, 6vw, 40px); }
+.contact p { margin: 0; color: var(--muted); max-width: 44ch; }
+.lines { display: grid; gap: 2px; }
+.lines a { min-height: 46px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 16px; text-decoration: none; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+footer { border-top: 1px solid var(--gold); padding-block: 32px calc(48px + env(safe-area-inset-bottom, 0px)); text-align: center; display: grid; gap: 8px; justify-items: center; }
+footer .name { font-family: var(--display); font-size: 22px; font-weight: 600; letter-spacing: 0.16em; }
+footer .tl { font-family: var(--display); font-style: italic; font-size: 17px; color: var(--muted); }
+footer small { font-size: 12px; color: var(--muted); }
+
+.fab { position: fixed; right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 58px; height: 58px; border-radius: 50%; background: var(--wa); color: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 18px rgba(46, 33, 26, 0.3); z-index: 8; }
+
+.scrim { position: fixed; inset: 0; background: rgba(46, 33, 26, 0.5); z-index: 20; display: flex; align-items: flex-end; justify-content: center; }
+.sheet { background: var(--blush); width: 100%; max-width: 560px; max-height: 92%; overflow-y: auto; border-top: 2px solid var(--gold); padding: 0 max(16px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); animation: up .25s ease-out; }
+@media (min-width: 700px) { .scrim { align-items: center; } .sheet { border: 1px solid var(--gold); max-height: 88%; } }
+@keyframes up { from { transform: translateY(24px); opacity: .6; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .sheet { animation: none; } }
+.sheet-top { position: sticky; top: 0; background: var(--blush); display: flex; align-items: center; justify-content: space-between; padding-block: 8px; z-index: 2; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.sheet-top span { font-family: var(--display); font-size: 18px; font-weight: 600; letter-spacing: 0.14em; }
+.gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; background: var(--tile); }
+.gallery > * { flex: 0 0 100%; aspect-ratio: 1 / 1; max-height: 420px; scroll-snap-align: start; }
+.gallery img { width: 100%; height: 100%; object-fit: cover; }
+.gallery .m3d { position: relative; background: var(--tile); }
+.gallery model-viewer { width: 100%; height: 100%; background-color: var(--tile); --poster-color: transparent; }
+.m3d-label { position: absolute; left: 10px; bottom: 10px; background: var(--night); color: var(--night-gold); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 10px; pointer-events: none; }
+.gallery .noimg { display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; color: var(--muted); font-size: 13px; }
+.gallery-hint { font-size: 12px; color: var(--muted); text-align: center; margin-top: -4px; }
+.sheet h2 { font-size: 32px; line-height: 1.1; overflow-wrap: anywhere; }
+.sheet .amount { font-family: var(--display); font-size: 28px; font-weight: 600; color: var(--gold-ink); }
+.stack { display: grid; gap: 12px; }
+.field label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+select { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: var(--paper); color: var(--ink); font: 15px var(--body); padding: 0 12px; border-radius: 0; }
+.details { border-top: 1px solid var(--line); margin: 8px 0 0; }
+.details div { display: flex; justify-content: space-between; gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--line); }
+.details dt { color: var(--muted); }
+.details dd { margin: 0; text-align: right; }
+.apps { display: grid; gap: 10px; }
+.app { min-height: 54px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border: 1px solid #CDB09A; background: var(--paper); text-decoration: none; font-size: 16px; }
+.qr { width: 200px; height: 200px; max-width: 100%; background: #FFFFFF; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; padding: 8px; }
+.qr svg { width: 100%; height: 100%; }
+.note { display: flex; gap: 12px; align-items: flex-start; background: var(--paper); border: 1px solid var(--line); padding: 14px; font-size: 14px; }
+.toast { position: fixed; left: 50%; bottom: calc(90px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--night); color: var(--card); padding: 10px 18px; font-size: 14px; z-index: 30; }
+.muted { color: var(--muted); }
+.center { text-align: center; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="wa" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.4z"/><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M9 8.6c0 3.3 3 6.3 6.3 6.4l1.2-1.6-2-1-1 .9c-1-.5-1.9-1.4-2.4-2.4l.9-1-1-2z"/></symbol>
+    <symbol id="gem" viewBox="0 0 120 80"><g fill="none" stroke="currentColor" stroke-linejoin="round"><path d="M24 6h72l20 22-56 46L4 28z"/><path d="M4 28h112"/><path d="M44 6L30 28l30 46 30-46L76 6"/><path d="M44 6l16 22 16-22"/></g></symbol>
+    <symbol id="insta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.8"/></g></symbol>
+    <symbol id="phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M5 4h3l1.5 4-2 1.3a11 11 0 0 0 7.2 7.2L16 14.5l4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4z"/></symbol>
+    <symbol id="card" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h4"/></g></symbol>
+    <symbol id="mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></g></symbol>
+    <symbol id="globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.7 5.6 3.7 9s-1.2 6.4-3.7 9c-2.5-2.6-3.7-5.6-3.7-9S9.5 5.6 12 3z"/></g></symbol>
+    <symbol id="truck" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M2.5 6.5h11v9h-11z"/><path d="M13.5 9.5h4l3 3v3h-7"/><circle cx="6.5" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></g></symbol>
+    <symbol id="close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="chev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></symbol>
+  </defs>
+</svg>
+
+<div class="strip"><svg class="icon" aria-hidden="true"><use href="#truck"/></svg><span>Courier across India &amp; International</span></div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Zeenat Jewels home">
+      <svg width="30" height="20" style="color: var(--gold)" aria-hidden="true"><use href="#gem" stroke-width="4"/></svg>
+      <span>ZEENAT JEWELS</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#collection">Collection</a>
+      <a href="#shop">New Arrivals</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="icon-btn" href="https://instagram.com/Zeenat_Jewels" target="_blank" rel="noopener" aria-label="Zeenat Jewels on Instagram"><svg class="icon" aria-hidden="true"><use href="#insta"/></svg></a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <div class="frame">
+      <div class="inner">
+        <svg class="diamond-draw" width="128" height="86" viewBox="0 0 120 80" aria-hidden="true">
+          <g fill="none" stroke="#B8913A" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+            <path pathLength="100" d="M24 6H96L116 28L60 74L4 28Z"/>
+            <path pathLength="100" d="M4 28H116"/>
+            <path pathLength="100" d="M44 6L30 28L60 74L90 28L76 6"/>
+            <path pathLength="100" d="M44 6L60 28L76 6"/>
+          </g>
+        </svg>
+        <h1>ZEENAT<br>JEWELS</h1>
+        <div class="tagline">Rare Jewels, Timeless Elegance</div>
+        <div class="rule"></div>
+        <p class="lead">Gold &amp; silver rings, precious gemstones, takhti, kurta buttons and tasbih of original stones &amp; crystal.</p>
+        <div class="cta-row">
+          <a class="btn btn-dark" id="hero-wa" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>Order on WhatsApp</a>
+          <a class="btn btn-line" href="#shop">View Collection</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="collection">
+    <div class="head"><span class="eyebrow">Our Collection</span><h2>Shop by Category</h2></div>
+    <div class="cats" id="cats"></div>
+  </section>
+
+  <section class="wrap" style="padding-block: 0 48px">
+    <div class="head" style="margin-bottom: 16px"><h2 style="font-size: 28px">Precious Stones</h2></div>
+    <div class="stones" id="stones"></div>
+  </section>
+
+  <section class="shop" id="shop">
+    <div class="wrap" style="padding-block: 40px 48px">
+      <div class="shop-head">
+        <div style="display: grid; gap: 4px"><span class="eyebrow">Just In</span><h2>New Arrivals</h2></div>
+        <span class="muted" id="count" style="font-size: 14px"></span>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Filter products"></div>
+      <div class="grid" id="grid"><p class="empty">Loading the collection…</p></div>
+    </div>
+  </section>
+
+  <section class="night">
+    <div class="wrap" style="padding-block: 44px">
+      <div class="promises">
+        <div class="promise"><svg width="32" height="22" style="color: var(--night-gold)" aria-hidden="true"><use href="#gem" stroke-width="4"/></svg><div><h3>Original Stones</h3><p>Ruby, emerald, pearl, aqeeq and crystal, chosen with care.</p></div></div>
+        <div class="promise"><svg width="30" height="30" style="color: var(--night-gold)" aria-hidden="true"><use href="#wa"/></svg><div><h3>Order on WhatsApp</h3><p>Ask about any piece, see more photos and order in one chat.</p></div></div>
+        <div class="promise"><svg width="30" height="30" style="color: var(--night-gold)" aria-hidden="true"><use href="#truck"/></svg><div><h3>Courier Delivery</h3><p>Safely packed and couriered across India and to international addresses.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap contact" id="contact">
+    <div class="frame">
+      <div class="inner">
+        <h2>Get in Touch</h2>
+        <p>Message or call us for ring sizes, stone selection and bulk kurta button orders.</p>
+        <div class="lines">
+          <a href="https://instagram.com/Zeenat_Jewels" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#insta"/></svg>@Zeenat_Jewels</a>
+          <a id="contact-wa-line" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>+91 89764 85153</a>
+          <a href="tel:+918290038327"><svg class="icon" aria-hidden="true"><use href="#phone"/></svg>+91 82900 38327</a>
+          <a href="mailto:zeenat.jewels53@gmail.com"><svg class="icon" aria-hidden="true"><use href="#mail"/></svg>zeenat.jewels53@gmail.com</a>
+          <a href="https://zeenatjewels53.vercel.app"><svg class="icon" aria-hidden="true"><use href="#globe"/></svg>zeenatjewels53.vercel.app</a>
+        </div>
+        <a class="btn btn-wa" id="contact-wa" target="_blank" rel="noopener" style="width: 100%; max-width: 360px"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>Chat on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <svg width="44" height="30" style="color: var(--gold)" aria-hidden="true"><use href="#gem" stroke-width="3"/></svg>
+  <div class="name">ZEENAT JEWELS</div>
+  <div class="tl">Rare Jewels, Timeless Elegance</div>
+  <small>zeenatjewels53.vercel.app · zeenat.jewels53@gmail.com</small>
+  <small>© 2026 Zeenat Jewels</small>
+</footer>
+
+<a class="fab" id="fab" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg width="28" height="28" aria-hidden="true"><use href="#wa"/></svg></a>
+
+<div class="scrim" id="product-sheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="p-name">
+    <div class="sheet-top"><span>ZEENAT JEWELS</span><button class="icon-btn" data-close aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button></div>
+    <div class="stack">
+      <div class="gallery" id="p-gallery"></div>
+      <div class="gallery-hint" id="p-gallery-hint" hidden>Swipe to see more photos</div>
+      <span class="eyebrow" id="p-cat"></span>
+      <h2 id="p-name"></h2>
+      <div class="amount" id="p-price"></div>
+      <div class="ship"><svg class="icon" aria-hidden="true"><use href="#truck"/></svg>Courier available across India &amp; International</div>
+      <p class="muted" style="margin: 0; white-space: pre-line" id="p-desc"></p>
+      <div class="field" id="p-size-field"><label for="p-size">Ring size</label>
+        <select id="p-size"><option value="">Select your size</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>Not sure, help me</option></select>
+      </div>
+      <a class="btn btn-wa" id="p-wa" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>Order on WhatsApp</a>
+      <p class="muted center" style="margin: 0; font-size: 13px">Your message includes this product's photo. We'll reply with payment details and courier charges.</p>
+      <dl class="details" id="p-details"></dl>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+<script>
+const CFG = window.ZJ_CONFIG || {};
+const WA = CFG.WHATSAPP || '918976485153';
+const wa = (msg) => 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const money = (p) => (p === null || p === undefined || p === '' || isNaN(Number(p))) ? null : Number(p);
+const priceText = (p) => money(p) === null ? 'Price on request' : '₹ ' + money(p).toLocaleString('en-IN');
+
+let sb = null;
+try {
+  if (CFG.SUPABASE_URL && CFG.SUPABASE_ANON_KEY && window.supabase) sb = window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY);
+} catch (e) { sb = null; }
+
+function track(kind, productId) {
+  if (!sb) return;
+  sb.from('events').insert({ kind: kind, product_id: productId || null }).then(() => {}, () => {});
+}
+
+const DEFAULT_CATS = [
+  { id: 'gold', name: 'Gold Rings', icon: '<circle cx="24" cy="30" r="12"/><path d="M19 12h10l3 4-8 6-8-6z"/>' },
+  { id: 'silver', name: 'Silver Rings', icon: '<circle cx="24" cy="30" r="12"/><circle cx="24" cy="30" r="8.5"/><path d="M20 13h8l2.5 3.5L24 21l-6.5-4.5z"/>' },
+  { id: 'buttons', name: 'Kurta Buttons', icon: '<circle cx="24" cy="24" r="14"/><circle cx="24" cy="24" r="9"/><circle cx="21" cy="21" r="1.4"/><circle cx="27" cy="21" r="1.4"/><circle cx="21" cy="27" r="1.4"/><circle cx="27" cy="27" r="1.4"/>' },
+  { id: 'gems', name: 'Gem Stones', icon: '<path d="M14 13h20l7 9-17 17L7 22z"/><path d="M7 22h34"/><path d="M19 13l-3 9 8 17 8-17-3-9"/>' },
+  { id: 'bracelets', name: 'Takhti', icon: '<circle cx="24" cy="8.5" r="3"/><rect x="14" y="12.5" width="20" height="27" rx="3"/><rect x="18" y="16.5" width="12" height="19" rx="1.5"/>' },
+  { id: 'tasbih', name: 'Tasbih', icon: '<circle cx="24" cy="19" r="12" stroke-dasharray="2.2 3"/><path d="M24 31v5"/><path d="M21 36h6l-1 7h-4z"/>' }
+];
+const STONES = [
+  { id: 'Ruby', color: '#9B1B30' }, { id: 'Emerald', color: '#1F6B4A' },
+  { id: 'Pearl', color: '#F3EEE6', border: true }, { id: 'Aqeeq', color: '#A0452A' }, { id: 'Crystal', color: '#DCE6EC', border: true }
+];
+// Shown only until the online product list is connected (config.js).
+const SAMPLES = [
+  { name: 'Aqeeq Ring in Silver', category: 'silver', stone: 'Aqeeq', metal: 'Silver', is_ring: true, is_new: true },
+  { name: 'Emerald Gold Ring', category: 'gold', stone: 'Emerald', metal: 'Gold', is_ring: true, is_new: true },
+  { name: 'Crystal Tasbih', category: 'tasbih', stone: 'Crystal', is_new: true },
+  { name: 'Silver Kurta Buttons', category: 'buttons', metal: 'Silver' },
+  { name: 'Ruby Silver Ring', category: 'silver', stone: 'Ruby', metal: 'Silver', is_ring: true },
+  { name: 'Pearl Gold Ring', category: 'gold', stone: 'Pearl', metal: 'Gold', is_ring: true },
+  { name: 'Aqeeq Tasbih', category: 'tasbih', stone: 'Aqeeq' },
+  { name: 'Aqeeq Takhti', category: 'bracelets', stone: 'Aqeeq', metal: 'Silver' }
+];
+
+let PRODUCTS = [];
+const $ = (id) => document.getElementById(id);
+const catName = (id) => (CATS.find(c => c.id === id) || {}).name || '';
+let filter = { type: 'all', value: null };
+let current = null;
+
+const generalMsg = wa('Hello Zeenat Jewels, I would like to know more about your collection.');
+['hero-wa', 'contact-wa', 'contact-wa-line', 'fab'].forEach(id => { $(id).href = generalMsg; });
+
+let CATS = DEFAULT_CATS.slice();
+const ICONS = {};
+DEFAULT_CATS.forEach(c => { ICONS[c.id] = c.icon; });
+const GEM_ICON = '<path d="M14 13h20l7 9-17 17L7 22z"/><path d="M7 22h34"/><path d="M19 13l-3 9 8 17 8-17-3-9"/>';
+function renderCats() {
+  $('cats').innerHTML = CATS.map(c => {
+    const inner = c.image ? '<img loading="lazy" src="' + esc(c.image) + '" alt="' + esc(c.name) + '">' :
+      '<svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#7A5C17" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[c.id] || GEM_ICON) + '</svg>';
+    return '<button class="cat" data-cat="' + esc(c.id) + '"><div class="ph">' + inner + '</div><span>' + esc(c.name) + '</span></button>';
+  }).join('');
+}
+renderCats();
+$('stones').innerHTML = STONES.map(s => '<button class="chip" data-stone="' + s.id + '" aria-pressed="false"><span class="dot" style="background:' + s.color + (s.border ? ';border:1px solid #B9A795' : '') + '"></span>' + s.id + '</button>').join('');
+
+function renderFilters() {
+  const chips = [{ label: 'All', type: 'all', value: null }].concat(CATS.map(c => ({ label: c.name, type: 'cat', value: c.id })));
+  $('filters').innerHTML = chips.map(c => {
+    const on = filter.type === c.type && filter.value === c.value;
+    return '<button class="chip" data-ftype="' + c.type + '" data-fval="' + esc(c.value || '') + '" aria-pressed="' + on + '">' + esc(c.label) + '</button>';
+  }).join('') + (filter.type === 'stone' ? '<button class="chip" aria-pressed="true" data-ftype="all" data-fval="">' + esc(filter.value) + ' ✕</button>' : '');
+}
+
+function renderGrid() {
+  const list = PRODUCTS.filter(p => filter.type === 'all' || (filter.type === 'cat' && p.category === filter.value) || (filter.type === 'stone' && (p.stone || '').toLowerCase() === filter.value.toLowerCase()));
+  $('count').textContent = list.length + (list.length === 1 ? ' piece' : ' pieces');
+  $('grid').innerHTML = list.map(p => {
+    const i = PRODUCTS.indexOf(p);
+    const img = (p.images && p.images[0]) ? '<img loading="lazy" src="' + esc(p.images[0]) + '" alt="' + esc(p.name) + '">' :
+      '<svg width="40" height="27" style="color:#7A5C17" aria-hidden="true"><use href="#gem" stroke-width="3"/></svg>Photo coming soon';
+    return '<article class="prod"><button class="open" data-open="' + i + '" aria-label="View ' + esc(p.name) + '"><div class="ph tilt"><span class="glare"></span>' + (p.is_new ? '<span class="tag">New</span>' : '') + (p.model_url ? '<span class="tag3d">3D</span>' : '') + img +
+      '</div><h3>' + esc(p.name) + '</h3><span class="price">' + priceText(p.price) + '</span></button>' +
+      '<a class="btn btn-line" data-wa-product="' + i + '" target="_blank" rel="noopener" href="' + esc(wa(orderMsg(p, ''))) + '"><svg class="icon" style="width:16px;height:16px" aria-hidden="true"><use href="#wa"/></svg>Enquire</a></article>';
+  }).join('') || '<p class="empty">No pieces here yet. Message us on WhatsApp and we\'ll show you what we have.</p>';
+}
+
+function setFilter(type, value) {
+  filter = { type, value };
+  document.querySelectorAll('#stones .chip').forEach(b => b.setAttribute('aria-pressed', String(type === 'stone' && b.dataset.stone === value)));
+  renderFilters(); renderGrid();
+}
+
+function openSheet(el) { el.hidden = false; document.body.style.overflow = 'hidden'; const b = el.querySelector('[data-close]'); if (b) b.focus(); }
+function closeSheet(el) { el.hidden = true; if ($('product-sheet').hidden) document.body.style.overflow = ''; }
+
+const SITE = (CFG.SITE_URL || location.origin).replace(/\/$/, '');
+const productLink = (p) => p && p.id ? SITE + '/p/' + p.id : '';
+function orderMsg(p, size) {
+  const link = productLink(p);
+  return 'Hello Zeenat Jewels, I would like to order:\n\n' +
+    '*' + p.name + '*\n' +
+    (money(p.price) !== null ? 'Price: ' + priceText(p.price) + '\n' : '') +
+    (p.stone ? 'Stone: ' + p.stone + '\n' : '') +
+    (p.is_ring && size ? 'Ring size: ' + size + '\n' : '') +
+    (link ? '\nPhoto: ' + link + '\n' : '') +
+    '\nI want to buy this product, please give payment details and courier charges.';
+}
+function orderText() { return orderMsg(current, $('p-size').value); }
+
+function openProduct(i) {
+  current = PRODUCTS[i];
+  const imgs = current.images || [];
+  const model = current.model_url ? '<div class="m3d"><model-viewer src="' + esc(current.model_url) + '" alt="3D view of ' + esc(current.name) + '" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="20deg" touch-action="pan-y" shadow-intensity="1" exposure="1.1" interaction-prompt="auto" ar' + (imgs[0] ? ' poster="' + esc(imgs[0]) + '"' : '') + '></model-viewer><span class="m3d-label">3D · drag to rotate</span></div>' : '';
+  if (current.model_url) load3D();
+  const slides = (model ? 1 : 0) + imgs.length;
+  $('p-gallery').innerHTML = slides ? model + imgs.map((u, n) => '<img src="' + esc(u) + '" alt="' + esc(current.name) + ' photo ' + (n + 1) + '">').join('') :
+    '<div class="noimg"><svg width="90" height="60" style="color: var(--gold-ink)" aria-hidden="true"><use href="#gem" stroke-width="2"/></svg>Photo coming soon</div>';
+  $('p-gallery').scrollLeft = 0;
+  $('p-gallery-hint').hidden = slides < 2;
+  $('p-cat').textContent = catName(current.category) + (current.stone ? ' · ' + current.stone : '');
+  $('p-name').textContent = current.name;
+  $('p-price').textContent = priceText(current.price);
+  $('p-desc').textContent = current.description || '';
+  $('p-desc').hidden = !current.description;
+  $('p-size-field').hidden = !current.is_ring;
+  $('p-size').value = '';
+  $('p-wa').href = wa(orderText());
+  const rows = [['Metal', current.metal], ['Stone', current.stone], ['Category', catName(current.category)]].filter(r => r[1]);
+  $('p-details').innerHTML = rows.map(r => '<div><dt>' + r[0] + '</dt><dd>' + esc(r[1]) + '</dd></div>').join('');
+  openSheet($('product-sheet'));
+  track('product', current.id);
+}
+
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { t.hidden = true; }, 2200); }
+
+document.addEventListener('click', (e) => {
+  const waLink = e.target.closest('a[href^="https://wa.me"]');
+  if (waLink) { const pi = waLink.dataset.waProduct; track('whatsapp', pi !== undefined ? PRODUCTS[+pi].id : (waLink.closest('.sheet') && current ? current.id : null)); return; }
+  const cat = e.target.closest('[data-cat]');
+  if (cat) { setFilter('cat', cat.dataset.cat); $('shop').scrollIntoView({ behavior: 'smooth' }); return; }
+  const st = e.target.closest('[data-stone]');
+  if (st) { setFilter('stone', st.dataset.stone); $('shop').scrollIntoView({ behavior: 'smooth' }); return; }
+  const f = e.target.closest('[data-ftype]');
+  if (f) { setFilter(f.dataset.ftype, f.dataset.fval || null); return; }
+  const o = e.target.closest('[data-open]');
+  if (o) { openProduct(+o.dataset.open); return; }
+  const c = e.target.closest('[data-close]');
+  if (c) { closeSheet(c.closest('.scrim')); return; }
+  if (e.target.classList && e.target.classList.contains('scrim')) closeSheet(e.target);
+});
+$('p-size').addEventListener('change', () => { $('p-wa').href = wa(orderText()); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.scrim').forEach(s => { if (!s.hidden) closeSheet(s); }); });
+
+/* 3D tilt on product photos (mouse / trackpad) */
+document.addEventListener('pointermove', (e) => {
+  if (e.pointerType === 'touch') return;
+  const t = e.target.closest && e.target.closest('.tilt');
+  document.querySelectorAll('.tilt.on').forEach(el => { if (el !== t) resetTilt(el); });
+  if (!t) return;
+  const r = t.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+  t.classList.add('on');
+  t.style.setProperty('--ry', ((x - 0.5) * 14).toFixed(2) + 'deg');
+  t.style.setProperty('--rx', ((0.5 - y) * 12).toFixed(2) + 'deg');
+  t.style.setProperty('--gx', (x * 100).toFixed(0) + '%');
+  t.style.setProperty('--gy', (y * 100).toFixed(0) + '%');
+});
+function resetTilt(el) { el.classList.remove('on'); el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); }
+document.addEventListener('pointerleave', () => document.querySelectorAll('.tilt.on').forEach(resetTilt));
+
+/* Loads the 3D viewer only when a product with a 3D model is opened */
+function load3D() {
+  if (window.customElements && customElements.get('model-viewer')) return;
+  if (document.getElementById('mv-lib')) return;
+  const sc = document.createElement('script');
+  sc.type = 'module'; sc.id = 'mv-lib';
+  sc.src = 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js';
+  document.head.appendChild(sc);
+}
+
+async function load() {
+  renderFilters();
+  if (!sb) { PRODUCTS = SAMPLES; renderGrid(); return; }
+  const cats = await sb.from('categories').select('*').eq('visible', true).order('sort_order', { ascending: true });
+  if (!cats.error && cats.data && cats.data.length) { CATS = cats.data; renderCats(); renderFilters(); }
+  const { data, error } = await sb.from('products').select('*').eq('visible', true).order('sort_order', { ascending: true }).order('created_at', { ascending: false });
+  if (error) { $('grid').innerHTML = '<p class="empty">The collection could not load right now. Please refresh, or message us on WhatsApp.</p>'; return; }
+  PRODUCTS = data || [];
+  renderGrid();
+  openFromHash();
+  let seen = false;
+  try { seen = sessionStorage.getItem('zj_seen') === '1'; sessionStorage.setItem('zj_seen', '1'); } catch (e) {}
+  if (!seen) track('view', null);
+}
+function openFromHash() {
+  const m = /^#p-([0-9a-f-]{36})$/i.exec(location.hash || '');
+  if (!m) return;
+  const i = PRODUCTS.findIndex(p => p.id === m[1]);
+  if (i >= 0) openProduct(i);
+}
+window.addEventListener('hashchange', openFromHash);
+load();
+</script>
+</body>
+</html>
