@@ -159,7 +159,7 @@ textarea { padding: 12px; min-height: 110px; resize: vertical; }
         <div class="field"><label for="f-name">Product name</label><input id="f-name" type="text" placeholder="e.g. Ruby Silver Ring" required></div>
         <div class="row2">
           <div class="field"><label for="f-cat">Category</label>
-            <select id="f-cat"><option value="gold">Gold Rings</option><option value="silver">Silver Rings</option><option value="buttons">Kurta Buttons</option><option value="gems">Gem Stones</option><option value="bracelets">Bracelets</option><option value="tasbih">Tasbih</option></select>
+            <select id="f-cat"><option value="gold">Gold Rings</option><option value="silver">Silver Rings</option><option value="buttons">Kurta Buttons</option><option value="gems">Gem Stones</option><option value="bracelets">Takhti</option><option value="tasbih">Tasbih</option></select>
           </div>
           <div class="field"><label for="f-price">Price (₹)</label><input id="f-price" type="number" inputmode="decimal" min="0" step="1" placeholder="Leave empty for Price on request"></div>
         </div>
@@ -196,7 +196,7 @@ textarea { padding: 12px; min-height: 110px; resize: vertical; }
 const CFG = window.ZJ_CONFIG || {};
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-let CATS = { gold: 'Gold Rings', silver: 'Silver Rings', buttons: 'Kurta Buttons', gems: 'Gem Stones', bracelets: 'Bracelets', tasbih: 'Tasbih' };
+let CATS = { gold: 'Gold Rings', silver: 'Silver Rings', buttons: 'Kurta Buttons', gems: 'Gem Stones', bracelets: 'Takhti', tasbih: 'Tasbih' };
 let categories = [];
 const MAX_PHOTOS = 6;
 let sb = null, products = [], days = 0, editId = null;
