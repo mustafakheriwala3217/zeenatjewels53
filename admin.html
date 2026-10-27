@@ -214,7 +214,7 @@ if (!CFG.SUPABASE_URL || !CFG.SUPABASE_ANON_KEY || !window.supabase) {
   sb.auth.onAuthStateChange((_e, session) => show(session));
 }
 
-let shownFor = null;
+let shownFor; // undefined until the first check, so the sign-in box always appears
 function show(session) {
   const email = session && session.user ? session.user.email : null;
   if (email === shownFor) return;
