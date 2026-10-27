@@ -255,7 +255,6 @@ select { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: v
         <div class="promise"><svg width="32" height="22" style="color: var(--night-gold)" aria-hidden="true"><use href="#gem" stroke-width="4"/></svg><div><h3>Original Stones</h3><p>Ruby, emerald, pearl, aqeeq and crystal, chosen with care.</p></div></div>
         <div class="promise"><svg width="30" height="30" style="color: var(--night-gold)" aria-hidden="true"><use href="#wa"/></svg><div><h3>Order on WhatsApp</h3><p>Ask about any piece, see more photos and order in one chat.</p></div></div>
         <div class="promise"><svg width="30" height="30" style="color: var(--night-gold)" aria-hidden="true"><use href="#truck"/></svg><div><h3>Courier Delivery</h3><p>Safely packed and couriered across India and to international addresses.</p></div></div>
-        <div class="promise"><svg width="30" height="30" style="color: var(--night-gold)" aria-hidden="true"><use href="#card"/></svg><div><h3>Easy UPI Payment</h3><p>Pay directly with GPay, PhonePe, Paytm or any UPI app.</p></div></div>
       </div>
     </div>
   </section>
@@ -303,60 +302,8 @@ select { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: v
         <select id="p-size"><option value="">Select your size</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>Not sure, help me</option></select>
       </div>
       <a class="btn btn-wa" id="p-wa" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>Order on WhatsApp</a>
-      <button class="btn btn-dark" id="p-pay"><svg class="icon" aria-hidden="true"><use href="#card"/></svg>Buy Now</button>
-      <p class="muted center" style="margin: 0; font-size: 13px">Not sure about size or stone? Message us first and we'll guide you.</p>
+      <p class="muted center" style="margin: 0; font-size: 13px">Your message includes this product's photo. We'll reply with courier charges for your address.</p>
       <dl class="details" id="p-details"></dl>
-    </div>
-  </div>
-</div>
-
-<div class="scrim" id="pay-sheet" hidden>
-  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="pay-title">
-    <div class="sheet-top"><span id="pay-title">CHECKOUT</span><button class="icon-btn" data-close aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button></div>
-    <div class="stack">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px">
-        <div style="min-width: 0"><div style="font-family: var(--display); font-size: 20px; font-weight: 600" id="pay-name"></div><div class="muted" style="font-size: 13px" id="pay-meta"></div></div>
-        <div class="amount" id="pay-amount"></div>
-      </div>
-      <div class="steps" aria-label="Checkout steps"><span id="st-1" aria-current="step">1 · Delivery address</span><span aria-hidden="true">›</span><span id="st-2">2 · Payment</span></div>
-
-      <form class="form" id="addr-form" novalidate>
-        <p class="muted" style="margin: 0; font-size: 14px">Please enter your full and correct address for the courier. We courier across India and internationally.</p>
-        <div class="field"><label for="a-name">Full name <span class="req">*</span></label><input id="a-name" type="text" autocomplete="name"></div>
-        <div class="field"><label for="a-phone">Mobile number <span class="req">*</span></label><input id="a-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="With country code if outside India"></div>
-        <div class="field"><label for="a-line">House / flat, building, street, area <span class="req">*</span></label><textarea id="a-line" autocomplete="street-address"></textarea></div>
-        <div class="field"><label for="a-landmark">Landmark</label><input id="a-landmark" type="text" placeholder="Optional"></div>
-        <div class="two">
-          <div class="field"><label for="a-city">City <span class="req">*</span></label><input id="a-city" type="text" autocomplete="address-level2"></div>
-          <div class="field"><label for="a-pin">PIN / ZIP code <span class="req">*</span></label><input id="a-pin" type="text" inputmode="numeric" autocomplete="postal-code"></div>
-        </div>
-        <div class="two">
-          <div class="field"><label for="a-state">State <span class="req">*</span></label><input id="a-state" type="text" autocomplete="address-level1"></div>
-          <div class="field"><label for="a-country">Country <span class="req">*</span></label><input id="a-country" type="text" autocomplete="country-name" value="India"></div>
-        </div>
-        <div class="err" id="a-err" role="alert" hidden></div>
-        <button class="btn btn-dark" type="submit">Continue to Payment</button>
-      </form>
-
-      <div id="pay-step" class="stack" hidden>
-      <div class="addr-box"><div><div style="font-weight: 500">Delivering to</div><div id="addr-summary" style="white-space: pre-line; color: var(--muted)"></div></div><button type="button" id="addr-change">Change</button></div>
-      <div class="note" id="intl-note" hidden><svg class="icon" style="color: var(--gold-ink)" aria-hidden="true"><use href="#globe"/></svg><span>For delivery outside India, UPI may not work from your bank. Message us on WhatsApp and we'll share international payment and courier charges.</span></div>
-      <div id="upi-block" class="stack">
-        <span class="eyebrow" style="margin-top: 8px">Pay with any UPI app</span>
-        <div class="apps" id="apps"></div>
-        <div class="frame" style="margin-top: 8px"><div class="inner" style="padding: 22px; display: grid; gap: 12px; justify-items: center; text-align: center">
-          <div style="font-family: var(--display); font-size: 22px; font-weight: 600">Or scan to pay</div>
-          <div class="qr" id="qr"></div>
-          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center">
-            <span>UPI ID: <strong id="upi-id"></strong></span>
-            <button class="btn btn-line" id="copy-upi" style="min-height: 44px; padding: 0 14px; font-size: 13px">Copy</button>
-          </div>
-        </div></div>
-      </div>
-      <div class="note" id="upi-missing" hidden><svg class="icon" style="color: var(--gold-ink)" aria-hidden="true"><use href="#card"/></svg><span>Online UPI payment is coming soon. Please message us on WhatsApp and we'll share payment details.</span></div>
-      <div class="note"><svg class="icon" style="color: var(--gold-ink)" aria-hidden="true"><use href="#card"/></svg><span>After paying, send us the payment screenshot on WhatsApp so we can confirm and pack your order.</span></div>
-      <a class="btn btn-wa" id="pay-wa" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>Send Screenshot on WhatsApp</a>
-      </div>
     </div>
   </div>
 </div>
@@ -364,12 +311,10 @@ select { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: v
 <div class="toast" id="toast" hidden></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script src="config.js"></script>
 <script>
 const CFG = window.ZJ_CONFIG || {};
 const WA = CFG.WHATSAPP || '918976485153';
-const UPI_ID = (CFG.UPI_ID || '').trim();
 const wa = (msg) => 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const money = (p) => (p === null || p === undefined || p === '' || isNaN(Number(p))) ? null : Number(p);
@@ -449,7 +394,7 @@ function renderGrid() {
       '<svg width="40" height="27" style="color:#7A5C17" aria-hidden="true"><use href="#gem" stroke-width="3"/></svg>Photo coming soon';
     return '<article class="prod"><button class="open" data-open="' + i + '" aria-label="View ' + esc(p.name) + '"><div class="ph tilt"><span class="glare"></span>' + (p.is_new ? '<span class="tag">New</span>' : '') + (p.model_url ? '<span class="tag3d">3D</span>' : '') + img +
       '</div><h3>' + esc(p.name) + '</h3><span class="price">' + priceText(p.price) + '</span></button>' +
-      '<a class="btn btn-line" data-wa-product="' + i + '" target="_blank" rel="noopener" href="' + esc(wa('Hello, I want to order the ' + p.name + '.')) + '"><svg class="icon" style="width:16px;height:16px" aria-hidden="true"><use href="#wa"/></svg>Enquire</a></article>';
+      '<a class="btn btn-line" data-wa-product="' + i + '" target="_blank" rel="noopener" href="' + esc(wa(orderMsg(p, ''))) + '"><svg class="icon" style="width:16px;height:16px" aria-hidden="true"><use href="#wa"/></svg>Enquire</a></article>';
   }).join('') || '<p class="empty">No pieces here yet. Message us on WhatsApp and we\'ll show you what we have.</p>';
 }
 
@@ -460,12 +405,21 @@ function setFilter(type, value) {
 }
 
 function openSheet(el) { el.hidden = false; document.body.style.overflow = 'hidden'; const b = el.querySelector('[data-close]'); if (b) b.focus(); }
-function closeSheet(el) { el.hidden = true; if ($('product-sheet').hidden && $('pay-sheet').hidden) document.body.style.overflow = ''; }
+function closeSheet(el) { el.hidden = true; if ($('product-sheet').hidden) document.body.style.overflow = ''; }
 
-function orderText() {
-  const size = $('p-size').value;
-  return 'Hello, I want to order the ' + current.name + (current.is_ring && size ? ' (ring size ' + size + ')' : '') + '.';
+const SITE = (CFG.SITE_URL || location.origin).replace(/\/$/, '');
+const productLink = (p) => p && p.id ? SITE + '/p/' + p.id : '';
+function orderMsg(p, size) {
+  const link = productLink(p);
+  return 'Hello Zeenat Jewels, I would like to order:\n\n' +
+    '*' + p.name + '*\n' +
+    (money(p.price) !== null ? 'Price: ' + priceText(p.price) + '\n' : '') +
+    (p.stone ? 'Stone: ' + p.stone + '\n' : '') +
+    (p.is_ring && size ? 'Ring size: ' + size + '\n' : '') +
+    (link ? '\nPhoto: ' + link + '\n' : '') +
+    '\nPlease share the courier charges for my address.';
 }
+function orderText() { return orderMsg(current, $('p-size').value); }
 
 function openProduct(i) {
   current = PRODUCTS[i];
@@ -491,80 +445,6 @@ function openProduct(i) {
   track('product', current.id);
 }
 
-function upiLink() {
-  let s = 'upi://pay?pa=' + encodeURIComponent(UPI_ID) + '&pn=' + encodeURIComponent(CFG.UPI_NAME || 'Zeenat Jewels') + '&cu=INR&tn=' + encodeURIComponent(current.name.slice(0, 60));
-  if (money(current.price) !== null) s += '&am=' + money(current.price).toFixed(2);
-  return s;
-}
-
-function openPay() {
-  const size = $('p-size').value;
-  $('pay-name').textContent = current.name;
-  $('pay-meta').textContent = (current.stone ? 'Stone: ' + current.stone + ' · ' : '') + (current.is_ring ? 'Size: ' + (size || 'not chosen') + ' · ' : '') + 'Qty 1';
-  $('pay-amount').textContent = money(current.price) === null ? '' : priceText(current.price);
-  loadAddress();
-  showAddrStep();
-  closeSheet($('product-sheet'));
-  openSheet($('pay-sheet'));
-  track('pay', current.id);
-}
-
-const ADDR_FIELDS = ['name', 'phone', 'line', 'landmark', 'city', 'pin', 'state', 'country'];
-let address = null;
-function loadAddress() {
-  try {
-    const saved = JSON.parse(localStorage.getItem('zj_address') || 'null');
-    if (saved) ADDR_FIELDS.forEach(k => { if (saved[k] && !$('a-' + k).value) $('a-' + k).value = saved[k]; });
-  } catch (e) {}
-}
-function showAddrStep() {
-  $('addr-form').hidden = false; $('pay-step').hidden = true; $('a-err').hidden = true;
-  $('st-1').setAttribute('aria-current', 'step'); $('st-2').removeAttribute('aria-current');
-}
-function addressText(a) {
-  return a.name + '\n' + a.line + (a.landmark ? '\nLandmark: ' + a.landmark : '') + '\n' + a.city + ' - ' + a.pin + '\n' + a.state + ', ' + a.country + '\nMobile: ' + a.phone;
-}
-$('addr-form').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const a = {};
-  ADDR_FIELDS.forEach(k => { a[k] = $('a-' + k).value.trim(); });
-  const missing = ['name', 'phone', 'line', 'city', 'pin', 'state', 'country'].filter(k => !a[k]);
-  const india = /^(india|bharat|in)$/i.test(a.country);
-  let msg = '';
-  if (missing.length) msg = 'Please fill in all fields marked *.';
-  else if (a.phone.replace(/\D/g, '').length < 10) msg = 'Please enter a valid mobile number.';
-  else if (india && !/^\d{6}$/.test(a.pin.replace(/\s/g, ''))) msg = 'Indian PIN code should be 6 digits.';
-  if (msg) { $('a-err').textContent = msg; $('a-err').hidden = false; const f = missing[0] ? $('a-' + missing[0]) : null; if (f) f.focus(); return; }
-  address = a;
-  try { localStorage.setItem('zj_address', JSON.stringify(a)); } catch (err) {}
-  showPayStep(india);
-});
-$('addr-change').addEventListener('click', showAddrStep);
-
-function showPayStep(india) {
-  const size = $('p-size').value;
-  $('addr-form').hidden = true; $('pay-step').hidden = false;
-  $('st-2').setAttribute('aria-current', 'step'); $('st-1').removeAttribute('aria-current');
-  $('addr-summary').textContent = addressText(address);
-  $('intl-note').hidden = india;
-  $('upi-block').hidden = !UPI_ID;
-  $('upi-missing').hidden = !!UPI_ID;
-  if (UPI_ID) {
-    const link = upiLink();
-    $('apps').innerHTML = ['Google Pay', 'PhonePe', 'Paytm', 'Other UPI app'].map(a =>
-      '<a class="app" href="' + esc(link) + '"><span>' + a + '</span><svg class="icon" aria-hidden="true"><use href="#chev"/></svg></a>').join('');
-    $('upi-id').textContent = UPI_ID;
-    try { const q = qrcode(0, 'M'); q.addData(link); q.make(); $('qr').innerHTML = q.createSvgTag({ cellSize: 4, margin: 2, scalable: true }); }
-    catch (e) { $('qr').textContent = 'Scan code unavailable — use the UPI ID below.'; }
-  }
-  const item = current.name + (current.is_ring && size ? ' (ring size ' + size + ')' : '') + (money(current.price) !== null ? ' - ' + priceText(current.price) : '');
-  const paid = UPI_ID && india;
-  $('pay-wa').lastChild.textContent = paid ? 'Send Screenshot on WhatsApp' : 'Send Order on WhatsApp';
-  $('pay-wa').href = wa((paid ? 'Hello, I have paid for: ' : 'Hello, I would like to order: ') + item +
-    '\n\nCourier address:\n' + addressText(address) + (paid ? '\n\nSharing the payment screenshot.' : ''));
-  $('pay-sheet').querySelector('.sheet').scrollTop = 0;
-}
-
 function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { t.hidden = true; }, 2200); }
 
 document.addEventListener('click', (e) => {
@@ -583,12 +463,6 @@ document.addEventListener('click', (e) => {
   if (e.target.classList && e.target.classList.contains('scrim')) closeSheet(e.target);
 });
 $('p-size').addEventListener('change', () => { $('p-wa').href = wa(orderText()); });
-$('p-pay').addEventListener('click', openPay);
-$('copy-upi').addEventListener('click', () => {
-  const done = () => toast('UPI ID copied');
-  const fallback = () => { const r = document.createRange(); r.selectNodeContents($('upi-id')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('UPI ID selected — copy it'); };
-  try { navigator.clipboard.writeText(UPI_ID).then(done, fallback); } catch (err) { fallback(); }
-});
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.scrim').forEach(s => { if (!s.hidden) closeSheet(s); }); });
 
 /* 3D tilt on product photos (mouse / trackpad) */
@@ -627,10 +501,18 @@ async function load() {
   if (error) { $('grid').innerHTML = '<p class="empty">The collection could not load right now. Please refresh, or message us on WhatsApp.</p>'; return; }
   PRODUCTS = data || [];
   renderGrid();
+  openFromHash();
   let seen = false;
   try { seen = sessionStorage.getItem('zj_seen') === '1'; sessionStorage.setItem('zj_seen', '1'); } catch (e) {}
   if (!seen) track('view', null);
 }
+function openFromHash() {
+  const m = /^#p-([0-9a-f-]{36})$/i.exec(location.hash || '');
+  if (!m) return;
+  const i = PRODUCTS.findIndex(p => p.id === m[1]);
+  if (i >= 0) openProduct(i);
+}
+window.addEventListener('hashchange', openFromHash);
 load();
 </script>
 </body>
