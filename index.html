@@ -3,33 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zeenat Jewels</title>
 <meta name="description" content="Zeenat Jewels - gold and silver rings, ruby, emerald, pearl and aqeeq gemstones, bracelets, kurta buttons and tasbih of original stones. Order on WhatsApp.">
 <meta name="theme-color" content="#F4E6DA">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 120 80%27%3E%3Cg fill=%27none%27 stroke=%27%23B8913A%27 stroke-width=%276%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M24 6h72l20 22-56 46L4 28z%27/%3E%3Cpath d=%27M4 28h112%27/%3E%3C/g%3E%3C/svg%3E">
-<style>html,body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
-<title>Zeenat Jewels</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500&display=swap">
 <style>
-/* Layout: one column on phones, the business card's double-gold frame as the recurring motif; widens to a centered 1120px shop on desktop. Single warm look by design, matching the printed card. */
 :root {
-  --blush: #F4E6DA;
-  --card: #F8EDE3;
-  --tile: #EBD5C5;
-  --paper: #FAF1E9;
-  --line: #E2CBB8;
-  --ink: #3A2A1F;
-  --muted: #6B5546;
-  --gold: #B8913A;
-  --gold-ink: #7A5C17;
-  --night: #2E211A;
-  --night-gold: #E7CF95;
-  --night-text: #E3D2C4;
-  --wa: #1E7A47;
+  --blush: #F4E6DA; --card: #F8EDE3; --tile: #EBD5C5; --paper: #FAF1E9; --line: #E2CBB8;
+  --ink: #3A2A1F; --muted: #6B5546; --gold: #B8913A; --gold-ink: #7A5C17;
+  --night: #2E211A; --night-gold: #E7CF95; --night-text: #E3D2C4; --wa: #1E7A47;
   --display: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
   --body: 'Jost', 'Segoe UI', system-ui, sans-serif;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
+html, body { margin: 0; }
+[hidden] { display: none !important; }
+img { max-width: 100%; display: block; }
 body { background: var(--blush); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.55; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--blush); }
 a { color: inherit; }
@@ -49,7 +40,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; margin: 0; text-wrap
 .btn-line:hover { background: var(--paper); }
 .icon { width: 20px; height: 20px; flex-shrink: 0; }
 
-/* top strip + header */
 .strip { background: var(--night); color: var(--night-gold); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; text-align: center; padding-block: 9px; }
 header.site { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--blush); border-bottom: 1px solid var(--line); }
 header.site .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 62px; gap: 12px; }
@@ -61,7 +51,6 @@ header.site .wrap { display: flex; align-items: center; justify-content: space-b
 .icon-btn { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; color: var(--ink); background: none; border: none; cursor: pointer; }
 @media (max-width: 760px) { .nav { display: none; } }
 
-/* hero */
 .hero { padding-block: 22px 40px; }
 .hero .inner { padding: 44px 22px 34px; display: grid; gap: 18px; justify-items: center; text-align: center; }
 .hero h1 { font-size: clamp(48px, 13vw, 88px); line-height: 0.95; letter-spacing: 0.08em; color: var(--gold-ink); }
@@ -70,16 +59,15 @@ header.site .wrap { display: flex; align-items: center; justify-content: space-b
 .hero p.lead { margin: 0; max-width: 46ch; color: var(--muted); }
 .cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; width: 100%; margin-top: 6px; }
 .cta-row .btn { flex: 1 1 220px; max-width: 320px; }
-.diamond-draw path { stroke-dasharray: 260; stroke-dashoffset: 0; animation: draw 1.6s ease-out both; }
-@keyframes draw { from { stroke-dashoffset: 260; } to { stroke-dashoffset: 0; } }
+.diamond-draw path { stroke-dasharray: 100; stroke-dashoffset: 0; animation: draw 1.6s ease-out both; }
+@keyframes draw { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
 @media (prefers-reduced-motion: reduce) { .diamond-draw path { animation: none; } .btn { transition: none; } }
 
-/* sections */
 section.block { padding-block: 44px; }
 .head { display: grid; gap: 6px; justify-items: center; text-align: center; margin-bottom: 22px; }
 .head h2 { font-size: clamp(30px, 6vw, 40px); }
 .cats { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-.cat { display: grid; gap: 10px; text-decoration: none; background: none; border: none; padding: 0; cursor: pointer; color: var(--ink); font: inherit; }
+.cat { display: grid; gap: 10px; background: none; border: none; padding: 0; cursor: pointer; color: var(--ink); font: inherit; }
 .cat .ph { aspect-ratio: 1; max-width: 100%; background: var(--tile); border: 1px solid #DCC0AC; display: flex; align-items: center; justify-content: center; transition: background .2s; }
 .cat:hover .ph { background: #E4CBB8; }
 .cat span { font-family: var(--display); font-size: 20px; font-weight: 600; }
@@ -88,7 +76,6 @@ section.block { padding-block: 44px; }
 .chip[aria-pressed="true"] { background: var(--night); border-color: var(--night); color: var(--card); }
 .dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
 
-/* products */
 .shop { background: var(--paper); border-block: 1px solid var(--line); }
 .shop-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
 .shop-head h2 { font-size: clamp(30px, 6vw, 40px); }
@@ -99,54 +86,57 @@ section.block { padding-block: 44px; }
 .prod { display: grid; gap: 8px; align-content: start; min-width: 0; }
 .prod button.open { all: unset; cursor: pointer; display: grid; gap: 8px; }
 .prod button.open:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
-.prod .ph { aspect-ratio: 4 / 5; max-width: 100%; background: var(--tile); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--muted); position: relative; }
-.prod .tag { position: absolute; top: 8px; left: 8px; background: var(--card); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 8px; color: var(--gold-ink); }
-.prod h3 { font-size: 19px; line-height: 1.2; }
+.prod .ph { aspect-ratio: 4 / 5; max-width: 100%; background: var(--tile); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--muted); position: relative; overflow: hidden; }
+.prod .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.prod .tag { position: absolute; top: 8px; left: 8px; background: var(--card); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 8px; color: var(--gold-ink); z-index: 1; }
+.prod h3 { font-size: 19px; line-height: 1.2; overflow-wrap: anywhere; }
 .price { font-size: 14px; font-weight: 500; color: var(--muted); }
 .prod .btn { min-height: 44px; font-size: 13px; padding: 0 12px; }
+.empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding-block: 24px; }
 
-/* promises */
 .night { background: var(--night); color: var(--card); }
 .promises { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 26px; }
 .promise { display: flex; gap: 16px; align-items: flex-start; }
 .promise h3 { color: var(--night-gold); font-size: 22px; }
 .promise p { margin: 4px 0 0; color: var(--night-text); font-size: 14px; }
 
-/* contact */
 .contact .inner { padding: 34px 22px; display: grid; gap: 16px; justify-items: center; text-align: center; }
 .contact h2 { font-size: clamp(30px, 6vw, 40px); }
 .contact p { margin: 0; color: var(--muted); max-width: 44ch; }
 .lines { display: grid; gap: 2px; }
-.lines a, .lines div { min-height: 46px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 16px; text-decoration: none; font-variant-numeric: tabular-nums; }
+.lines a { min-height: 46px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 16px; text-decoration: none; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 footer { border-top: 1px solid var(--gold); padding-block: 32px calc(48px + env(safe-area-inset-bottom, 0px)); text-align: center; display: grid; gap: 8px; justify-items: center; }
 footer .name { font-family: var(--display); font-size: 22px; font-weight: 600; letter-spacing: 0.16em; }
 footer .tl { font-family: var(--display); font-style: italic; font-size: 17px; color: var(--muted); }
 footer small { font-size: 12px; color: var(--muted); }
 
-/* floating whatsapp */
 .fab { position: fixed; right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 58px; height: 58px; border-radius: 50%; background: var(--wa); color: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 18px rgba(46, 33, 26, 0.3); z-index: 8; }
 
-/* sheets (product + payment) */
 .scrim { position: fixed; inset: 0; background: rgba(46, 33, 26, 0.5); z-index: 20; display: flex; align-items: flex-end; justify-content: center; }
 .sheet { background: var(--blush); width: 100%; max-width: 560px; max-height: 92%; overflow-y: auto; border-top: 2px solid var(--gold); padding: 0 max(16px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); animation: up .25s ease-out; }
 @media (min-width: 700px) { .scrim { align-items: center; } .sheet { border: 1px solid var(--gold); max-height: 88%; } }
 @keyframes up { from { transform: translateY(24px); opacity: .6; } to { transform: none; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .sheet { animation: none; } }
-.sheet-top { position: sticky; top: 0; background: var(--blush); display: flex; align-items: center; justify-content: space-between; padding-block: 8px; z-index: 1; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.sheet-top { position: sticky; top: 0; background: var(--blush); display: flex; align-items: center; justify-content: space-between; padding-block: 8px; z-index: 2; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
 .sheet-top span { font-family: var(--display); font-size: 18px; font-weight: 600; letter-spacing: 0.14em; }
-.sheet .bigph { aspect-ratio: 1 / 1; max-height: 340px; width: 100%; background: var(--tile); display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; color: var(--muted); font-size: 13px; }
-.sheet h2 { font-size: 32px; line-height: 1.1; }
+.gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; background: var(--tile); }
+.gallery > * { flex: 0 0 100%; aspect-ratio: 1 / 1; max-height: 420px; scroll-snap-align: start; }
+.gallery img { width: 100%; height: 100%; object-fit: cover; }
+.gallery .noimg { display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; color: var(--muted); font-size: 13px; }
+.gallery-hint { font-size: 12px; color: var(--muted); text-align: center; margin-top: -4px; }
+.sheet h2 { font-size: 32px; line-height: 1.1; overflow-wrap: anywhere; }
 .sheet .amount { font-family: var(--display); font-size: 28px; font-weight: 600; color: var(--gold-ink); }
 .stack { display: grid; gap: 12px; }
 .field label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
-select, input[type="text"] { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: var(--paper); color: var(--ink); font: 15px var(--body); padding: 0 12px; border-radius: 0; }
-.details { border-top: 1px solid var(--line); }
+select { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: var(--paper); color: var(--ink); font: 15px var(--body); padding: 0 12px; border-radius: 0; }
+.details { border-top: 1px solid var(--line); margin: 8px 0 0; }
 .details div { display: flex; justify-content: space-between; gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--line); }
 .details dt { color: var(--muted); }
 .details dd { margin: 0; text-align: right; }
 .apps { display: grid; gap: 10px; }
 .app { min-height: 54px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border: 1px solid #CDB09A; background: var(--paper); text-decoration: none; font-size: 16px; }
-.qr { width: 180px; height: 180px; max-width: 100%; background: #FFFFFF; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; text-align: center; font-size: 13px; color: var(--muted); padding: 12px; }
+.qr { width: 200px; height: 200px; max-width: 100%; background: #FFFFFF; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; padding: 8px; }
+.qr svg { width: 100%; height: 100%; }
 .note { display: flex; gap: 12px; align-items: flex-start; background: var(--paper); border: 1px solid var(--line); padding: 14px; font-size: 14px; }
 .toast { position: fixed; left: 50%; bottom: calc(90px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--night); color: var(--card); padding: 10px 18px; font-size: 14px; z-index: 30; }
 .muted { color: var(--muted); }
@@ -191,7 +181,12 @@ select, input[type="text"] { width: 100%; min-height: 48px; border: 1px solid #C
     <div class="frame">
       <div class="inner">
         <svg class="diamond-draw" width="128" height="86" viewBox="0 0 120 80" aria-hidden="true">
-          <g fill="none" stroke="#B8913A" stroke-width="1.5" stroke-linejoin="round"><path d="M24 6h72l20 22-56 46L4 28z"/><path d="M4 28h112"/><path d="M44 6L30 28l30 46 30-46L76 6"/><path d="M44 6l16 22 16-22"/></g>
+          <g fill="none" stroke="#B8913A" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+            <path pathLength="100" d="M24 6H96L116 28L60 74L4 28Z"/>
+            <path pathLength="100" d="M4 28H116"/>
+            <path pathLength="100" d="M44 6L30 28L60 74L90 28L76 6"/>
+            <path pathLength="100" d="M44 6L60 28L76 6"/>
+          </g>
         </svg>
         <h1>ZEENAT<br>JEWELS</h1>
         <div class="tagline">Rare Jewels, Timeless Elegance</div>
@@ -222,7 +217,7 @@ select, input[type="text"] { width: 100%; min-height: 48px; border: 1px solid #C
         <span class="muted" id="count" style="font-size: 14px"></span>
       </div>
       <div class="filters" id="filters" role="group" aria-label="Filter products"></div>
-      <div class="grid" id="grid"></div>
+      <div class="grid" id="grid"><p class="empty">Loading the collection…</p></div>
     </div>
   </section>
 
@@ -243,10 +238,10 @@ select, input[type="text"] { width: 100%; min-height: 48px; border: 1px solid #C
         <p>Message or call us for ring sizes, stone selection and bulk kurta button orders.</p>
         <div class="lines">
           <a href="https://instagram.com/Zeenat_Jewels" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#insta"/></svg>@Zeenat_Jewels</a>
-          <div><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>+91 89764 85153</div>
-          <div><svg class="icon" aria-hidden="true"><use href="#phone"/></svg>+91 82900 38327</div>
-          <div style="overflow-wrap: anywhere"><svg class="icon" aria-hidden="true"><use href="#mail"/></svg>zeenat.jewels53@gmail.com</div>
-          <div style="overflow-wrap: anywhere"><svg class="icon" aria-hidden="true"><use href="#globe"/></svg>zeenatjewels53.vercel.app</div>
+          <a id="contact-wa-line" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>+91 89764 85153</a>
+          <a href="tel:+918290038327"><svg class="icon" aria-hidden="true"><use href="#phone"/></svg>+91 82900 38327</a>
+          <a href="mailto:zeenat.jewels53@gmail.com"><svg class="icon" aria-hidden="true"><use href="#mail"/></svg>zeenat.jewels53@gmail.com</a>
+          <a href="https://zeenatjewels53.vercel.app"><svg class="icon" aria-hidden="true"><use href="#globe"/></svg>zeenatjewels53.vercel.app</a>
         </div>
         <a class="btn btn-wa" id="contact-wa" target="_blank" rel="noopener" style="width: 100%; max-width: 360px"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>Chat on WhatsApp</a>
       </div>
@@ -259,7 +254,7 @@ select, input[type="text"] { width: 100%; min-height: 48px; border: 1px solid #C
   <div class="name">ZEENAT JEWELS</div>
   <div class="tl">Rare Jewels, Timeless Elegance</div>
   <small>zeenatjewels53.vercel.app · zeenat.jewels53@gmail.com</small>
-  <small>© 2026 Zeenat Jewels · Preview — sample products and prices</small>
+  <small>© 2026 Zeenat Jewels</small>
 </footer>
 
 <a class="fab" id="fab" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg width="28" height="28" aria-hidden="true"><use href="#wa"/></svg></a>
@@ -268,18 +263,19 @@ select, input[type="text"] { width: 100%; min-height: 48px; border: 1px solid #C
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="p-name">
     <div class="sheet-top"><span>ZEENAT JEWELS</span><button class="icon-btn" data-close aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button></div>
     <div class="stack">
-      <div class="bigph"><svg width="90" height="60" style="color: var(--gold-ink)" aria-hidden="true"><use href="#gem" stroke-width="2"/></svg>Product photo</div>
+      <div class="gallery" id="p-gallery"></div>
+      <div class="gallery-hint" id="p-gallery-hint" hidden>Swipe to see more photos</div>
       <span class="eyebrow" id="p-cat"></span>
       <h2 id="p-name"></h2>
       <div class="amount" id="p-price"></div>
-      <p class="muted" style="margin: 0" id="p-desc"></p>
+      <p class="muted" style="margin: 0; white-space: pre-line" id="p-desc"></p>
       <div class="field" id="p-size-field"><label for="p-size">Ring size</label>
-        <select id="p-size"><option value="">Select your size</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>Not sure — help me</option></select>
+        <select id="p-size"><option value="">Select your size</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>Not sure, help me</option></select>
       </div>
       <a class="btn btn-wa" id="p-wa" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>Order on WhatsApp</a>
       <button class="btn btn-dark" id="p-pay"><svg class="icon" aria-hidden="true"><use href="#card"/></svg>Pay Now with UPI</button>
       <p class="muted center" style="margin: 0; font-size: 13px">Not sure about size or stone? Message us first and we'll guide you.</p>
-      <dl class="details" id="p-details" style="margin: 8px 0 0"></dl>
+      <dl class="details" id="p-details"></dl>
     </div>
   </div>
 </div>
@@ -289,19 +285,22 @@ select, input[type="text"] { width: 100%; min-height: 48px; border: 1px solid #C
     <div class="sheet-top"><span id="pay-title">PAYMENT</span><button class="icon-btn" data-close aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button></div>
     <div class="stack">
       <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px">
-        <div><div style="font-family: var(--display); font-size: 20px; font-weight: 600" id="pay-name"></div><div class="muted" style="font-size: 13px" id="pay-meta"></div></div>
+        <div style="min-width: 0"><div style="font-family: var(--display); font-size: 20px; font-weight: 600" id="pay-name"></div><div class="muted" style="font-size: 13px" id="pay-meta"></div></div>
         <div class="amount" id="pay-amount"></div>
       </div>
-      <span class="eyebrow" style="margin-top: 8px">Pay with any UPI app</span>
-      <div class="apps" id="apps"></div>
-      <div class="frame" style="margin-top: 8px"><div class="inner" style="padding: 22px; display: grid; gap: 12px; justify-items: center; text-align: center">
-        <div style="font-family: var(--display); font-size: 22px; font-weight: 600">Or scan to pay</div>
-        <div class="qr">Your UPI QR code will appear here</div>
-        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center">
-          <span>UPI ID: <strong id="upi-id">yourname@upi</strong></span>
-          <button class="btn btn-line" id="copy-upi" style="min-height: 44px; padding: 0 14px; font-size: 13px">Copy</button>
-        </div>
-      </div></div>
+      <div id="upi-block" class="stack">
+        <span class="eyebrow" style="margin-top: 8px">Pay with any UPI app</span>
+        <div class="apps" id="apps"></div>
+        <div class="frame" style="margin-top: 8px"><div class="inner" style="padding: 22px; display: grid; gap: 12px; justify-items: center; text-align: center">
+          <div style="font-family: var(--display); font-size: 22px; font-weight: 600">Or scan to pay</div>
+          <div class="qr" id="qr"></div>
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center">
+            <span>UPI ID: <strong id="upi-id"></strong></span>
+            <button class="btn btn-line" id="copy-upi" style="min-height: 44px; padding: 0 14px; font-size: 13px">Copy</button>
+          </div>
+        </div></div>
+      </div>
+      <div class="note" id="upi-missing" hidden><svg class="icon" style="color: var(--gold-ink)" aria-hidden="true"><use href="#card"/></svg><span>Online UPI payment is coming soon. Please message us on WhatsApp and we'll share payment details.</span></div>
       <div class="note"><svg class="icon" style="color: var(--gold-ink)" aria-hidden="true"><use href="#card"/></svg><span>After paying, send us the payment screenshot on WhatsApp so we can confirm and pack your order.</span></div>
       <a class="btn btn-wa" id="pay-wa" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>Send Screenshot on WhatsApp</a>
     </div>
@@ -310,10 +309,27 @@ select, input[type="text"] { width: 100%; min-height: 48px; border: 1px solid #C
 
 <div class="toast" id="toast" hidden></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="config.js"></script>
 <script>
-const WA = '918976485153';
-const UPI_ID = 'yourname@upi';
+const CFG = window.ZJ_CONFIG || {};
+const WA = CFG.WHATSAPP || '918976485153';
+const UPI_ID = (CFG.UPI_ID || '').trim();
 const wa = (msg) => 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const money = (p) => (p === null || p === undefined || p === '' || isNaN(Number(p))) ? null : Number(p);
+const priceText = (p) => money(p) === null ? 'Price on request' : '₹ ' + money(p).toLocaleString('en-IN');
+
+let sb = null;
+try {
+  if (CFG.SUPABASE_URL && CFG.SUPABASE_ANON_KEY && window.supabase) sb = window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY);
+} catch (e) { sb = null; }
+
+function track(kind, productId) {
+  if (!sb) return;
+  sb.from('events').insert({ kind: kind, product_id: productId || null }).then(() => {}, () => {});
+}
 
 const CATS = [
   { id: 'gold', name: 'Gold Rings', icon: '<circle cx="24" cy="30" r="12"/><path d="M19 12h10l3 4-8 6-8-6z"/>' },
@@ -327,53 +343,51 @@ const STONES = [
   { id: 'Ruby', color: '#9B1B30' }, { id: 'Emerald', color: '#1F6B4A' },
   { id: 'Pearl', color: '#F3EEE6', border: true }, { id: 'Aqeeq', color: '#A0452A' }, { id: 'Crystal', color: '#DCE6EC', border: true }
 ];
-// Sample products for the preview — replace with real items, photos and prices.
-const PRODUCTS = [
-  { name: 'Aqeeq Ring in Silver', cat: 'silver', stone: 'Aqeeq', metal: 'Silver', ring: true, isNew: true },
-  { name: 'Emerald Gold Ring', cat: 'gold', stone: 'Emerald', metal: 'Gold', ring: true, isNew: true },
-  { name: 'Crystal Tasbih', cat: 'tasbih', stone: 'Crystal', metal: '—', isNew: true },
-  { name: 'Silver Kurta Buttons', cat: 'buttons', stone: '—', metal: 'Silver' },
-  { name: 'Ruby Silver Ring', cat: 'silver', stone: 'Ruby', metal: 'Silver', ring: true },
-  { name: 'Pearl Gold Ring', cat: 'gold', stone: 'Pearl', metal: 'Gold', ring: true },
-  { name: 'Aqeeq Tasbih', cat: 'tasbih', stone: 'Aqeeq', metal: '—' },
-  { name: 'Aqeeq Bracelet', cat: 'bracelets', stone: 'Aqeeq', metal: 'Silver' },
-  { name: 'Loose Ruby Stone', cat: 'gems', stone: 'Ruby', metal: '—' },
-  { name: 'Gold Kurta Buttons', cat: 'buttons', stone: '—', metal: 'Gold' }
+// Shown only until the online product list is connected (config.js).
+const SAMPLES = [
+  { name: 'Aqeeq Ring in Silver', category: 'silver', stone: 'Aqeeq', metal: 'Silver', is_ring: true, is_new: true },
+  { name: 'Emerald Gold Ring', category: 'gold', stone: 'Emerald', metal: 'Gold', is_ring: true, is_new: true },
+  { name: 'Crystal Tasbih', category: 'tasbih', stone: 'Crystal', is_new: true },
+  { name: 'Silver Kurta Buttons', category: 'buttons', metal: 'Silver' },
+  { name: 'Ruby Silver Ring', category: 'silver', stone: 'Ruby', metal: 'Silver', is_ring: true },
+  { name: 'Pearl Gold Ring', category: 'gold', stone: 'Pearl', metal: 'Gold', is_ring: true },
+  { name: 'Aqeeq Tasbih', category: 'tasbih', stone: 'Aqeeq' },
+  { name: 'Aqeeq Bracelet', category: 'bracelets', stone: 'Aqeeq', metal: 'Silver' }
 ];
 
+let PRODUCTS = [];
 const $ = (id) => document.getElementById(id);
 const catName = (id) => (CATS.find(c => c.id === id) || {}).name || '';
 let filter = { type: 'all', value: null };
 let current = null;
 
-$('hero-wa').href = wa('Hello Zeenat Jewels, I would like to know more about your collection.');
-$('contact-wa').href = $('hero-wa').href;
-$('fab').href = $('hero-wa').href;
+const generalMsg = wa('Hello Zeenat Jewels, I would like to know more about your collection.');
+['hero-wa', 'contact-wa', 'contact-wa-line', 'fab'].forEach(id => { $(id).href = generalMsg; });
 
 $('cats').innerHTML = CATS.map(c =>
   '<button class="cat" data-cat="' + c.id + '"><div class="ph"><svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#7A5C17" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + c.icon + '</svg></div><span>' + c.name + '</span></button>'
 ).join('');
-
-const stoneChip = (s) => '<button class="chip" data-stone="' + s.id + '" aria-pressed="false"><span class="dot" style="background:' + s.color + (s.border ? ';border:1px solid #B9A795' : '') + '"></span>' + s.id + '</button>';
-$('stones').innerHTML = STONES.map(stoneChip).join('');
+$('stones').innerHTML = STONES.map(s => '<button class="chip" data-stone="' + s.id + '" aria-pressed="false"><span class="dot" style="background:' + s.color + (s.border ? ';border:1px solid #B9A795' : '') + '"></span>' + s.id + '</button>').join('');
 
 function renderFilters() {
   const chips = [{ label: 'All', type: 'all', value: null }].concat(CATS.map(c => ({ label: c.name, type: 'cat', value: c.id })));
   $('filters').innerHTML = chips.map(c => {
     const on = filter.type === c.type && filter.value === c.value;
     return '<button class="chip" data-ftype="' + c.type + '" data-fval="' + (c.value || '') + '" aria-pressed="' + on + '">' + c.label + '</button>';
-  }).join('') + (filter.type === 'stone' ? '<button class="chip" aria-pressed="true" data-ftype="all" data-fval="">' + filter.value + ' ✕</button>' : '');
+  }).join('') + (filter.type === 'stone' ? '<button class="chip" aria-pressed="true" data-ftype="all" data-fval="">' + esc(filter.value) + ' ✕</button>' : '');
 }
 
 function renderGrid() {
-  const list = PRODUCTS.filter(p => filter.type === 'all' || (filter.type === 'cat' && p.cat === filter.value) || (filter.type === 'stone' && p.stone === filter.value));
+  const list = PRODUCTS.filter(p => filter.type === 'all' || (filter.type === 'cat' && p.category === filter.value) || (filter.type === 'stone' && (p.stone || '').toLowerCase() === filter.value.toLowerCase()));
   $('count').textContent = list.length + (list.length === 1 ? ' piece' : ' pieces');
   $('grid').innerHTML = list.map(p => {
     const i = PRODUCTS.indexOf(p);
-    return '<article class="prod"><button class="open" data-open="' + i + '" aria-label="View ' + p.name + '"><div class="ph">' + (p.isNew ? '<span class="tag">New</span>' : '') +
-      '<svg width="40" height="27" style="color:#7A5C17" aria-hidden="true"><use href="#gem" stroke-width="3"/></svg>Product photo</div><h3>' + p.name + '</h3><span class="price">₹ Price on request</span></button>' +
-      '<a class="btn btn-line" target="_blank" rel="noopener" href="' + wa('Hello, I want to order the ' + p.name + '.') + '"><svg class="icon" style="width:16px;height:16px" aria-hidden="true"><use href="#wa"/></svg>Enquire</a></article>';
-  }).join('') || '<p class="muted">No pieces here yet. Message us on WhatsApp and we\'ll show you what we have.</p>';
+    const img = (p.images && p.images[0]) ? '<img loading="lazy" src="' + esc(p.images[0]) + '" alt="' + esc(p.name) + '">' :
+      '<svg width="40" height="27" style="color:#7A5C17" aria-hidden="true"><use href="#gem" stroke-width="3"/></svg>Photo coming soon';
+    return '<article class="prod"><button class="open" data-open="' + i + '" aria-label="View ' + esc(p.name) + '"><div class="ph">' + (p.is_new ? '<span class="tag">New</span>' : '') + img +
+      '</div><h3>' + esc(p.name) + '</h3><span class="price">' + priceText(p.price) + '</span></button>' +
+      '<a class="btn btn-line" data-wa-product="' + i + '" target="_blank" rel="noopener" href="' + esc(wa('Hello, I want to order the ' + p.name + '.')) + '"><svg class="icon" style="width:16px;height:16px" aria-hidden="true"><use href="#wa"/></svg>Enquire</a></article>';
+  }).join('') || '<p class="empty">No pieces here yet. Message us on WhatsApp and we\'ll show you what we have.</p>';
 }
 
 function setFilter(type, value) {
@@ -382,43 +396,67 @@ function setFilter(type, value) {
   renderFilters(); renderGrid();
 }
 
-function openSheet(el) { el.hidden = false; document.body.style.overflow = 'hidden'; const b = el.querySelector('[data-close]'); b && b.focus(); }
+function openSheet(el) { el.hidden = false; document.body.style.overflow = 'hidden'; const b = el.querySelector('[data-close]'); if (b) b.focus(); }
 function closeSheet(el) { el.hidden = true; if ($('product-sheet').hidden && $('pay-sheet').hidden) document.body.style.overflow = ''; }
 
 function orderText() {
   const size = $('p-size').value;
-  return 'Hello, I want to order the ' + current.name + (current.ring && size ? ' (ring size ' + size + ')' : '') + '.';
+  return 'Hello, I want to order the ' + current.name + (current.is_ring && size ? ' (ring size ' + size + ')' : '') + '.';
 }
 
 function openProduct(i) {
   current = PRODUCTS[i];
-  $('p-cat').textContent = catName(current.cat) + (current.stone !== '—' ? ' · ' + current.stone : '');
+  const imgs = current.images || [];
+  $('p-gallery').innerHTML = imgs.length ? imgs.map((u, n) => '<img src="' + esc(u) + '" alt="' + esc(current.name) + ' photo ' + (n + 1) + '">').join('') :
+    '<div class="noimg"><svg width="90" height="60" style="color: var(--gold-ink)" aria-hidden="true"><use href="#gem" stroke-width="2"/></svg>Photo coming soon</div>';
+  $('p-gallery').scrollLeft = 0;
+  $('p-gallery-hint').hidden = imgs.length < 2;
+  $('p-cat').textContent = catName(current.category) + (current.stone ? ' · ' + current.stone : '');
   $('p-name').textContent = current.name;
-  $('p-price').textContent = '₹ Price on request';
-  $('p-desc').textContent = 'A sample listing. Your real description goes here: the stone, the finish, and how it is best worn.';
-  $('p-size-field').hidden = !current.ring;
+  $('p-price').textContent = priceText(current.price);
+  $('p-desc').textContent = current.description || '';
+  $('p-desc').hidden = !current.description;
+  $('p-size-field').hidden = !current.is_ring;
   $('p-size').value = '';
   $('p-wa').href = wa(orderText());
-  $('p-details').innerHTML = [['Metal', current.metal], ['Stone', current.stone], ['Weight', 'To be added'], ['Delivery', 'To be added']]
-    .map(r => '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>').join('');
+  const rows = [['Metal', current.metal], ['Stone', current.stone], ['Category', catName(current.category)]].filter(r => r[1]);
+  $('p-details').innerHTML = rows.map(r => '<div><dt>' + r[0] + '</dt><dd>' + esc(r[1]) + '</dd></div>').join('');
   openSheet($('product-sheet'));
+  track('product', current.id);
+}
+
+function upiLink() {
+  let s = 'upi://pay?pa=' + encodeURIComponent(UPI_ID) + '&pn=' + encodeURIComponent(CFG.UPI_NAME || 'Zeenat Jewels') + '&cu=INR&tn=' + encodeURIComponent(current.name.slice(0, 60));
+  if (money(current.price) !== null) s += '&am=' + money(current.price).toFixed(2);
+  return s;
 }
 
 function openPay() {
   const size = $('p-size').value;
   $('pay-name').textContent = current.name;
-  $('pay-meta').textContent = (current.stone !== '—' ? 'Stone: ' + current.stone + ' · ' : '') + (current.ring ? 'Size: ' + (size || 'not chosen') + ' · ' : '') + 'Qty 1';
-  $('pay-amount').textContent = '₹ —';
-  $('apps').innerHTML = ['Google Pay', 'PhonePe', 'Paytm', 'Other UPI app'].map(a =>
-    '<a class="app" href="upi://pay?pa=' + encodeURIComponent(UPI_ID) + '&pn=' + encodeURIComponent('Zeenat Jewels') + '&tn=' + encodeURIComponent(current.name) + '"><span>' + a + '</span><svg class="icon" aria-hidden="true"><use href="#chev"/></svg></a>').join('');
-  $('pay-wa').href = wa('Hello, I have paid for the ' + current.name + '. Sharing the payment screenshot.');
+  $('pay-meta').textContent = (current.stone ? 'Stone: ' + current.stone + ' · ' : '') + (current.is_ring ? 'Size: ' + (size || 'not chosen') + ' · ' : '') + 'Qty 1';
+  $('pay-amount').textContent = money(current.price) === null ? '' : priceText(current.price);
+  $('upi-block').hidden = !UPI_ID;
+  $('upi-missing').hidden = !!UPI_ID;
+  if (UPI_ID) {
+    const link = upiLink();
+    $('apps').innerHTML = ['Google Pay', 'PhonePe', 'Paytm', 'Other UPI app'].map(a =>
+      '<a class="app" href="' + esc(link) + '"><span>' + a + '</span><svg class="icon" aria-hidden="true"><use href="#chev"/></svg></a>').join('');
+    $('upi-id').textContent = UPI_ID;
+    try { const q = qrcode(0, 'M'); q.addData(link); q.make(); $('qr').innerHTML = q.createSvgTag({ cellSize: 4, margin: 2, scalable: true }); }
+    catch (e) { $('qr').textContent = 'Scan code unavailable — use the UPI ID below.'; }
+  }
+  $('pay-wa').href = wa('Hello, I have paid for the ' + current.name + (current.is_ring && size ? ' (ring size ' + size + ')' : '') + '. Sharing the payment screenshot.');
   closeSheet($('product-sheet'));
   openSheet($('pay-sheet'));
+  track('pay', current.id);
 }
 
-function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2200); }
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { t.hidden = true; }, 2200); }
 
 document.addEventListener('click', (e) => {
+  const waLink = e.target.closest('a[href^="https://wa.me"]');
+  if (waLink) { const pi = waLink.dataset.waProduct; track('whatsapp', pi !== undefined ? PRODUCTS[+pi].id : (waLink.closest('.sheet') && current ? current.id : null)); return; }
   const cat = e.target.closest('[data-cat]');
   if (cat) { setFilter('cat', cat.dataset.cat); $('shop').scrollIntoView({ behavior: 'smooth' }); return; }
   const st = e.target.closest('[data-stone]');
@@ -434,15 +472,24 @@ document.addEventListener('click', (e) => {
 $('p-size').addEventListener('change', () => { $('p-wa').href = wa(orderText()); });
 $('p-pay').addEventListener('click', openPay);
 $('copy-upi').addEventListener('click', () => {
-  const text = $('upi-id').textContent;
-  try {
-    navigator.clipboard.writeText(text).then(() => toast('UPI ID copied'), () => selectUpi());
-  } catch (err) { selectUpi(); }
+  const done = () => toast('UPI ID copied');
+  const fallback = () => { const r = document.createRange(); r.selectNodeContents($('upi-id')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('UPI ID selected — copy it'); };
+  try { navigator.clipboard.writeText(UPI_ID).then(done, fallback); } catch (err) { fallback(); }
 });
-function selectUpi() { const r = document.createRange(); r.selectNodeContents($('upi-id')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('UPI ID selected — copy it'); }
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.scrim').forEach(s => { if (!s.hidden) closeSheet(s); }); });
 
-renderFilters(); renderGrid();
+async function load() {
+  renderFilters();
+  if (!sb) { PRODUCTS = SAMPLES; renderGrid(); return; }
+  const { data, error } = await sb.from('products').select('*').eq('visible', true).order('sort_order', { ascending: true }).order('created_at', { ascending: false });
+  if (error) { $('grid').innerHTML = '<p class="empty">The collection could not load right now. Please refresh, or message us on WhatsApp.</p>'; return; }
+  PRODUCTS = data || [];
+  renderGrid();
+  let seen = false;
+  try { seen = sessionStorage.getItem('zj_seen') === '1'; sessionStorage.setItem('zj_seen', '1'); } catch (e) {}
+  if (!seen) track('view', null);
+}
+load();
 </script>
 </body>
 </html>

@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Zeenat Jewels Owner</title>
+<meta name="theme-color" content="#2E211A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 120 80%27%3E%3Cg fill=%27none%27 stroke=%27%23B8913A%27 stroke-width=%276%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M24 6h72l20 22-56 46L4 28z%27/%3E%3Cpath d=%27M4 28h112%27/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500&display=swap">
+<style>
+:root {
+  --blush: #F4E6DA; --card: #F8EDE3; --tile: #EBD5C5; --paper: #FAF1E9; --line: #E2CBB8; --field: #CDB09A;
+  --ink: #3A2A1F; --muted: #6B5546; --gold: #B8913A; --gold-ink: #7A5C17;
+  --night: #2E211A; --night-gold: #E7CF95; --ok: #1E7A47; --bad: #9B1B30;
+  --display: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --body: 'Jost', 'Segoe UI', system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+[hidden] { display: none !important; }
+img { max-width: 100%; display: block; }
+body { background: var(--blush); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5; }
+:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; margin: 0; }
+.wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header { background: var(--night); color: var(--card); padding-top: env(safe-area-inset-top, 0px); }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 16px; flex-wrap: wrap; }
+header .eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--night-gold); }
+header h1 { font-size: 26px; }
+.hbtns { display: flex; gap: 8px; }
+.hbtn { min-height: 44px; padding: 0 14px; border: 1px solid #8C7462; color: var(--card); background: transparent; text-decoration: none; display: inline-flex; align-items: center; font: 13px var(--body); cursor: pointer; }
+main { display: grid; gap: 28px; padding-block: 24px calc(48px + env(safe-area-inset-bottom, 0px)); }
+.panel { background: var(--paper); border: 1px solid var(--line); padding: 20px 18px; display: grid; gap: 14px; }
+.frame { border: 1px solid var(--gold); padding: 5px; background: var(--card); }
+.frame > .inner { border: 1px solid var(--gold); padding: 22px 18px; display: grid; gap: 14px; }
+.sec-title { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.sec-title h2 { font-size: 26px; }
+label { font-size: 14px; font-weight: 500; }
+.field { display: grid; gap: 6px; min-width: 0; }
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], select, textarea {
+  width: 100%; min-height: 48px; border: 1px solid var(--field); background: #FFFFFF; color: var(--ink); font: 15px var(--body); padding: 0 12px; border-radius: 0; min-width: 0;
+}
+textarea { padding: 12px; min-height: 110px; resize: vertical; }
+.row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 420px) { .row2 { grid-template-columns: 1fr; } }
+.check { display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; }
+.check input { width: 20px; height: 20px; accent-color: var(--night); }
+.btn { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 20px; font: 500 15px/1 var(--body); letter-spacing: 0.04em; cursor: pointer; border: 1px solid transparent; text-decoration: none; }
+.btn-dark { background: var(--night); color: var(--card); }
+.btn-dark:disabled { opacity: 0.6; cursor: wait; }
+.btn-line { background: transparent; border-color: var(--ink); color: var(--ink); }
+.btn-sm { min-height: 44px; padding: 0 12px; font-size: 13px; }
+.msg { font-size: 14px; padding: 10px 12px; border: 1px solid var(--line); background: #FFFFFF; }
+.msg.bad { border-color: #D9A3AC; color: var(--bad); }
+.msg.ok { border-color: #A9CDB8; color: var(--ok); }
+.tabs { display: flex; border: 1px solid var(--field); }
+.tabs button { flex: 1; min-height: 44px; border: none; background: var(--paper); color: var(--ink); font: 14px var(--body); cursor: pointer; }
+.tabs button + button { border-left: 1px solid var(--field); }
+.tabs button[aria-pressed="true"] { background: var(--night); color: var(--card); }
+.tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (min-width: 640px) { .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.tile { background: #FFFFFF; border: 1px solid var(--line); padding: 14px; display: grid; gap: 2px; }
+.tile span { font-size: 13px; color: var(--muted); }
+.tile strong { font-family: var(--display); font-size: 36px; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.list { display: grid; background: #FFFFFF; border: 1px solid var(--line); }
+.list > div { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; }
+.list > div + div { border-top: 1px solid var(--line); }
+.list .n { font-variant-numeric: tabular-nums; color: var(--muted); white-space: nowrap; }
+.photos { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 10px; }
+.photo { position: relative; aspect-ratio: 1; background: var(--tile); }
+.photo img { width: 100%; height: 100%; object-fit: cover; }
+.photo button { position: absolute; top: 4px; right: 4px; width: 32px; height: 32px; border-radius: 50%; border: none; background: rgba(46, 33, 26, 0.85); color: #FFFFFF; font-size: 18px; line-height: 1; cursor: pointer; }
+.photo .first { position: absolute; left: 4px; bottom: 4px; background: var(--card); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 6px; color: var(--gold-ink); }
+.addphoto { aspect-ratio: 1; border: 1px dashed var(--gold); background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 13px; text-align: center; cursor: pointer; color: var(--ink); padding: 6px; }
+.addphoto input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.prow { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 12px; align-items: start; padding: 12px 14px; }
+.prow + .prow { border-top: 1px solid var(--line); }
+.prow .thumb { width: 64px; height: 76px; background: var(--tile); }
+.prow .thumb img { width: 100%; height: 100%; object-fit: cover; }
+.prow h3 { font-size: 19px; line-height: 1.2; overflow-wrap: anywhere; }
+.prow .meta { font-size: 13px; color: var(--muted); }
+.prow .acts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.pill { display: inline-block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border: 1px solid var(--line); background: var(--card); color: var(--gold-ink); margin-left: 6px; vertical-align: middle; }
+.pill.off { color: var(--muted); background: var(--tile); }
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--night); color: var(--card); padding: 10px 18px; font-size: 14px; z-index: 30; max-width: calc(100% - 32px); }
+.muted { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div><div class="eyebrow">Zeenat Jewels</div><h1>Owner Dashboard</h1></div>
+    <div class="hbtns">
+      <a class="hbtn" href="./" target="_blank" rel="noopener">View site</a>
+      <button class="hbtn" id="signout" hidden>Sign out</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="msg bad" id="setup" hidden>The website is not connected to Supabase yet. Open <strong>config.js</strong> and fill in SUPABASE_URL and SUPABASE_ANON_KEY, then reload this page.</div>
+
+  <section id="login" class="frame" hidden>
+    <form class="inner" id="login-form">
+      <h2 style="font-size: 26px">Sign in</h2>
+      <div class="field"><label for="l-email">Email</label><input id="l-email" type="email" autocomplete="username" required></div>
+      <div class="field"><label for="l-pass">Password</label><input id="l-pass" type="password" autocomplete="current-password" required></div>
+      <div class="msg bad" id="l-err" hidden></div>
+      <button class="btn btn-dark" type="submit" id="l-btn">Sign in</button>
+    </form>
+  </section>
+
+  <div id="app" hidden style="display: grid; gap: 28px">
+    <section class="panel" aria-labelledby="stats-h">
+      <div class="sec-title"><h2 id="stats-h">Visitors</h2><button class="btn btn-line btn-sm" id="refresh">Refresh</button></div>
+      <div class="tabs" role="group" aria-label="Time period">
+        <button data-days="0" aria-pressed="true">Today</button>
+        <button data-days="7" aria-pressed="false">7 days</button>
+        <button data-days="30" aria-pressed="false">30 days</button>
+      </div>
+      <div class="tiles">
+        <div class="tile"><span>Website visits</span><strong id="s-view">–</strong></div>
+        <div class="tile"><span>Product views</span><strong id="s-product">–</strong></div>
+        <div class="tile"><span>WhatsApp taps</span><strong id="s-whatsapp">–</strong></div>
+        <div class="tile"><span>Payment taps</span><strong id="s-pay">–</strong></div>
+      </div>
+      <h3 style="font-size: 20px; margin-top: 4px">Most viewed products</h3>
+      <div class="list" id="top"><div class="muted">No product views yet.</div></div>
+    </section>
+
+    <section class="frame" id="form-sec" aria-labelledby="form-h">
+      <form class="inner" id="pform" novalidate>
+        <div class="sec-title"><h2 id="form-h">Add a Product</h2><button type="button" class="btn btn-line btn-sm" id="cancel-edit" hidden>Cancel edit</button></div>
+        <div class="field">
+          <span style="font-size: 14px; font-weight: 500">Photos <span class="muted" style="font-weight: 400">(up to 6, first one is the main photo)</span></span>
+          <div class="photos" id="photos"></div>
+        </div>
+        <div class="field"><label for="f-name">Product name</label><input id="f-name" type="text" placeholder="e.g. Ruby Silver Ring" required></div>
+        <div class="row2">
+          <div class="field"><label for="f-cat">Category</label>
+            <select id="f-cat"><option value="gold">Gold Rings</option><option value="silver">Silver Rings</option><option value="buttons">Kurta Buttons</option><option value="gems">Gem Stones</option><option value="bracelets">Bracelets</option><option value="tasbih">Tasbih</option></select>
+          </div>
+          <div class="field"><label for="f-price">Price (₹)</label><input id="f-price" type="number" inputmode="decimal" min="0" step="1" placeholder="Leave empty for Price on request"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="f-stone">Stone</label>
+            <select id="f-stone"><option value="">None</option><option>Ruby</option><option>Emerald</option><option>Pearl</option><option>Aqeeq</option><option>Crystal</option><option>Other</option></select>
+          </div>
+          <div class="field"><label for="f-metal">Metal</label>
+            <select id="f-metal"><option value="">None</option><option>Gold</option><option>Silver</option><option>Other</option></select>
+          </div>
+        </div>
+        <div class="field"><label for="f-desc">Description</label><textarea id="f-desc" placeholder="Stone, weight, finish, how to wear it…"></textarea></div>
+        <div class="field"><label for="f-sort">Position <span class="muted" style="font-weight: 400">(smaller number shows first)</span></label><input id="f-sort" type="number" inputmode="numeric" value="100"></div>
+        <label class="check"><input type="checkbox" id="f-ring"> Ask customer for ring size</label>
+        <label class="check"><input type="checkbox" id="f-new" checked> Show "New" tag</label>
+        <label class="check"><input type="checkbox" id="f-visible" checked> Show on website</label>
+        <div class="msg" id="f-msg" hidden></div>
+        <button class="btn btn-dark" type="submit" id="f-save">Save Product</button>
+      </form>
+    </section>
+
+    <section class="panel" aria-labelledby="list-h">
+      <div class="sec-title"><h2 id="list-h">Your Products</h2><span class="muted" id="p-count"></span></div>
+      <div class="list" id="plist" style="display: block"><div class="muted" style="padding: 14px">Loading…</div></div>
+    </section>
+  </div>
+</main>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+<script>
+const CFG = window.ZJ_CONFIG || {};
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const CATS = { gold: 'Gold Rings', silver: 'Silver Rings', buttons: 'Kurta Buttons', gems: 'Gem Stones', bracelets: 'Bracelets', tasbih: 'Tasbih' };
+const MAX_PHOTOS = 6;
+let sb = null, products = [], days = 0, editId = null;
+let photos = []; // { url, file? } — file present means not uploaded yet
+
+function toast(m) { const t = $('toast'); t.textContent = m; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { t.hidden = true; }, 2600); }
+function showMsg(el, text, kind) { el.textContent = text; el.className = 'msg' + (kind ? ' ' + kind : ''); el.hidden = !text; }
+
+if (!CFG.SUPABASE_URL || !CFG.SUPABASE_ANON_KEY || !window.supabase) {
+  $('setup').hidden = false;
+} else {
+  sb = window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY);
+  $('l-email').value = CFG.ADMIN_EMAIL || '';
+  sb.auth.getSession().then(({ data }) => show(data.session));
+  sb.auth.onAuthStateChange((_e, session) => show(session));
+}
+
+let shownFor = null;
+function show(session) {
+  const email = session && session.user ? session.user.email : null;
+  if (email === shownFor) return;
+  shownFor = email;
+  $('login').hidden = !!email;
+  $('app').hidden = !email;
+  $('signout').hidden = !email;
+  if (email) {
+    if (CFG.ADMIN_EMAIL && email.toLowerCase() !== CFG.ADMIN_EMAIL.toLowerCase()) toast('Signed in as ' + email + ', which is not the owner email. Changes may be refused.');
+    loadStats(); loadProducts(); renderPhotos();
+  }
+}
+
+$('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  $('l-btn').disabled = true; showMsg($('l-err'), '');
+  const { error } = await sb.auth.signInWithPassword({ email: $('l-email').value.trim(), password: $('l-pass').value });
+  $('l-btn').disabled = false;
+  if (error) showMsg($('l-err'), 'Could not sign in: ' + error.message + '. Check the email and password.', 'bad');
+});
+$('signout').addEventListener('click', () => sb.auth.signOut());
+
+/* ---------- Visitors ---------- */
+function sinceDate() { const d = new Date(); d.setHours(0, 0, 0, 0); if (days) d.setDate(d.getDate() - (days - 1)); return d.toISOString(); }
+async function loadStats() {
+  const since = sinceDate();
+  for (const k of ['view', 'product', 'whatsapp', 'pay']) {
+    const { count, error } = await sb.from('events').select('id', { count: 'exact', head: true }).eq('kind', k).gte('created_at', since);
+    $('s-' + k).textContent = error ? '–' : (count || 0).toLocaleString('en-IN');
+  }
+  const { data } = await sb.from('events').select('product_id').eq('kind', 'product').gte('created_at', since).not('product_id', 'is', null).limit(10000);
+  const tally = {};
+  (data || []).forEach(r => { tally[r.product_id] = (tally[r.product_id] || 0) + 1; });
+  const top = Object.entries(tally).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  $('top').innerHTML = top.length ? top.map(([id, n]) => {
+    const p = products.find(x => x.id === id);
+    return '<div><span>' + esc(p ? p.name : 'Deleted product') + '</span><span class="n">' + n + (n === 1 ? ' view' : ' views') + '</span></div>';
+  }).join('') : '<div class="muted">No product views in this period yet.</div>';
+}
+document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => {
+  days = +b.dataset.days;
+  document.querySelectorAll('.tabs button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  loadStats();
+}));
+$('refresh').addEventListener('click', () => { loadStats(); loadProducts(); });
+
+/* ---------- Photos ---------- */
+function renderPhotos() {
+  const items = photos.map((p, i) => '<div class="photo"><img src="' + esc(p.url) + '" alt="Photo ' + (i + 1) + '">' +
+    (i === 0 ? '<span class="first">Main</span>' : '') +
+    '<button type="button" data-rm="' + i + '" aria-label="Remove photo ' + (i + 1) + '">×</button></div>').join('');
+  const add = photos.length < MAX_PHOTOS ? '<label class="addphoto" style="position: relative"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7A5C17" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Add photos<input type="file" id="f-files" accept="image/*" multiple></label>' : '';
+  $('photos').innerHTML = items + add;
+  const inp = $('f-files');
+  if (inp) inp.addEventListener('change', () => {
+    const files = Array.from(inp.files || []).slice(0, MAX_PHOTOS - photos.length);
+    files.forEach(f => photos.push({ url: URL.createObjectURL(f), file: f }));
+    renderPhotos();
+  });
+}
+$('photos').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-rm]');
+  if (!b) return;
+  const p = photos.splice(+b.dataset.rm, 1)[0];
+  if (p && p.file) URL.revokeObjectURL(p.url);
+  renderPhotos();
+});
+
+function compress(file) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const max = 1400;
+      let w = img.naturalWidth, h = img.naturalHeight;
+      if (w > max || h > max) { const r = Math.min(max / w, max / h); w = Math.round(w * r); h = Math.round(h * r); }
+      const c = document.createElement('canvas'); c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      c.toBlob(b => resolve(b || file), 'image/jpeg', 0.82);
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+    img.src = url;
+  });
+}
+
+/* ---------- Product form ---------- */
+$('f-cat').addEventListener('change', () => { if (!editId) $('f-ring').checked = ['gold', 'silver'].includes($('f-cat').value); });
+
+function resetForm() {
+  editId = null;
+  $('pform').reset();
+  $('f-sort').value = 100; $('f-new').checked = true; $('f-visible').checked = true;
+  $('f-ring').checked = ['gold', 'silver'].includes($('f-cat').value);
+  photos.forEach(p => { if (p.file) URL.revokeObjectURL(p.url); });
+  photos = [];
+  renderPhotos();
+  $('form-h').textContent = 'Add a Product';
+  $('f-save').textContent = 'Save Product';
+  $('cancel-edit').hidden = true;
+}
+$('cancel-edit').addEventListener('click', () => { resetForm(); showMsg($('f-msg'), ''); });
+
+function startEdit(p) {
+  editId = p.id;
+  $('f-name').value = p.name || '';
+  $('f-cat').value = p.category || 'gold';
+  $('f-price').value = p.price == null ? '' : p.price;
+  $('f-stone').value = p.stone || '';
+  $('f-metal').value = p.metal || '';
+  $('f-desc').value = p.description || '';
+  $('f-sort').value = p.sort_order == null ? 100 : p.sort_order;
+  $('f-ring').checked = !!p.is_ring; $('f-new').checked = !!p.is_new; $('f-visible').checked = p.visible !== false;
+  photos = (p.images || []).map(u => ({ url: u }));
+  renderPhotos();
+  $('form-h').textContent = 'Edit Product';
+  $('f-save').textContent = 'Save Changes';
+  $('cancel-edit').hidden = false;
+  showMsg($('f-msg'), '');
+  $('form-sec').scrollIntoView({ behavior: 'smooth' });
+}
+
+$('pform').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name = $('f-name').value.trim();
+  if (!name) { showMsg($('f-msg'), 'Please enter a product name.', 'bad'); $('f-name').focus(); return; }
+  $('f-save').disabled = true;
+  try {
+    const urls = [];
+    const pending = photos.filter(p => p.file).length;
+    let done = 0;
+    for (const p of photos) {
+      if (!p.file) { urls.push(p.url); continue; }
+      done++;
+      showMsg($('f-msg'), 'Uploading photo ' + done + ' of ' + pending + '…');
+      const blob = await compress(p.file);
+      const path = Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.jpg';
+      const { error } = await sb.storage.from('products').upload(path, blob, { contentType: 'image/jpeg', upsert: false });
+      if (error) throw new Error('Photo upload failed: ' + error.message);
+      urls.push(sb.storage.from('products').getPublicUrl(path).data.publicUrl);
+    }
+    showMsg($('f-msg'), 'Saving…');
+    const priceRaw = $('f-price').value.trim();
+    const row = {
+      name, category: $('f-cat').value, price: priceRaw === '' ? null : Number(priceRaw),
+      stone: $('f-stone').value || null, metal: $('f-metal').value || null,
+      description: $('f-desc').value.trim() || null, images: urls,
+      sort_order: parseInt($('f-sort').value, 10) || 100,
+      is_ring: $('f-ring').checked, is_new: $('f-new').checked, visible: $('f-visible').checked
+    };
+    const res = editId ? await sb.from('products').update(row).eq('id', editId) : await sb.from('products').insert(row);
+    if (res.error) throw new Error(res.error.message);
+    const wasEdit = !!editId;
+    resetForm();
+    showMsg($('f-msg'), wasEdit ? 'Changes saved. They are live on the website now.' : 'Product added. It is live on the website now.', 'ok');
+    loadProducts();
+  } catch (err) {
+    showMsg($('f-msg'), 'Not saved. ' + err.message, 'bad');
+  }
+  $('f-save').disabled = false;
+});
+
+/* ---------- Product list ---------- */
+async function loadProducts() {
+  const { data, error } = await sb.from('products').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: false });
+  if (error) { $('plist').innerHTML = '<div class="msg bad" style="margin: 14px">Could not load products: ' + esc(error.message) + '. Did you run supabase-setup.sql?</div>'; return; }
+  products = data || [];
+  $('p-count').textContent = products.length + (products.length === 1 ? ' product' : ' products');
+  $('plist').innerHTML = products.length ? products.map((p, i) =>
+    '<div class="prow"><div class="thumb">' + (p.images && p.images[0] ? '<img src="' + esc(p.images[0]) + '" alt="">' : '') + '</div><div>' +
+    '<h3>' + esc(p.name) + (p.visible ? '' : '<span class="pill off">Hidden</span>') + (p.is_new ? '<span class="pill">New</span>' : '') + '</h3>' +
+    '<div class="meta">' + esc(CATS[p.category] || p.category) + ' · ' + (p.price == null ? 'Price on request' : '₹ ' + Number(p.price).toLocaleString('en-IN')) + ' · ' + (p.images ? p.images.length : 0) + ' photo(s)</div>' +
+    '<div class="acts"><button class="btn btn-line btn-sm" data-edit="' + i + '">Edit</button>' +
+    '<button class="btn btn-line btn-sm" data-vis="' + i + '">' + (p.visible ? 'Hide' : 'Show') + '</button>' +
+    '<button class="btn btn-line btn-sm" data-del="' + i + '" style="color: var(--bad); border-color: var(--bad)">Delete</button></div></div></div>'
+  ).join('') : '<div class="muted" style="padding: 14px">No products yet. Add your first one above.</div>';
+}
+
+$('plist').addEventListener('click', async (e) => {
+  const ed = e.target.closest('[data-edit]'); if (ed) { startEdit(products[+ed.dataset.edit]); return; }
+  const vs = e.target.closest('[data-vis]');
+  if (vs) {
+    const p = products[+vs.dataset.vis];
+    const { error } = await sb.from('products').update({ visible: !p.visible }).eq('id', p.id);
+    toast(error ? 'Could not update: ' + error.message : (p.visible ? 'Hidden from website' : 'Showing on website'));
+    loadProducts(); return;
+  }
+  const dl = e.target.closest('[data-del]');
+  if (dl) {
+    const p = products[+dl.dataset.del];
+    if (!window.confirm('Delete "' + p.name + '"? This cannot be undone.')) return;
+    const { error } = await sb.from('products').delete().eq('id', p.id);
+    if (error) { toast('Could not delete: ' + error.message); return; }
+    const paths = (p.images || []).map(u => u.split('/products/')[1]).filter(Boolean);
+    if (paths.length) sb.storage.from('products').remove(paths).then(() => {}, () => {});
+    if (editId === p.id) resetForm();
+    toast('Deleted'); loadProducts();
+  }
+});
+</script>
+</body>
+</html>
