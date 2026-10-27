@@ -82,6 +82,15 @@ textarea { padding: 12px; min-height: 110px; resize: vertical; }
 .prow h3 { font-size: 19px; line-height: 1.2; overflow-wrap: anywhere; }
 .prow .meta { font-size: 13px; color: var(--muted); }
 .prow .acts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.crow { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 12px; padding: 12px 14px; align-items: start; }
+.crow + .crow { border-top: 1px solid var(--line); }
+.crow .cthumb { width: 84px; height: 84px; background: var(--tile); position: relative; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--muted); text-align: center; }
+.crow .cthumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.crow .cfields { display: grid; gap: 8px; }
+.crow .cline { display: grid; grid-template-columns: minmax(0, 1fr) 76px; gap: 8px; }
+.crow .acts { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.filebtn { position: relative; overflow: hidden; }
+.filebtn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 .pill { display: inline-block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border: 1px solid var(--line); background: var(--card); color: var(--gold-ink); margin-left: 6px; vertical-align: middle; }
 .pill.off { color: var(--muted); background: var(--tile); }
 .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--night); color: var(--card); padding: 10px 18px; font-size: 14px; z-index: 30; max-width: calc(100% - 32px); }
@@ -131,6 +140,15 @@ textarea { padding: 12px; min-height: 110px; resize: vertical; }
       <div class="list" id="top"><div class="muted">No product views yet.</div></div>
     </section>
 
+    <section class="panel" aria-labelledby="cat-h">
+      <div class="sec-title"><h2 id="cat-h">Categories</h2><span class="muted" style="font-size: 13px">Photo and name on each "Shop by Category" tile</span></div>
+      <div class="list" id="clist" style="display: block"><div class="muted" style="padding: 14px">Loading…</div></div>
+      <form id="cat-add" class="row2" style="align-items: end" novalidate>
+        <div class="field"><label for="c-new">New category name</label><input id="c-new" type="text" placeholder="e.g. Earrings"></div>
+        <button class="btn btn-line" type="submit">Add Category</button>
+      </form>
+    </section>
+
     <section class="frame" id="form-sec" aria-labelledby="form-h">
       <form class="inner" id="pform" novalidate>
         <div class="sec-title"><h2 id="form-h">Add a Product</h2><button type="button" class="btn btn-line btn-sm" id="cancel-edit" hidden>Cancel edit</button></div>
@@ -178,7 +196,8 @@ textarea { padding: 12px; min-height: 110px; resize: vertical; }
 const CFG = window.ZJ_CONFIG || {};
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const CATS = { gold: 'Gold Rings', silver: 'Silver Rings', buttons: 'Kurta Buttons', gems: 'Gem Stones', bracelets: 'Bracelets', tasbih: 'Tasbih' };
+let CATS = { gold: 'Gold Rings', silver: 'Silver Rings', buttons: 'Kurta Buttons', gems: 'Gem Stones', bracelets: 'Bracelets', tasbih: 'Tasbih' };
+let categories = [];
 const MAX_PHOTOS = 6;
 let sb = null, products = [], days = 0, editId = null;
 let photos = []; // { url, file? } — file present means not uploaded yet
@@ -205,7 +224,7 @@ function show(session) {
   $('signout').hidden = !email;
   if (email) {
     if (CFG.ADMIN_EMAIL && email.toLowerCase() !== CFG.ADMIN_EMAIL.toLowerCase()) toast('Signed in as ' + email + ', which is not the owner email. Changes may be refused.');
-    loadStats(); loadProducts(); renderPhotos();
+    loadCats().then(() => { loadStats(); loadProducts(); }); renderPhotos();
   }
 }
 
@@ -240,7 +259,7 @@ document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click
   document.querySelectorAll('.tabs button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
   loadStats();
 }));
-$('refresh').addEventListener('click', () => { loadStats(); loadProducts(); });
+$('refresh').addEventListener('click', () => { loadCats(); loadStats(); loadProducts(); });
 
 /* ---------- Photos ---------- */
 function renderPhotos() {
@@ -331,11 +350,7 @@ $('pform').addEventListener('submit', async (e) => {
       if (!p.file) { urls.push(p.url); continue; }
       done++;
       showMsg($('f-msg'), 'Uploading photo ' + done + ' of ' + pending + '…');
-      const blob = await compress(p.file);
-      const path = Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.jpg';
-      const { error } = await sb.storage.from('products').upload(path, blob, { contentType: 'image/jpeg', upsert: false });
-      if (error) throw new Error('Photo upload failed: ' + error.message);
-      urls.push(sb.storage.from('products').getPublicUrl(path).data.publicUrl);
+      urls.push(await uploadImage(p.file));
     }
     showMsg($('f-msg'), 'Saving…');
     const priceRaw = $('f-price').value.trim();
@@ -356,6 +371,84 @@ $('pform').addEventListener('submit', async (e) => {
     showMsg($('f-msg'), 'Not saved. ' + err.message, 'bad');
   }
   $('f-save').disabled = false;
+});
+
+async function uploadImage(file) {
+  const blob = await compress(file);
+  const path = Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.jpg';
+  const { error } = await sb.storage.from('products').upload(path, blob, { contentType: 'image/jpeg', upsert: false });
+  if (error) throw new Error('Photo upload failed: ' + error.message);
+  return sb.storage.from('products').getPublicUrl(path).data.publicUrl;
+}
+function removeStored(url) {
+  const path = url && url.split('/products/')[1];
+  if (path) sb.storage.from('products').remove([path]).then(() => {}, () => {});
+}
+
+/* ---------- Categories ---------- */
+async function loadCats() {
+  const { data, error } = await sb.from('categories').select('*').order('sort_order', { ascending: true });
+  if (error) { $('clist').innerHTML = '<div class="msg bad" style="margin: 14px">Could not load categories: ' + esc(error.message) + '. Run the latest supabase-setup.sql.</div>'; return; }
+  categories = data || [];
+  if (categories.length) {
+    CATS = {};
+    categories.forEach(c => { CATS[c.id] = c.name; });
+    const keep = $('f-cat').value;
+    $('f-cat').innerHTML = categories.map(c => '<option value="' + esc(c.id) + '">' + esc(c.name) + (c.visible ? '' : ' (hidden)') + '</option>').join('');
+    if (CATS[keep]) $('f-cat').value = keep;
+  }
+  renderCatList();
+}
+function renderCatList() {
+  $('clist').innerHTML = categories.length ? categories.map((c, i) =>
+    '<div class="crow"><div class="cthumb">' + (c.image ? '<img src="' + esc(c.image) + '" alt="">' : 'No photo') + '</div><div class="cfields">' +
+    '<div class="cline"><div class="field"><label for="cn-' + i + '">Name</label><input id="cn-' + i + '" type="text" value="' + esc(c.name) + '"></div>' +
+    '<div class="field"><label for="cs-' + i + '">Position</label><input id="cs-' + i + '" type="number" inputmode="numeric" value="' + esc(c.sort_order) + '"></div></div>' +
+    '<label class="check" style="min-height: 36px"><input type="checkbox" id="cv-' + i + '"' + (c.visible ? ' checked' : '') + '> Show on website</label>' +
+    '<div class="acts"><span class="btn btn-line btn-sm filebtn">' + (c.image ? 'Change photo' : 'Add photo') + '<input type="file" accept="image/*" data-cphoto="' + i + '" aria-label="Photo for ' + esc(c.name) + '"></span>' +
+    (c.image ? '<button class="btn btn-line btn-sm" data-cnophoto="' + i + '">Remove photo</button>' : '') +
+    '<button class="btn btn-dark btn-sm" data-csave="' + i + '">Save</button></div></div></div>'
+  ).join('') : '<div class="muted" style="padding: 14px">No categories yet. Add one below.</div>';
+}
+async function saveCat(i, extra) {
+  const c = categories[i];
+  const row = Object.assign({
+    name: ($('cn-' + i).value || '').trim() || c.name,
+    sort_order: parseInt($('cs-' + i).value, 10) || 100,
+    visible: $('cv-' + i).checked
+  }, extra || {});
+  const { error } = await sb.from('categories').update(row).eq('id', c.id);
+  toast(error ? 'Not saved: ' + error.message : 'Category saved. It is live on the website now.');
+  if (!error) loadCats();
+  return !error;
+}
+$('clist').addEventListener('change', async (e) => {
+  const inp = e.target.closest('[data-cphoto]');
+  if (!inp || !inp.files || !inp.files[0]) return;
+  const i = +inp.dataset.cphoto, old = categories[i].image;
+  toast('Uploading photo…');
+  try {
+    const url = await uploadImage(inp.files[0]);
+    if (await saveCat(i, { image: url })) removeStored(old);
+  } catch (err) { toast(err.message); }
+});
+$('clist').addEventListener('click', async (e) => {
+  const sv = e.target.closest('[data-csave]'); if (sv) { saveCat(+sv.dataset.csave); return; }
+  const np = e.target.closest('[data-cnophoto]');
+  if (np) { const i = +np.dataset.cnophoto, old = categories[i].image; if (await saveCat(i, { image: null })) removeStored(old); }
+});
+$('cat-add').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name = $('c-new').value.trim();
+  if (!name) { toast('Type a category name first'); $('c-new').focus(); return; }
+  let id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'cat';
+  if (categories.some(c => c.id === id)) id += '-' + Math.random().toString(36).slice(2, 5);
+  const maxSort = categories.reduce((m, c) => Math.max(m, c.sort_order || 0), 0);
+  const { error } = await sb.from('categories').insert({ id, name, sort_order: maxSort + 10 });
+  if (error) { toast('Not added: ' + error.message); return; }
+  $('c-new').value = '';
+  toast('Category added. Add a photo to it below.');
+  loadCats();
 });
 
 /* ---------- Product list ---------- */

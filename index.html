@@ -66,9 +66,13 @@ header.site .wrap { display: flex; align-items: center; justify-content: space-b
 section.block { padding-block: 44px; }
 .head { display: grid; gap: 6px; justify-items: center; text-align: center; margin-bottom: 22px; }
 .head h2 { font-size: clamp(30px, 6vw, 40px); }
-.cats { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-.cat { display: grid; gap: 10px; background: none; border: none; padding: 0; cursor: pointer; color: var(--ink); font: inherit; }
-.cat .ph { aspect-ratio: 1; max-width: 100%; background: var(--tile); border: 1px solid #DCC0AC; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+.cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+@media (min-width: 900px) { .cats { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; } }
+.cat { display: grid; gap: 10px; background: none; border: none; padding: 0; cursor: pointer; color: var(--ink); font: inherit; min-width: 0; }
+.cat .ph { aspect-ratio: 1; max-width: 100%; background: var(--tile); border: 1px solid #DCC0AC; display: flex; align-items: center; justify-content: center; transition: background .2s; position: relative; overflow: hidden; }
+.cat .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.cat:hover .ph img { transform: scale(1.04); }
+@media (prefers-reduced-motion: reduce) { .cat .ph img { transition: none; } }
 .cat:hover .ph { background: #E4CBB8; }
 .cat span { font-family: var(--display); font-size: 20px; font-weight: 600; }
 .stones { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
@@ -331,7 +335,7 @@ function track(kind, productId) {
   sb.from('events').insert({ kind: kind, product_id: productId || null }).then(() => {}, () => {});
 }
 
-const CATS = [
+const DEFAULT_CATS = [
   { id: 'gold', name: 'Gold Rings', icon: '<circle cx="24" cy="30" r="12"/><path d="M19 12h10l3 4-8 6-8-6z"/>' },
   { id: 'silver', name: 'Silver Rings', icon: '<circle cx="24" cy="30" r="12"/><circle cx="24" cy="30" r="8.5"/><path d="M20 13h8l2.5 3.5L24 21l-6.5-4.5z"/>' },
   { id: 'buttons', name: 'Kurta Buttons', icon: '<circle cx="24" cy="24" r="14"/><circle cx="24" cy="24" r="9"/><circle cx="21" cy="21" r="1.4"/><circle cx="27" cy="21" r="1.4"/><circle cx="21" cy="27" r="1.4"/><circle cx="27" cy="27" r="1.4"/>' },
@@ -364,16 +368,25 @@ let current = null;
 const generalMsg = wa('Hello Zeenat Jewels, I would like to know more about your collection.');
 ['hero-wa', 'contact-wa', 'contact-wa-line', 'fab'].forEach(id => { $(id).href = generalMsg; });
 
-$('cats').innerHTML = CATS.map(c =>
-  '<button class="cat" data-cat="' + c.id + '"><div class="ph"><svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#7A5C17" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + c.icon + '</svg></div><span>' + c.name + '</span></button>'
-).join('');
+let CATS = DEFAULT_CATS.slice();
+const ICONS = {};
+DEFAULT_CATS.forEach(c => { ICONS[c.id] = c.icon; });
+const GEM_ICON = '<path d="M14 13h20l7 9-17 17L7 22z"/><path d="M7 22h34"/><path d="M19 13l-3 9 8 17 8-17-3-9"/>';
+function renderCats() {
+  $('cats').innerHTML = CATS.map(c => {
+    const inner = c.image ? '<img loading="lazy" src="' + esc(c.image) + '" alt="' + esc(c.name) + '">' :
+      '<svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#7A5C17" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[c.id] || GEM_ICON) + '</svg>';
+    return '<button class="cat" data-cat="' + esc(c.id) + '"><div class="ph">' + inner + '</div><span>' + esc(c.name) + '</span></button>';
+  }).join('');
+}
+renderCats();
 $('stones').innerHTML = STONES.map(s => '<button class="chip" data-stone="' + s.id + '" aria-pressed="false"><span class="dot" style="background:' + s.color + (s.border ? ';border:1px solid #B9A795' : '') + '"></span>' + s.id + '</button>').join('');
 
 function renderFilters() {
   const chips = [{ label: 'All', type: 'all', value: null }].concat(CATS.map(c => ({ label: c.name, type: 'cat', value: c.id })));
   $('filters').innerHTML = chips.map(c => {
     const on = filter.type === c.type && filter.value === c.value;
-    return '<button class="chip" data-ftype="' + c.type + '" data-fval="' + (c.value || '') + '" aria-pressed="' + on + '">' + c.label + '</button>';
+    return '<button class="chip" data-ftype="' + c.type + '" data-fval="' + esc(c.value || '') + '" aria-pressed="' + on + '">' + esc(c.label) + '</button>';
   }).join('') + (filter.type === 'stone' ? '<button class="chip" aria-pressed="true" data-ftype="all" data-fval="">' + esc(filter.value) + ' ✕</button>' : '');
 }
 
@@ -481,6 +494,8 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.q
 async function load() {
   renderFilters();
   if (!sb) { PRODUCTS = SAMPLES; renderGrid(); return; }
+  const cats = await sb.from('categories').select('*').eq('visible', true).order('sort_order', { ascending: true });
+  if (!cats.error && cats.data && cats.data.length) { CATS = cats.data; renderCats(); renderFilters(); }
   const { data, error } = await sb.from('products').select('*').eq('visible', true).order('sort_order', { ascending: true }).order('created_at', { ascending: false });
   if (error) { $('grid').innerHTML = '<p class="empty">The collection could not load right now. Please refresh, or message us on WhatsApp.</p>'; return; }
   PRODUCTS = data || [];
