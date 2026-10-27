@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Zeenat Jewels - gold and silver rings, ruby, emerald, pearl and aqeeq gemstones, bracelets, kurta buttons and tasbih of original stones. Order on WhatsApp.">
+<meta name="theme-color" content="#F4E6DA">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 120 80%27%3E%3Cg fill=%27none%27 stroke=%27%23B8913A%27 stroke-width=%276%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M24 6h72l20 22-56 46L4 28z%27/%3E%3Cpath d=%27M4 28h112%27/%3E%3C/g%3E%3C/svg%3E">
+<style>html,body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Zeenat Jewels</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500&display=swap">
+<style>
+/* Layout: one column on phones, the business card's double-gold frame as the recurring motif; widens to a centered 1120px shop on desktop. Single warm look by design, matching the printed card. */
+:root {
+  --blush: #F4E6DA;
+  --card: #F8EDE3;
+  --tile: #EBD5C5;
+  --paper: #FAF1E9;
+  --line: #E2CBB8;
+  --ink: #3A2A1F;
+  --muted: #6B5546;
+  --gold: #B8913A;
+  --gold-ink: #7A5C17;
+  --night: #2E211A;
+  --night-gold: #E7CF95;
+  --night-text: #E3D2C4;
+  --wa: #1E7A47;
+  --display: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+  --body: 'Jost', 'Segoe UI', system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { background: var(--blush); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--blush); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; margin: 0; text-wrap: balance; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.eyebrow { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-ink); }
+.frame { border: 1px solid var(--gold); padding: 6px; background: var(--card); }
+.frame > .inner { border: 1px solid var(--gold); }
+.btn { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 22px; font: 500 15px/1 var(--body); letter-spacing: 0.05em; text-decoration: none; cursor: pointer; border: 1px solid transparent; transition: transform .15s ease, background .15s ease; }
+.btn:active { transform: scale(0.98); }
+.btn-dark { background: var(--night); color: var(--card); }
+.btn-dark:hover { background: #46332A; }
+.btn-wa { background: var(--wa); color: #FFFFFF; }
+.btn-wa:hover { background: #18663B; }
+.btn-line { border-color: var(--ink); color: var(--ink); background: transparent; }
+.btn-line:hover { background: var(--paper); }
+.icon { width: 20px; height: 20px; flex-shrink: 0; }
+
+/* top strip + header */
+.strip { background: var(--night); color: var(--night-gold); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; text-align: center; padding-block: 9px; }
+header.site { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--blush); border-bottom: 1px solid var(--line); }
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 62px; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+.brand span { font-family: var(--display); font-size: 21px; font-weight: 600; letter-spacing: 0.16em; white-space: nowrap; }
+.nav { display: flex; gap: 22px; font-size: 14px; }
+.nav a { text-decoration: none; padding-block: 12px; }
+.nav a:hover { color: var(--gold-ink); }
+.icon-btn { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; color: var(--ink); background: none; border: none; cursor: pointer; }
+@media (max-width: 760px) { .nav { display: none; } }
+
+/* hero */
+.hero { padding-block: 22px 40px; }
+.hero .inner { padding: 44px 22px 34px; display: grid; gap: 18px; justify-items: center; text-align: center; }
+.hero h1 { font-size: clamp(48px, 13vw, 88px); line-height: 0.95; letter-spacing: 0.08em; color: var(--gold-ink); }
+.tagline { font-family: var(--display); font-style: italic; font-size: clamp(21px, 4vw, 28px); font-weight: 500; }
+.rule { width: 48px; height: 1px; background: var(--gold); }
+.hero p.lead { margin: 0; max-width: 46ch; color: var(--muted); }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; width: 100%; margin-top: 6px; }
+.cta-row .btn { flex: 1 1 220px; max-width: 320px; }
+.diamond-draw path { stroke-dasharray: 260; stroke-dashoffset: 0; animation: draw 1.6s ease-out both; }
+@keyframes draw { from { stroke-dashoffset: 260; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .diamond-draw path { animation: none; } .btn { transition: none; } }
+
+/* sections */
+section.block { padding-block: 44px; }
+.head { display: grid; gap: 6px; justify-items: center; text-align: center; margin-bottom: 22px; }
+.head h2 { font-size: clamp(30px, 6vw, 40px); }
+.cats { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.cat { display: grid; gap: 10px; text-decoration: none; background: none; border: none; padding: 0; cursor: pointer; color: var(--ink); font: inherit; }
+.cat .ph { aspect-ratio: 1; max-width: 100%; background: var(--tile); border: 1px solid #DCC0AC; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+.cat:hover .ph { background: #E4CBB8; }
+.cat span { font-family: var(--display); font-size: 20px; font-weight: 600; }
+.stones { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.chip { min-height: 44px; padding: 0 18px; border: 1px solid #CDB09A; border-radius: 999px; background: var(--paper); display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font: 14px var(--body); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--night); border-color: var(--night); color: var(--card); }
+.dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+
+/* products */
+.shop { background: var(--paper); border-block: 1px solid var(--line); }
+.shop-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.shop-head h2 { font-size: clamp(30px, 6vw, 40px); }
+.filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 18px; scrollbar-width: none; }
+.filters .chip { flex-shrink: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 18px 12px; }
+@media (min-width: 900px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 20px; } }
+.prod { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.prod button.open { all: unset; cursor: pointer; display: grid; gap: 8px; }
+.prod button.open:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+.prod .ph { aspect-ratio: 4 / 5; max-width: 100%; background: var(--tile); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--muted); position: relative; }
+.prod .tag { position: absolute; top: 8px; left: 8px; background: var(--card); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 8px; color: var(--gold-ink); }
+.prod h3 { font-size: 19px; line-height: 1.2; }
+.price { font-size: 14px; font-weight: 500; color: var(--muted); }
+.prod .btn { min-height: 44px; font-size: 13px; padding: 0 12px; }
+
+/* promises */
+.night { background: var(--night); color: var(--card); }
+.promises { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 26px; }
+.promise { display: flex; gap: 16px; align-items: flex-start; }
+.promise h3 { color: var(--night-gold); font-size: 22px; }
+.promise p { margin: 4px 0 0; color: var(--night-text); font-size: 14px; }
+
+/* contact */
+.contact .inner { padding: 34px 22px; display: grid; gap: 16px; justify-items: center; text-align: center; }
+.contact h2 { font-size: clamp(30px, 6vw, 40px); }
+.contact p { margin: 0; color: var(--muted); max-width: 44ch; }
+.lines { display: grid; gap: 2px; }
+.lines a, .lines div { min-height: 46px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 16px; text-decoration: none; font-variant-numeric: tabular-nums; }
+footer { border-top: 1px solid var(--gold); padding-block: 32px calc(48px + env(safe-area-inset-bottom, 0px)); text-align: center; display: grid; gap: 8px; justify-items: center; }
+footer .name { font-family: var(--display); font-size: 22px; font-weight: 600; letter-spacing: 0.16em; }
+footer .tl { font-family: var(--display); font-style: italic; font-size: 17px; color: var(--muted); }
+footer small { font-size: 12px; color: var(--muted); }
+
+/* floating whatsapp */
+.fab { position: fixed; right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 58px; height: 58px; border-radius: 50%; background: var(--wa); color: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 18px rgba(46, 33, 26, 0.3); z-index: 8; }
+
+/* sheets (product + payment) */
+.scrim { position: fixed; inset: 0; background: rgba(46, 33, 26, 0.5); z-index: 20; display: flex; align-items: flex-end; justify-content: center; }
+.sheet { background: var(--blush); width: 100%; max-width: 560px; max-height: 92%; overflow-y: auto; border-top: 2px solid var(--gold); padding: 0 max(16px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); animation: up .25s ease-out; }
+@media (min-width: 700px) { .scrim { align-items: center; } .sheet { border: 1px solid var(--gold); max-height: 88%; } }
+@keyframes up { from { transform: translateY(24px); opacity: .6; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .sheet { animation: none; } }
+.sheet-top { position: sticky; top: 0; background: var(--blush); display: flex; align-items: center; justify-content: space-between; padding-block: 8px; z-index: 1; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.sheet-top span { font-family: var(--display); font-size: 18px; font-weight: 600; letter-spacing: 0.14em; }
+.sheet .bigph { aspect-ratio: 1 / 1; max-height: 340px; width: 100%; background: var(--tile); display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; color: var(--muted); font-size: 13px; }
+.sheet h2 { font-size: 32px; line-height: 1.1; }
+.sheet .amount { font-family: var(--display); font-size: 28px; font-weight: 600; color: var(--gold-ink); }
+.stack { display: grid; gap: 12px; }
+.field label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+select, input[type="text"] { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: var(--paper); color: var(--ink); font: 15px var(--body); padding: 0 12px; border-radius: 0; }
+.details { border-top: 1px solid var(--line); }
+.details div { display: flex; justify-content: space-between; gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--line); }
+.details dt { color: var(--muted); }
+.details dd { margin: 0; text-align: right; }
+.apps { display: grid; gap: 10px; }
+.app { min-height: 54px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border: 1px solid #CDB09A; background: var(--paper); text-decoration: none; font-size: 16px; }
+.qr { width: 180px; height: 180px; max-width: 100%; background: #FFFFFF; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; text-align: center; font-size: 13px; color: var(--muted); padding: 12px; }
+.note { display: flex; gap: 12px; align-items: flex-start; background: var(--paper); border: 1px solid var(--line); padding: 14px; font-size: 14px; }
+.toast { position: fixed; left: 50%; bottom: calc(90px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--night); color: var(--card); padding: 10px 18px; font-size: 14px; z-index: 30; }
+.muted { color: var(--muted); }
+.center { text-align: center; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="wa" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.4z"/><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M9 8.6c0 3.3 3 6.3 6.3 6.4l1.2-1.6-2-1-1 .9c-1-.5-1.9-1.4-2.4-2.4l.9-1-1-2z"/></symbol>
+    <symbol id="gem" viewBox="0 0 120 80"><g fill="none" stroke="currentColor" stroke-linejoin="round"><path d="M24 6h72l20 22-56 46L4 28z"/><path d="M4 28h112"/><path d="M44 6L30 28l30 46 30-46L76 6"/><path d="M44 6l16 22 16-22"/></g></symbol>
+    <symbol id="insta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.8"/></g></symbol>
+    <symbol id="phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M5 4h3l1.5 4-2 1.3a11 11 0 0 0 7.2 7.2L16 14.5l4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4z"/></symbol>
+    <symbol id="card" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h4"/></g></symbol>
+    <symbol id="mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></g></symbol>
+    <symbol id="globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.7 5.6 3.7 9s-1.2 6.4-3.7 9c-2.5-2.6-3.7-5.6-3.7-9S9.5 5.6 12 3z"/></g></symbol>
+    <symbol id="close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="chev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></symbol>
+  </defs>
+</svg>
+
+<div class="strip">Rings · Gemstones · Tasbih · Kurta Buttons</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Zeenat Jewels home">
+      <svg width="30" height="20" style="color: var(--gold)" aria-hidden="true"><use href="#gem" stroke-width="4"/></svg>
+      <span>ZEENAT JEWELS</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#collection">Collection</a>
+      <a href="#shop">New Arrivals</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="icon-btn" href="https://instagram.com/Zeenat_Jewels" target="_blank" rel="noopener" aria-label="Zeenat Jewels on Instagram"><svg class="icon" aria-hidden="true"><use href="#insta"/></svg></a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <div class="frame">
+      <div class="inner">
+        <svg class="diamond-draw" width="128" height="86" viewBox="0 0 120 80" aria-hidden="true">
+          <g fill="none" stroke="#B8913A" stroke-width="1.5" stroke-linejoin="round"><path d="M24 6h72l20 22-56 46L4 28z"/><path d="M4 28h112"/><path d="M44 6L30 28l30 46 30-46L76 6"/><path d="M44 6l16 22 16-22"/></g>
+        </svg>
+        <h1>ZEENAT<br>JEWELS</h1>
+        <div class="tagline">Rare Jewels, Timeless Elegance</div>
+        <div class="rule"></div>
+        <p class="lead">Gold &amp; silver rings, precious gemstones, bracelets, kurta buttons and tasbih of original stones &amp; crystal.</p>
+        <div class="cta-row">
+          <a class="btn btn-dark" id="hero-wa" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>Order on WhatsApp</a>
+          <a class="btn btn-line" href="#shop">View Collection</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="collection">
+    <div class="head"><span class="eyebrow">Our Collection</span><h2>Shop by Category</h2></div>
+    <div class="cats" id="cats"></div>
+  </section>
+
+  <section class="wrap" style="padding-block: 0 48px">
+    <div class="head" style="margin-bottom: 16px"><h2 style="font-size: 28px">Precious Stones</h2></div>
+    <div class="stones" id="stones"></div>
+  </section>
+
+  <section class="shop" id="shop">
+    <div class="wrap" style="padding-block: 40px 48px">
+      <div class="shop-head">
+        <div style="display: grid; gap: 4px"><span class="eyebrow">Just In</span><h2>New Arrivals</h2></div>
+        <span class="muted" id="count" style="font-size: 14px"></span>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Filter products"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="night">
+    <div class="wrap" style="padding-block: 44px">
+      <div class="promises">
+        <div class="promise"><svg width="32" height="22" style="color: var(--night-gold)" aria-hidden="true"><use href="#gem" stroke-width="4"/></svg><div><h3>Original Stones</h3><p>Ruby, emerald, pearl, aqeeq and crystal, chosen with care.</p></div></div>
+        <div class="promise"><svg width="30" height="30" style="color: var(--night-gold)" aria-hidden="true"><use href="#wa"/></svg><div><h3>Order on WhatsApp</h3><p>Ask about any piece, see more photos and order in one chat.</p></div></div>
+        <div class="promise"><svg width="30" height="30" style="color: var(--night-gold)" aria-hidden="true"><use href="#card"/></svg><div><h3>Easy UPI Payment</h3><p>Pay directly with GPay, PhonePe, Paytm or any UPI app.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap contact" id="contact">
+    <div class="frame">
+      <div class="inner">
+        <h2>Get in Touch</h2>
+        <p>Message or call us for ring sizes, stone selection and bulk kurta button orders.</p>
+        <div class="lines">
+          <a href="https://instagram.com/Zeenat_Jewels" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#insta"/></svg>@Zeenat_Jewels</a>
+          <div><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>+91 89764 85153</div>
+          <div><svg class="icon" aria-hidden="true"><use href="#phone"/></svg>+91 82900 38327</div>
+          <div style="overflow-wrap: anywhere"><svg class="icon" aria-hidden="true"><use href="#mail"/></svg>zeenat.jewels53@gmail.com</div>
+          <div style="overflow-wrap: anywhere"><svg class="icon" aria-hidden="true"><use href="#globe"/></svg>zeenatjewels53.vercel.app</div>
+        </div>
+        <a class="btn btn-wa" id="contact-wa" target="_blank" rel="noopener" style="width: 100%; max-width: 360px"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>Chat on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <svg width="44" height="30" style="color: var(--gold)" aria-hidden="true"><use href="#gem" stroke-width="3"/></svg>
+  <div class="name">ZEENAT JEWELS</div>
+  <div class="tl">Rare Jewels, Timeless Elegance</div>
+  <small>zeenatjewels53.vercel.app · zeenat.jewels53@gmail.com</small>
+  <small>© 2026 Zeenat Jewels · Preview — sample products and prices</small>
+</footer>
+
+<a class="fab" id="fab" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg width="28" height="28" aria-hidden="true"><use href="#wa"/></svg></a>
+
+<div class="scrim" id="product-sheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="p-name">
+    <div class="sheet-top"><span>ZEENAT JEWELS</span><button class="icon-btn" data-close aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button></div>
+    <div class="stack">
+      <div class="bigph"><svg width="90" height="60" style="color: var(--gold-ink)" aria-hidden="true"><use href="#gem" stroke-width="2"/></svg>Product photo</div>
+      <span class="eyebrow" id="p-cat"></span>
+      <h2 id="p-name"></h2>
+      <div class="amount" id="p-price"></div>
+      <p class="muted" style="margin: 0" id="p-desc"></p>
+      <div class="field" id="p-size-field"><label for="p-size">Ring size</label>
+        <select id="p-size"><option value="">Select your size</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>Not sure — help me</option></select>
+      </div>
+      <a class="btn btn-wa" id="p-wa" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>Order on WhatsApp</a>
+      <button class="btn btn-dark" id="p-pay"><svg class="icon" aria-hidden="true"><use href="#card"/></svg>Pay Now with UPI</button>
+      <p class="muted center" style="margin: 0; font-size: 13px">Not sure about size or stone? Message us first and we'll guide you.</p>
+      <dl class="details" id="p-details" style="margin: 8px 0 0"></dl>
+    </div>
+  </div>
+</div>
+
+<div class="scrim" id="pay-sheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="pay-title">
+    <div class="sheet-top"><span id="pay-title">PAYMENT</span><button class="icon-btn" data-close aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button></div>
+    <div class="stack">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px">
+        <div><div style="font-family: var(--display); font-size: 20px; font-weight: 600" id="pay-name"></div><div class="muted" style="font-size: 13px" id="pay-meta"></div></div>
+        <div class="amount" id="pay-amount"></div>
+      </div>
+      <span class="eyebrow" style="margin-top: 8px">Pay with any UPI app</span>
+      <div class="apps" id="apps"></div>
+      <div class="frame" style="margin-top: 8px"><div class="inner" style="padding: 22px; display: grid; gap: 12px; justify-items: center; text-align: center">
+        <div style="font-family: var(--display); font-size: 22px; font-weight: 600">Or scan to pay</div>
+        <div class="qr">Your UPI QR code will appear here</div>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center">
+          <span>UPI ID: <strong id="upi-id">yourname@upi</strong></span>
+          <button class="btn btn-line" id="copy-upi" style="min-height: 44px; padding: 0 14px; font-size: 13px">Copy</button>
+        </div>
+      </div></div>
+      <div class="note"><svg class="icon" style="color: var(--gold-ink)" aria-hidden="true"><use href="#card"/></svg><span>After paying, send us the payment screenshot on WhatsApp so we can confirm and pack your order.</span></div>
+      <a class="btn btn-wa" id="pay-wa" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>Send Screenshot on WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const WA = '918976485153';
+const UPI_ID = 'yourname@upi';
+const wa = (msg) => 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
+
+const CATS = [
+  { id: 'gold', name: 'Gold Rings', icon: '<circle cx="24" cy="30" r="12"/><path d="M19 12h10l3 4-8 6-8-6z"/>' },
+  { id: 'silver', name: 'Silver Rings', icon: '<circle cx="24" cy="30" r="12"/><circle cx="24" cy="30" r="8.5"/><path d="M20 13h8l2.5 3.5L24 21l-6.5-4.5z"/>' },
+  { id: 'buttons', name: 'Kurta Buttons', icon: '<circle cx="24" cy="24" r="14"/><circle cx="24" cy="24" r="9"/><circle cx="21" cy="21" r="1.4"/><circle cx="27" cy="21" r="1.4"/><circle cx="21" cy="27" r="1.4"/><circle cx="27" cy="27" r="1.4"/>' },
+  { id: 'gems', name: 'Gem Stones', icon: '<path d="M14 13h20l7 9-17 17L7 22z"/><path d="M7 22h34"/><path d="M19 13l-3 9 8 17 8-17-3-9"/>' },
+  { id: 'bracelets', name: 'Bracelets', icon: '<ellipse cx="24" cy="24" rx="17" ry="10"/><ellipse cx="24" cy="24" rx="12.5" ry="6.5"/><circle cx="24" cy="14" r="2"/>' },
+  { id: 'tasbih', name: 'Tasbih', icon: '<circle cx="24" cy="19" r="12" stroke-dasharray="2.2 3"/><path d="M24 31v5"/><path d="M21 36h6l-1 7h-4z"/>' }
+];
+const STONES = [
+  { id: 'Ruby', color: '#9B1B30' }, { id: 'Emerald', color: '#1F6B4A' },
+  { id: 'Pearl', color: '#F3EEE6', border: true }, { id: 'Aqeeq', color: '#A0452A' }, { id: 'Crystal', color: '#DCE6EC', border: true }
+];
+// Sample products for the preview — replace with real items, photos and prices.
+const PRODUCTS = [
+  { name: 'Aqeeq Ring in Silver', cat: 'silver', stone: 'Aqeeq', metal: 'Silver', ring: true, isNew: true },
+  { name: 'Emerald Gold Ring', cat: 'gold', stone: 'Emerald', metal: 'Gold', ring: true, isNew: true },
+  { name: 'Crystal Tasbih', cat: 'tasbih', stone: 'Crystal', metal: '—', isNew: true },
+  { name: 'Silver Kurta Buttons', cat: 'buttons', stone: '—', metal: 'Silver' },
+  { name: 'Ruby Silver Ring', cat: 'silver', stone: 'Ruby', metal: 'Silver', ring: true },
+  { name: 'Pearl Gold Ring', cat: 'gold', stone: 'Pearl', metal: 'Gold', ring: true },
+  { name: 'Aqeeq Tasbih', cat: 'tasbih', stone: 'Aqeeq', metal: '—' },
+  { name: 'Aqeeq Bracelet', cat: 'bracelets', stone: 'Aqeeq', metal: 'Silver' },
+  { name: 'Loose Ruby Stone', cat: 'gems', stone: 'Ruby', metal: '—' },
+  { name: 'Gold Kurta Buttons', cat: 'buttons', stone: '—', metal: 'Gold' }
+];
+
+const $ = (id) => document.getElementById(id);
+const catName = (id) => (CATS.find(c => c.id === id) || {}).name || '';
+let filter = { type: 'all', value: null };
+let current = null;
+
+$('hero-wa').href = wa('Hello Zeenat Jewels, I would like to know more about your collection.');
+$('contact-wa').href = $('hero-wa').href;
+$('fab').href = $('hero-wa').href;
+
+$('cats').innerHTML = CATS.map(c =>
+  '<button class="cat" data-cat="' + c.id + '"><div class="ph"><svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#7A5C17" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + c.icon + '</svg></div><span>' + c.name + '</span></button>'
+).join('');
+
+const stoneChip = (s) => '<button class="chip" data-stone="' + s.id + '" aria-pressed="false"><span class="dot" style="background:' + s.color + (s.border ? ';border:1px solid #B9A795' : '') + '"></span>' + s.id + '</button>';
+$('stones').innerHTML = STONES.map(stoneChip).join('');
+
+function renderFilters() {
+  const chips = [{ label: 'All', type: 'all', value: null }].concat(CATS.map(c => ({ label: c.name, type: 'cat', value: c.id })));
+  $('filters').innerHTML = chips.map(c => {
+    const on = filter.type === c.type && filter.value === c.value;
+    return '<button class="chip" data-ftype="' + c.type + '" data-fval="' + (c.value || '') + '" aria-pressed="' + on + '">' + c.label + '</button>';
+  }).join('') + (filter.type === 'stone' ? '<button class="chip" aria-pressed="true" data-ftype="all" data-fval="">' + filter.value + ' ✕</button>' : '');
+}
+
+function renderGrid() {
+  const list = PRODUCTS.filter(p => filter.type === 'all' || (filter.type === 'cat' && p.cat === filter.value) || (filter.type === 'stone' && p.stone === filter.value));
+  $('count').textContent = list.length + (list.length === 1 ? ' piece' : ' pieces');
+  $('grid').innerHTML = list.map(p => {
+    const i = PRODUCTS.indexOf(p);
+    return '<article class="prod"><button class="open" data-open="' + i + '" aria-label="View ' + p.name + '"><div class="ph">' + (p.isNew ? '<span class="tag">New</span>' : '') +
+      '<svg width="40" height="27" style="color:#7A5C17" aria-hidden="true"><use href="#gem" stroke-width="3"/></svg>Product photo</div><h3>' + p.name + '</h3><span class="price">₹ Price on request</span></button>' +
+      '<a class="btn btn-line" target="_blank" rel="noopener" href="' + wa('Hello, I want to order the ' + p.name + '.') + '"><svg class="icon" style="width:16px;height:16px" aria-hidden="true"><use href="#wa"/></svg>Enquire</a></article>';
+  }).join('') || '<p class="muted">No pieces here yet. Message us on WhatsApp and we\'ll show you what we have.</p>';
+}
+
+function setFilter(type, value) {
+  filter = { type, value };
+  document.querySelectorAll('#stones .chip').forEach(b => b.setAttribute('aria-pressed', String(type === 'stone' && b.dataset.stone === value)));
+  renderFilters(); renderGrid();
+}
+
+function openSheet(el) { el.hidden = false; document.body.style.overflow = 'hidden'; const b = el.querySelector('[data-close]'); b && b.focus(); }
+function closeSheet(el) { el.hidden = true; if ($('product-sheet').hidden && $('pay-sheet').hidden) document.body.style.overflow = ''; }
+
+function orderText() {
+  const size = $('p-size').value;
+  return 'Hello, I want to order the ' + current.name + (current.ring && size ? ' (ring size ' + size + ')' : '') + '.';
+}
+
+function openProduct(i) {
+  current = PRODUCTS[i];
+  $('p-cat').textContent = catName(current.cat) + (current.stone !== '—' ? ' · ' + current.stone : '');
+  $('p-name').textContent = current.name;
+  $('p-price').textContent = '₹ Price on request';
+  $('p-desc').textContent = 'A sample listing. Your real description goes here: the stone, the finish, and how it is best worn.';
+  $('p-size-field').hidden = !current.ring;
+  $('p-size').value = '';
+  $('p-wa').href = wa(orderText());
+  $('p-details').innerHTML = [['Metal', current.metal], ['Stone', current.stone], ['Weight', 'To be added'], ['Delivery', 'To be added']]
+    .map(r => '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>').join('');
+  openSheet($('product-sheet'));
+}
+
+function openPay() {
+  const size = $('p-size').value;
+  $('pay-name').textContent = current.name;
+  $('pay-meta').textContent = (current.stone !== '—' ? 'Stone: ' + current.stone + ' · ' : '') + (current.ring ? 'Size: ' + (size || 'not chosen') + ' · ' : '') + 'Qty 1';
+  $('pay-amount').textContent = '₹ —';
+  $('apps').innerHTML = ['Google Pay', 'PhonePe', 'Paytm', 'Other UPI app'].map(a =>
+    '<a class="app" href="upi://pay?pa=' + encodeURIComponent(UPI_ID) + '&pn=' + encodeURIComponent('Zeenat Jewels') + '&tn=' + encodeURIComponent(current.name) + '"><span>' + a + '</span><svg class="icon" aria-hidden="true"><use href="#chev"/></svg></a>').join('');
+  $('pay-wa').href = wa('Hello, I have paid for the ' + current.name + '. Sharing the payment screenshot.');
+  closeSheet($('product-sheet'));
+  openSheet($('pay-sheet'));
+}
+
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2200); }
+
+document.addEventListener('click', (e) => {
+  const cat = e.target.closest('[data-cat]');
+  if (cat) { setFilter('cat', cat.dataset.cat); $('shop').scrollIntoView({ behavior: 'smooth' }); return; }
+  const st = e.target.closest('[data-stone]');
+  if (st) { setFilter('stone', st.dataset.stone); $('shop').scrollIntoView({ behavior: 'smooth' }); return; }
+  const f = e.target.closest('[data-ftype]');
+  if (f) { setFilter(f.dataset.ftype, f.dataset.fval || null); return; }
+  const o = e.target.closest('[data-open]');
+  if (o) { openProduct(+o.dataset.open); return; }
+  const c = e.target.closest('[data-close]');
+  if (c) { closeSheet(c.closest('.scrim')); return; }
+  if (e.target.classList && e.target.classList.contains('scrim')) closeSheet(e.target);
+});
+$('p-size').addEventListener('change', () => { $('p-wa').href = wa(orderText()); });
+$('p-pay').addEventListener('click', openPay);
+$('copy-upi').addEventListener('click', () => {
+  const text = $('upi-id').textContent;
+  try {
+    navigator.clipboard.writeText(text).then(() => toast('UPI ID copied'), () => selectUpi());
+  } catch (err) { selectUpi(); }
+});
+function selectUpi() { const r = document.createRange(); r.selectNodeContents($('upi-id')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('UPI ID selected — copy it'); }
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.scrim').forEach(s => { if (!s.hidden) closeSheet(s); }); });
+
+renderFilters(); renderGrid();
+</script>
+</body>
+</html>
