@@ -91,6 +91,8 @@ textarea { padding: 12px; min-height: 110px; resize: vertical; }
 .crow .acts { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .filebtn { position: relative; overflow: hidden; }
 .filebtn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.photo.busy { display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--muted); text-align: center; padding: 6px; }
+.crow textarea { min-height: 90px; }
 .pill { display: inline-block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border: 1px solid var(--line); background: var(--card); color: var(--gold-ink); margin-left: 6px; vertical-align: middle; }
 .pill.off { color: var(--muted); background: var(--tile); }
 .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--night); color: var(--card); padding: 10px 18px; font-size: 14px; z-index: 30; max-width: calc(100% - 32px); }
@@ -154,6 +156,7 @@ textarea { padding: 12px; min-height: 110px; resize: vertical; }
         <div class="field">
           <span style="font-size: 14px; font-weight: 500">Photos <span class="muted" style="font-weight: 400">(up to 6, first one is the main photo)</span></span>
           <div class="photos" id="photos"></div>
+          <label class="check"><input type="checkbox" id="f-frame" checked> Put new photos in the Zeenat frame automatically</label>
         </div>
         <div class="field">
           <label for="f-model">3D model <span class="muted" style="font-weight: 400">(optional, .glb file up to 25 MB)</span></label>
@@ -175,7 +178,10 @@ textarea { padding: 12px; min-height: 110px; resize: vertical; }
             <select id="f-metal"><option value="">None</option><option>Gold</option><option>Silver</option><option>Other</option></select>
           </div>
         </div>
-        <div class="field"><label for="f-desc">Description</label><textarea id="f-desc" placeholder="Stone, weight, finish, how to wear it…"></textarea></div>
+        <div class="field"><label for="f-dtpl">Saved description</label>
+          <select id="f-dtpl"><option value="">Choose a saved description…</option></select>
+        </div>
+        <div class="field"><label for="f-desc">Description <span class="muted" style="font-weight: 400">(fills in from your choice above; you can still edit it)</span></label><textarea id="f-desc" placeholder="Stone, weight, finish, how to wear it…"></textarea></div>
         <div class="field"><label for="f-sort">Position <span class="muted" style="font-weight: 400">(smaller number shows first)</span></label><input id="f-sort" type="number" inputmode="numeric" value="100"></div>
         <label class="check"><input type="checkbox" id="f-ring"> Ask customer for ring size</label>
         <label class="check"><input type="checkbox" id="f-new" checked> Show "New" tag</label>
@@ -268,7 +274,7 @@ $('refresh').addEventListener('click', () => { loadCats(); loadStats(); loadProd
 
 /* ---------- Photos ---------- */
 function renderPhotos() {
-  const items = photos.map((p, i) => '<div class="photo"><img src="' + esc(p.url) + '" alt="Photo ' + (i + 1) + '">' +
+  const items = photos.map((p, i) => p.busy ? '<div class="photo busy">Adding Zeenat frame…</div>' : '<div class="photo"><img src="' + esc(p.url) + '" alt="Photo ' + (i + 1) + '">' +
     (i === 0 ? '<span class="first">Main</span>' : '') +
     '<button type="button" data-rm="' + i + '" aria-label="Remove photo ' + (i + 1) + '">×</button></div>').join('');
   const add = photos.length < MAX_PHOTOS ? '<label class="addphoto" style="position: relative"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7A5C17" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Add photos<input type="file" id="f-files" accept="image/*" multiple></label>' : '';
@@ -276,7 +282,14 @@ function renderPhotos() {
   const inp = $('f-files');
   if (inp) inp.addEventListener('change', () => {
     const files = Array.from(inp.files || []).slice(0, MAX_PHOTOS - photos.length);
-    files.forEach(f => photos.push({ url: URL.createObjectURL(f), file: f }));
+    const useFrame = $('f-frame').checked;
+    files.forEach(f => {
+      const item = { url: '', file: null, busy: true };
+      photos.push(item);
+      (useFrame ? frameImage(f) : Promise.resolve(f)).then(blob => {
+        item.file = blob; item.framed = useFrame; item.url = URL.createObjectURL(blob); item.busy = false; renderPhotos();
+      }, err => { photos.splice(photos.indexOf(item), 1); toast(err.message); renderPhotos(); });
+    });
     renderPhotos();
   });
 }
@@ -284,9 +297,64 @@ $('photos').addEventListener('click', (e) => {
   const b = e.target.closest('[data-rm]');
   if (!b) return;
   const p = photos.splice(+b.dataset.rm, 1)[0];
-  if (p && p.file) URL.revokeObjectURL(p.url);
+  if (p && p.file && p.url) URL.revokeObjectURL(p.url);
   renderPhotos();
 });
+try { const v = localStorage.getItem('zj_frame'); if (v !== null) $('f-frame').checked = v === '1'; } catch (e) {}
+$('f-frame').addEventListener('change', () => { try { localStorage.setItem('zj_frame', $('f-frame').checked ? '1' : '0'); } catch (e) {} });
+
+/* Zeenat frame: 1080x1350, blush card, gold double border, photo window, diamond + name */
+function loadImg(file) {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file); const img = new Image();
+    img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('This photo could not be opened. Try a JPG or PNG.')); };
+    img.src = url;
+  });
+}
+async function frameImage(file) {
+  const img = await loadImg(file);
+  try { await document.fonts.load('600 38px "Cormorant Garamond"'); } catch (e) {}
+  const W = 1080, H = 1350, X0 = 76, Y0 = 76, X1 = W - 76, Y1 = 1180, BW = X1 - X0, BH = Y1 - Y0;
+  const GOLD = '#B8913A', GOLDINK = '#7A5C17';
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const g = c.getContext('2d');
+  g.fillStyle = '#F4E6DA'; g.fillRect(0, 0, W, H);
+  g.fillStyle = '#F8EDE3'; g.fillRect(30, 30, W - 60, H - 60);
+  g.strokeStyle = GOLD; g.lineWidth = 3; g.strokeRect(30, 30, W - 60, H - 60);
+  g.lineWidth = 2; g.strokeRect(42, 42, W - 84, H - 84);
+  const iw = img.naturalWidth, ih = img.naturalHeight, ratio = iw / ih, win = BW / BH;
+  g.save(); g.beginPath(); g.rect(X0, Y0, BW, BH); g.clip();
+  if (Math.abs(ratio - win) / win <= 0.12) {
+    const r = Math.max(BW / iw, BH / ih), dw = iw * r, dh = ih * r;
+    g.drawImage(img, X0 + (BW - dw) / 2, Y0 + (BH - dh) / 2, dw, dh);
+  } else {
+    const grad = g.createRadialGradient(X0 + BW / 2, Y0 + BH * 0.42, 40, X0 + BW / 2, Y0 + BH * 0.42, BH * 0.8);
+    grad.addColorStop(0, '#FBF3EC'); grad.addColorStop(1, '#E4CCBA');
+    g.fillStyle = grad; g.fillRect(X0, Y0, BW, BH);
+    const r = Math.min((BW - 40) / iw, (BH - 40) / ih), dw = iw * r, dh = ih * r;
+    const dx = X0 + (BW - dw) / 2, dy = Y0 + (BH - dh) / 2;
+    g.save(); g.shadowColor = 'rgba(46, 33, 26, 0.32)'; g.shadowBlur = 28; g.shadowOffsetY = 12;
+    g.fillStyle = '#FFFFFF'; g.fillRect(dx, dy, dw, dh); g.restore();
+    g.drawImage(img, dx, dy, dw, dh);
+    g.strokeStyle = GOLD; g.lineWidth = 1; g.strokeRect(dx - 0.5, dy - 0.5, dw + 1, dh + 1);
+  }
+  g.restore();
+  g.strokeStyle = GOLD; g.lineWidth = 2; g.strokeRect(X0 - 1, Y0 - 1, BW + 2, BH + 2);
+  // brand line: diamond + letter-spaced name, centred together
+  const text = 'ZEENAT  JEWELS', sp = 6;
+  g.font = '600 40px "Cormorant Garamond", "Times New Roman", serif'; g.fillStyle = GOLDINK; g.textBaseline = 'middle';
+  let tw = 0; for (const ch of text) tw += g.measureText(ch).width + sp; tw -= sp;
+  const s2 = 0.36, dwid = 120 * s2, gap = 16, startX = (W - (dwid + gap + tw)) / 2, cy = 1252;
+  const P = (x, y) => [startX + x * s2, cy + (y - 40) * s2];
+  g.strokeStyle = GOLD; g.lineWidth = 2; g.lineJoin = 'round';
+  [[[24,6],[96,6],[116,28],[60,74],[4,28],[24,6]], [[4,28],[116,28]], [[44,6],[30,28],[60,74],[90,28],[76,6]], [[44,6],[60,28],[76,6]]].forEach(seg => {
+    g.beginPath(); seg.forEach(([x, y], k) => { const [a, b] = P(x, y); k ? g.lineTo(a, b) : g.moveTo(a, b); }); g.stroke();
+  });
+  let x = startX + dwid + gap;
+  for (const ch of text) { g.fillText(ch, x, cy); x += g.measureText(ch).width + sp; }
+  return new Promise(res => c.toBlob(b => res(b), 'image/jpeg', 0.9));
+}
 
 function compress(file) {
   return new Promise((resolve) => {
@@ -315,20 +383,48 @@ function renderModel() {
 }
 
 /* ---------- Product form ---------- */
-$('f-cat').addEventListener('change', () => { if (!editId) $('f-ring').checked = ['gold', 'silver'].includes($('f-cat').value); });
+let autoDesc = '';   // the text last filled in automatically, so typing your own text is never overwritten
+function renderDescOptions() {
+  const keep = $('f-dtpl').value;
+  const withText = categories.filter(c => (c.description || '').trim());
+  $('f-dtpl').innerHTML = '<option value="">' + (withText.length ? 'Choose a saved description…' : 'No saved descriptions yet (add them under Categories)') + '</option>' +
+    withText.map(c => '<option value="' + esc(c.id) + '">' + esc(c.name) + '</option>').join('');
+  if (withText.some(c => c.id === keep)) $('f-dtpl').value = keep;
+  if (!editId) applyCategoryDesc();
+}
+function descFor(id) { const c = categories.find(x => x.id === id); return c && (c.description || '').trim(); }
+function fillDesc(text) {
+  const cur = $('f-desc').value.trim();
+  if (!cur || cur === autoDesc) { $('f-desc').value = text; autoDesc = text; return true; }
+  return false;
+}
+function applyCategoryDesc() {
+  const id = $('f-cat').value, t = descFor(id);
+  if (!t) return;
+  if ($('f-dtpl').querySelector('option[value="' + id + '"]')) $('f-dtpl').value = id;
+  fillDesc(t);
+}
+$('f-dtpl').addEventListener('change', () => {
+  const t = descFor($('f-dtpl').value); if (!t) return;
+  const cur = $('f-desc').value.trim();
+  if (cur && cur !== autoDesc && cur !== t && !window.confirm('Replace the description you typed with the saved one?')) return;
+  $('f-desc').value = t; autoDesc = t;
+});
+$('f-cat').addEventListener('change', () => { if (!editId) { $('f-ring').checked = ['gold', 'silver'].includes($('f-cat').value); applyCategoryDesc(); } });
 
 function resetForm() {
   editId = null;
   $('pform').reset();
   $('f-sort').value = 100; $('f-new').checked = true; $('f-visible').checked = true;
   $('f-ring').checked = ['gold', 'silver'].includes($('f-cat').value);
-  photos.forEach(p => { if (p.file) URL.revokeObjectURL(p.url); });
+  photos.forEach(p => { if (p.file && p.url) URL.revokeObjectURL(p.url); });
   photos = [];
   renderPhotos();
   modelUrl = null; $('f-model').value = ''; renderModel();
   $('form-h').textContent = 'Add a Product';
   $('f-save').textContent = 'Save Product';
   $('cancel-edit').hidden = true;
+  autoDesc = ''; $('f-dtpl').value = ''; applyCategoryDesc();
 }
 $('cancel-edit').addEventListener('click', () => { resetForm(); showMsg($('f-msg'), ''); });
 
@@ -339,7 +435,7 @@ function startEdit(p) {
   $('f-price').value = p.price == null ? '' : p.price;
   $('f-stone').value = p.stone || '';
   $('f-metal').value = p.metal || '';
-  $('f-desc').value = p.description || '';
+  $('f-desc').value = p.description || ''; autoDesc = ''; $('f-dtpl').value = '';
   $('f-sort').value = p.sort_order == null ? 100 : p.sort_order;
   $('f-ring').checked = !!p.is_ring; $('f-new').checked = !!p.is_new; $('f-visible').checked = p.visible !== false;
   photos = (p.images || []).map(u => ({ url: u }));
@@ -359,13 +455,14 @@ $('pform').addEventListener('submit', async (e) => {
   $('f-save').disabled = true;
   try {
     const urls = [];
+    if (photos.some(p => p.busy)) throw new Error('Please wait a moment, photos are still being framed.');
     const pending = photos.filter(p => p.file).length;
     let done = 0;
     for (const p of photos) {
       if (!p.file) { urls.push(p.url); continue; }
       done++;
       showMsg($('f-msg'), 'Uploading photo ' + done + ' of ' + pending + '…');
-      urls.push(await uploadImage(p.file));
+      urls.push(await uploadImage(p.file, p.framed));
     }
     let model = modelUrl;
     const mf = $('f-model').files && $('f-model').files[0];
@@ -402,8 +499,8 @@ $('pform').addEventListener('submit', async (e) => {
   $('f-save').disabled = false;
 });
 
-async function uploadImage(file) {
-  const blob = await compress(file);
+async function uploadImage(file, ready) {
+  const blob = ready ? file : await compress(file);
   const path = Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.jpg';
   const { error } = await sb.storage.from('products').upload(path, blob, { contentType: 'image/jpeg', upsert: false });
   if (error) throw new Error('Photo upload failed: ' + error.message);
@@ -426,6 +523,7 @@ async function loadCats() {
     $('f-cat').innerHTML = categories.map(c => '<option value="' + esc(c.id) + '">' + esc(c.name) + (c.visible ? '' : ' (hidden)') + '</option>').join('');
     if (CATS[keep]) $('f-cat').value = keep;
   }
+  renderDescOptions();
   renderCatList();
 }
 function renderCatList() {
@@ -433,6 +531,7 @@ function renderCatList() {
     '<div class="crow"><div class="cthumb">' + (c.image ? '<img src="' + esc(c.image) + '" alt="">' : 'No photo') + '</div><div class="cfields">' +
     '<div class="cline"><div class="field"><label for="cn-' + i + '">Name</label><input id="cn-' + i + '" type="text" value="' + esc(c.name) + '"></div>' +
     '<div class="field"><label for="cs-' + i + '">Position</label><input id="cs-' + i + '" type="number" inputmode="numeric" value="' + esc(c.sort_order) + '"></div></div>' +
+    '<div class="field"><label for="cd-' + i + '">Saved description</label><textarea id="cd-' + i + '" placeholder="Write the description you use for every ' + esc(c.name) + ' product">' + esc(c.description || '') + '</textarea></div>' +
     '<label class="check" style="min-height: 36px"><input type="checkbox" id="cv-' + i + '"' + (c.visible ? ' checked' : '') + '> Show on website</label>' +
     '<div class="acts"><span class="btn btn-line btn-sm filebtn">' + (c.image ? 'Change photo' : 'Add photo') + '<input type="file" accept="image/*" data-cphoto="' + i + '" aria-label="Photo for ' + esc(c.name) + '"></span>' +
     (c.image ? '<button class="btn btn-line btn-sm" data-cnophoto="' + i + '">Remove photo</button>' : '') +
@@ -446,8 +545,12 @@ async function saveCat(i, extra) {
     sort_order: parseInt($('cs-' + i).value, 10) || 100,
     visible: $('cv-' + i).checked
   }, extra || {});
+  const dv = ($('cd-' + i).value || '').trim();
+  if (dv !== (c.description || '')) row.description = dv || null;
   const { error } = await sb.from('categories').update(row).eq('id', c.id);
-  toast(error ? 'Not saved: ' + error.message : 'Category saved. It is live on the website now.');
+  const colMissing = error && /description/.test(error.message);
+  toast(colMissing ? 'Saved descriptions are not switched on yet. Run add-descriptions.sql in Supabase once, then save again.'
+    : error ? 'Not saved: ' + error.message : 'Category saved.');
   if (!error) loadCats();
   return !error;
 }
