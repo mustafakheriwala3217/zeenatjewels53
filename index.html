@@ -21,11 +21,12 @@
 html, body { margin: 0; }
 [hidden] { display: none !important; }
 img { max-width: 100%; display: block; }
-body { background: var(--blush); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+body { font-variant-numeric: lining-nums; background: var(--blush); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.55; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--blush); }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
-h1, h2, h3 { font-family: var(--display); font-weight: 600; margin: 0; text-wrap: balance; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; margin: 0; text-wrap: balance; font-variant-numeric: lining-nums; }
+.num { font-family: var(--body); font-variant-numeric: lining-nums tabular-nums; }
 .wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .eyebrow { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-ink); }
 .frame { border: 1px solid var(--gold); padding: 6px; background: var(--card); }
@@ -114,7 +115,7 @@ section.block { padding-block: 44px; }
 .tag3d { position: absolute; top: 8px; right: 8px; z-index: 2; background: var(--night); color: var(--night-gold); font-size: 10px; letter-spacing: 0.16em; padding: 4px 8px; }
 .prod .tag { position: absolute; top: 8px; left: 8px; background: var(--card); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 8px; color: var(--gold-ink); z-index: 1; }
 .prod h3 { font-size: 19px; line-height: 1.2; overflow-wrap: anywhere; }
-.price { font-size: 14px; font-weight: 500; color: var(--muted); }
+.price { font-family: var(--body); font-size: 14px; font-weight: 500; color: var(--muted); font-variant-numeric: lining-nums; }
 .prod .btn { min-height: 44px; font-size: 13px; padding: 0 12px; }
 .empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding-block: 24px; }
 
@@ -152,7 +153,7 @@ footer small { font-size: 12px; color: var(--muted); }
 .gallery .noimg { display: flex; flex-direction: column; gap: 10px; align-items: center; justify-content: center; color: var(--muted); font-size: 13px; }
 .gallery-hint { font-size: 12px; color: var(--muted); text-align: center; margin-top: -4px; }
 .sheet h2 { font-size: 32px; line-height: 1.1; overflow-wrap: anywhere; }
-.sheet .amount { font-family: var(--display); font-size: 28px; font-weight: 600; color: var(--gold-ink); }
+.sheet .amount { font-family: var(--body); font-size: 24px; font-weight: 500; color: var(--gold-ink); font-variant-numeric: lining-nums; }
 .stack { display: grid; gap: 12px; }
 .field label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
 select { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: var(--paper); color: var(--ink); font: 15px var(--body); padding: 0 12px; border-radius: 0; }
