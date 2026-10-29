@@ -351,7 +351,7 @@ select { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: v
 <div class="toast" id="toast" hidden></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
-<script src="config.js"></script>
+<script src="config.js?v=2"></script>
 <script>
 const CFG = window.ZJ_CONFIG || {};
 const WA = CFG.WHATSAPP || '918976485153';
@@ -450,7 +450,8 @@ function setFilter(type, value) {
 function openSheet(el) { el.hidden = false; document.body.style.overflow = 'hidden'; const b = el.querySelector('[data-close]'); if (b) b.focus(); }
 function closeSheet(el) { el.hidden = true; if ($('product-sheet').hidden) document.body.style.overflow = ''; }
 
-const SITE = (CFG.SITE_URL || location.origin).replace(/\/$/, '');
+// On the real domain always use it, even if an old copy of config.js is cached
+const SITE = (/(^|\.)zeenatjewels53\.com$/.test(location.hostname) ? 'https://zeenatjewels53.com' : (CFG.SITE_URL || location.origin)).replace(/\/$/, '');
 const productLink = (p) => p && p.id ? SITE + '/p/' + p.id : '';
 function orderMsg(p, size) {
   const link = productLink(p);

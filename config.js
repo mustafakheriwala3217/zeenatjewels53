@@ -1,5 +1,5 @@
 // Zeenat Jewels website settings.
-// Fill in the two Supabase values from: Supabase → Project Settings → API.
+// Fill in the two Supabase values from: Supabase > Project Settings > API.
 // The "anon public" key is safe to put here; never put the "service_role" key here.
 window.ZJ_CONFIG = {
   SUPABASE_URL: 'https://hocifqrkneafbvbnfyuv.supabase.co',
