@@ -6,6 +6,6 @@ window.ZJ_CONFIG = {
   SUPABASE_ANON_KEY: 'sb_publishable_E4kODCWXx1-C40kuR-PSpQ_qDiftUrl',   // publishable key (safe to be public)
 
   WHATSAPP: '918976485153',              // country code + number, no + or spaces
-  SITE_URL: 'https://zeenatjewels53.vercel.app',   // change when you buy your own domain
+  SITE_URL: 'https://zeenatjewels53.com',   // your own domain (Cloudflare)
   ADMIN_EMAIL: 'zeenat.jewels53@gmail.com'
 };
