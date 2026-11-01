@@ -227,7 +227,7 @@ select { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: v
       <a href="#shop">New Arrivals</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="icon-btn" href="https://instagram.com/Zeenat_Jewels" target="_blank" rel="noopener" aria-label="Zeenat Jewels on Instagram"><svg class="icon" aria-hidden="true"><use href="#insta"/></svg></a>
+    <a class="icon-btn" href="https://instagram.com/zeenat_jewels53" target="_blank" rel="noopener" aria-label="Zeenat Jewels on Instagram"><svg class="icon" aria-hidden="true"><use href="#insta"/></svg></a>
   </div>
 </header>
 
@@ -305,7 +305,7 @@ select { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: v
         <h2>Get in Touch</h2>
         <p>Message or call us for ring sizes, stone selection and bulk kurta button orders.</p>
         <div class="lines">
-          <a href="https://instagram.com/Zeenat_Jewels" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#insta"/></svg>@Zeenat_Jewels</a>
+          <a href="https://instagram.com/zeenat_jewels53" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#insta"/></svg>@zeenat_jewels53</a>
           <a id="contact-wa-line" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>+91 89764 85153</a>
           <a href="tel:+918290038327"><svg class="icon" aria-hidden="true"><use href="#phone"/></svg>+91 82900 38327</a>
           <a href="mailto:info@zeenatjewels53.com"><svg class="icon" aria-hidden="true"><use href="#mail"/></svg>info@zeenatjewels53.com</a>
@@ -575,7 +575,7 @@ window.handTour = (function () {
 
 async function load() {
   renderFilters();
-  if (!sb) { PRODUCTS = SAMPLES; renderGrid(); renderCats(); return; }
+  if (!sb) { PRODUCTS = SAMPLES; renderGrid(); renderCats(); openFromLink(); return; }
   const cats = await sb.from('categories').select('*').eq('visible', true).order('sort_order', { ascending: true });
   if (!cats.error && cats.data && cats.data.length) { CATS = cats.data; renderCats(); renderFilters(); }
   const { data, error } = await sb.from('products').select('*').eq('visible', true).order('sort_order', { ascending: true }).order('created_at', { ascending: false });
@@ -583,16 +583,30 @@ async function load() {
   PRODUCTS = data || [];
   renderGrid();
   renderCats();
-  openFromHash();
+  openFromLink();
   let seen = false;
   try { seen = sessionStorage.getItem('zj_seen') === '1'; sessionStorage.setItem('zj_seen', '1'); } catch (e) {}
   if (!seen) track('view', null);
 }
 function openFromHash() {
+  const c = /^#c-([a-z0-9-]+)$/i.exec(location.hash || '');
+  if (c) { showCategory(c[1]); return; }
   const m = /^#p-([0-9a-f-]{36})$/i.exec(location.hash || '');
   if (!m) return;
   const i = PRODUCTS.findIndex(p => p.id === m[1]);
   if (i >= 0) openProduct(i);
+}
+/* Category links: zeenatjewels53.com/c/gold-rings opens the shop showing only that category */
+function showCategory(id) {
+  if (!CATS.some(c => c.id === id)) return;
+  if (window.handTour) handTour.stop();
+  setFilter('cat', id);
+  setTimeout(() => $('shop').scrollIntoView({ behavior: 'smooth' }), 150);
+}
+function openFromLink() {
+  let id = null;
+  try { id = new URLSearchParams(location.search).get('c'); } catch (e) {}
+  if (id) showCategory(id); else openFromHash();
 }
 window.addEventListener('hashchange', openFromHash);
 load();

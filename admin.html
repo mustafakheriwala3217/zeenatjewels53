@@ -526,12 +526,16 @@ async function loadCats() {
   renderDescOptions();
   renderCatList();
 }
+const CAT_SLUGS = { gold: 'gold-rings', silver: 'silver-rings', buttons: 'kurta-buttons', gems: 'gem-stones', bracelets: 'takhti', tasbih: 'tasbih' };
+function catLink(c) { return 'https://zeenatjewels53.com/c/' + (CAT_SLUGS[c.id] || c.id); }
 function renderCatList() {
   $('clist').innerHTML = categories.length ? categories.map((c, i) =>
     '<div class="crow"><div class="cthumb">' + (c.image ? '<img src="' + esc(c.image) + '" alt="">' : 'No photo') + '</div><div class="cfields">' +
     '<div class="cline"><div class="field"><label for="cn-' + i + '">Name</label><input id="cn-' + i + '" type="text" value="' + esc(c.name) + '"></div>' +
     '<div class="field"><label for="cs-' + i + '">Position</label><input id="cs-' + i + '" type="number" inputmode="numeric" value="' + esc(c.sort_order) + '"></div></div>' +
     '<div class="field"><label for="cd-' + i + '">Saved description</label><textarea id="cd-' + i + '" placeholder="Write the description you use for every ' + esc(c.name) + ' product">' + esc(c.description || '') + '</textarea></div>' +
+    '<div class="field"><label>Link to share</label><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><code style="font-size:14px;word-break:break-all">' + esc(catLink(c)) + '</code>' +
+    '<button type="button" class="btn btn-line btn-sm" data-ccopy="' + i + '">Copy link</button></div></div>' +
     '<label class="check" style="min-height: 36px"><input type="checkbox" id="cv-' + i + '"' + (c.visible ? ' checked' : '') + '> Show on website</label>' +
     '<div class="acts"><span class="btn btn-line btn-sm filebtn">' + (c.image ? 'Change photo' : 'Add photo') + '<input type="file" accept="image/*" data-cphoto="' + i + '" aria-label="Photo for ' + esc(c.name) + '"></span>' +
     (c.image ? '<button class="btn btn-line btn-sm" data-cnophoto="' + i + '">Remove photo</button>' : '') +
@@ -565,6 +569,13 @@ $('clist').addEventListener('change', async (e) => {
   } catch (err) { toast(err.message); }
 });
 $('clist').addEventListener('click', async (e) => {
+  const cp = e.target.closest('[data-ccopy]');
+  if (cp) {
+    const link = catLink(categories[+cp.dataset.ccopy]);
+    try { await navigator.clipboard.writeText(link); toast('Link copied: ' + link); }
+    catch (err) { prompt('Copy this link:', link); }
+    return;
+  }
   const sv = e.target.closest('[data-csave]'); if (sv) { saveCat(+sv.dataset.csave); return; }
   const np = e.target.closest('[data-cnophoto]');
   if (np) { const i = +np.dataset.cnophoto, old = categories[i].image; if (await saveCat(i, { image: null })) removeStored(old); }
