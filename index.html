@@ -143,6 +143,30 @@ section.block { padding-block: 44px; }
 .prod h3 { font-size: 19px; line-height: 1.2; overflow-wrap: anywhere; }
 .price { font-family: var(--body); font-size: 14px; font-weight: 500; color: var(--muted); font-variant-numeric: lining-nums; }
 .prod .btn { min-height: 44px; font-size: 13px; padding: 0 12px; }
+.social { display: flex; align-items: center; gap: 0; margin: -4px 0 -2px -9px; }
+.social button { all: unset; box-sizing: border-box; cursor: pointer; min-width: 40px; height: 42px; padding: 0 9px; display: inline-flex; align-items: center; justify-content: center; gap: 5px; color: var(--ink); font: 500 13px var(--body); font-variant-numeric: lining-nums tabular-nums; }
+.social button:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: -2px; }
+.social svg { width: 23px; height: 23px; flex: none; }
+.social .liked { color: #B3243B; --hf: currentColor; }
+.social .liked svg { animation: pop .3s ease-out; }
+@keyframes pop { 50% { transform: scale(1.25); } }
+@media (prefers-reduced-motion: reduce) { .social .liked svg { animation: none; } }
+.social .sp { flex: 1; }
+.social .txt { font-size: 14px; }
+.comments { border-top: 1px solid var(--line); padding-top: 16px; display: grid; gap: 12px; scroll-margin-top: 70px; }
+.comments h3 { font-size: 24px; }
+.cmt { background: var(--paper); border: 1px solid var(--line); padding: 10px 12px; }
+.cmt b { font-weight: 500; }
+.cmt time { font-size: 12px; color: var(--muted); margin-left: 8px; }
+.cmt p { margin: 4px 0 0; white-space: pre-line; overflow-wrap: anywhere; }
+.cmt .reply { margin: 10px 0 0 12px; padding: 8px 0 0 12px; border-left: 2px solid var(--gold); }
+.cmt .own { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-ink); border: 1px solid var(--gold); padding: 1px 6px; margin-left: 8px; vertical-align: 2px; }
+.cmt .rbtn { all: unset; cursor: pointer; display: inline-flex; align-items: center; min-height: 40px; margin-top: 2px; font-size: 14px; font-weight: 500; color: var(--gold-ink); text-decoration: underline; text-underline-offset: 3px; }
+.cmt .rbtn:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
+.cform { display: grid; gap: 10px; }
+.cform input, .cform textarea { width: 100%; box-sizing: border-box; min-height: 48px; border: 1px solid #CDB09A; background: var(--paper); color: var(--ink); font: 16px var(--body); padding: 10px 12px; border-radius: 0; }
+.cform textarea { min-height: 84px; resize: vertical; }
+html:not(.is-admin) .gallery img, html:not(.is-admin) .prod .ph img { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; -webkit-user-drag: none; }
 .empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding-block: 24px; }
 
 .night { background: var(--night); color: var(--card); }
@@ -209,6 +233,11 @@ select { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: v
     <symbol id="mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6.5L20.5 7"/></g></symbol>
     <symbol id="globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.7 5.6 3.7 9s-1.2 6.4-3.7 9c-2.5-2.6-3.7-5.6-3.7-9S9.5 5.6 12 3z"/></g></symbol>
     <symbol id="truck" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M2.5 6.5h11v9h-11z"/><path d="M13.5 9.5h4l3 3v3h-7"/><circle cx="6.5" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></g></symbol>
+    <symbol id="heart" viewBox="0 0 24 24"><path style="fill: var(--hf, none)" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M12 20.3s-7.6-4.6-9.2-9.4C1.7 7.6 3.9 4.6 7.2 4.6c2 0 3.6 1.1 4.8 2.8 1.2-1.7 2.8-2.8 4.8-2.8 3.3 0 5.5 3 4.4 6.3-1.6 4.8-9.2 9.4-9.2 9.4z"/></symbol>
+    <symbol id="comment" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M20.6 11.6a8.4 8.4 0 0 1-12.2 7.5L3.6 20.4l1.4-4.5a8.4 8.4 0 1 1 15.6-4.3z"/></symbol>
+    <symbol id="send" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M21 3L3 10.2l7.2 3.2L13.6 21z"/><path d="M21 3L10.2 13.4"/></g></symbol>
+    <symbol id="image" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="10" r="1.7"/><path d="M20.5 16l-5-5-8.5 8.5"/></g></symbol>
+    <symbol id="download" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19.5h14"/></g></symbol>
     <symbol id="close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
     <symbol id="chev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></symbol>
   </defs>
@@ -333,6 +362,7 @@ select { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: v
     <div class="stack">
       <div class="gallery" id="p-gallery"></div>
       <div class="gallery-hint" id="p-gallery-hint" hidden>Swipe to see more photos</div>
+      <div class="social" id="p-social"></div>
       <span class="eyebrow" id="p-cat"></span>
       <h2 id="p-name"></h2>
       <div class="amount" id="p-price"></div>
@@ -344,6 +374,15 @@ select { width: 100%; min-height: 48px; border: 1px solid #CDB09A; background: v
       <a class="btn btn-wa" id="p-wa" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#wa"/></svg>Order on WhatsApp</a>
       <p class="muted center" style="margin: 0; font-size: 13px">Your message includes this product's photo. We'll reply with payment details and courier charges.</p>
       <dl class="details" id="p-details"></dl>
+      <section class="comments" id="p-comments" aria-labelledby="p-cmt-h">
+        <h3 id="p-cmt-h">Comments</h3>
+        <div id="p-cmt-list" class="stack" style="gap: 8px"></div>
+        <form class="cform" id="p-cmt-form">
+          <div class="field"><label for="c-name">Your name</label><input id="c-name" maxlength="40" autocomplete="name" required></div>
+          <div class="field"><label for="c-body">Your comment</label><textarea id="c-body" maxlength="500" required></textarea></div>
+          <button class="btn btn-line" type="submit" id="c-post">Post comment</button>
+        </form>
+      </section>
     </div>
   </div>
 </div>
@@ -437,6 +476,7 @@ function renderGrid() {
       '<svg width="40" height="27" style="color:#7A5C17" aria-hidden="true"><use href="#gem" stroke-width="3"/></svg>Photo coming soon';
     return '<article class="prod"><button class="open" data-open="' + i + '" aria-label="View ' + esc(p.name) + '"><div class="ph tilt"><span class="glare"></span>' + (p.is_new ? '<span class="tag">New</span>' : '') + (p.model_url ? '<span class="tag3d">3D</span>' : '') + img +
       '</div><h3>' + esc(p.name) + '</h3><span class="price">' + priceText(p.price) + '</span></button>' +
+      '<div class="social" data-si="' + i + '">' + socialInner(p, i, false) + '</div>' +
       '<a class="btn btn-line" data-wa-product="' + i + '" target="_blank" rel="noopener" href="' + esc(wa(orderMsg(p, ''))) + '"><svg class="icon" style="width:16px;height:16px" aria-hidden="true"><use href="#wa"/></svg>Enquire</a></article>';
   }).join('') || '<p class="empty">No pieces here yet. Message us on WhatsApp and we\'ll show you what we have.</p>';
 }
@@ -485,9 +525,170 @@ function openProduct(i) {
   $('p-wa').href = wa(orderText());
   const rows = [['Metal', current.metal], ['Stone', current.stone], ['Category', catName(current.category)]].filter(r => r[1]);
   $('p-details').innerHTML = rows.map(r => '<div><dt>' + r[0] + '</dt><dd>' + esc(r[1]) + '</dd></div>').join('');
+  $('p-social').dataset.si = i;
+  $('p-social').innerHTML = socialInner(current, i, true);
+  if (IS_ADMIN) imgs.forEach(u => getBlob(u).catch(() => {}));
+  loadComments(current);
   openSheet($('product-sheet'));
   track('product', current.id);
 }
+
+/* ---------- Like, comment, share, send photo ---------- */
+/* Owner check: photo send/save buttons show only when the owner is signed in (on admin.html) in this browser */
+let IS_ADMIN = false;
+async function checkAdmin() {
+  if (!sb || !sb.auth) return;
+  try {
+    const { data } = await sb.auth.getSession();
+    const em = data && data.session && data.session.user ? data.session.user.email : '';
+    IS_ADMIN = !!em && (!CFG.ADMIN_EMAIL || em.toLowerCase() === String(CFG.ADMIN_EMAIL).toLowerCase());
+  } catch (e) { IS_ADMIN = false; }
+  document.documentElement.classList.toggle('is-admin', IS_ADMIN);
+}
+document.addEventListener('contextmenu', (e) => {
+  if (!IS_ADMIN && e.target.closest && e.target.closest('.gallery img, .prod .ph img')) e.preventDefault();
+});
+document.addEventListener('dragstart', (e) => {
+  if (!IS_ADMIN && e.target.closest && e.target.closest('.gallery img, .prod .ph img')) e.preventDefault();
+});
+let LIKED = new Set();
+try { LIKED = new Set(JSON.parse(localStorage.getItem('zj_liked') || '[]')); } catch (e) {}
+function saveLiked() { try { localStorage.setItem('zj_liked', JSON.stringify(Array.from(LIKED))); } catch (e) {} }
+const count = (n) => n > 0 ? '<span>' + Number(n).toLocaleString('en-IN') + '</span>' : '';
+function socialInner(p, i, sheet) {
+  const liked = !!(p.id && LIKED.has(p.id));
+  let h = '<button type="button" data-like="' + i + '" class="' + (liked ? 'liked' : '') + '" aria-pressed="' + liked + '" aria-label="' + (liked ? 'Unlike ' : 'Like ') + esc(p.name) + '"><svg aria-hidden="true"><use href="#heart"/></svg>' + count(p.likes) + '</button>' +
+    '<button type="button" data-cmt="' + i + '" aria-label="Comments on ' + esc(p.name) + '"><svg aria-hidden="true"><use href="#comment"/></svg>' + count(p.comments_count) + '</button>' +
+    '<button type="button" data-share="' + i + '" aria-label="Share ' + esc(p.name) + '"><svg aria-hidden="true"><use href="#send"/></svg></button>';
+  if (sheet && IS_ADMIN && p.images && p.images.length) h += '<span class="sp"></span>' +
+    '<button type="button" data-photo="send" class="txt" aria-label="Send this photo"><svg aria-hidden="true"><use href="#image"/></svg>Send photo</button>' +
+    '<button type="button" data-photo="save" aria-label="Save this photo"><svg aria-hidden="true"><use href="#download"/></svg></button>';
+  return h;
+}
+function refreshSocial(i) {
+  document.querySelectorAll('.social[data-si="' + i + '"]').forEach(el => { el.innerHTML = socialInner(PRODUCTS[i], i, el.id === 'p-social'); });
+}
+async function toggleLike(i) {
+  const p = PRODUCTS[i];
+  if (!p || !p.id || !sb) { toast('Likes work once the shop is online'); return; }
+  const on = !LIKED.has(p.id);
+  const flip = (dir) => { dir ? LIKED.add(p.id) : LIKED.delete(p.id); saveLiked(); p.likes = Math.max(0, (p.likes || 0) + (dir ? 1 : -1)); refreshSocial(i); };
+  flip(on);
+  const { data, error } = await sb.rpc('like_product', { pid: p.id, delta: on ? 1 : -1 });
+  if (error) { flip(!on); toast('Could not save your like. Please try again.'); return; }
+  if (typeof data === 'number') { p.likes = data; refreshSocial(i); }
+}
+async function shareProduct(i) {
+  const p = PRODUCTS[i];
+  const url = productLink(p) || SITE;
+  const text = p.name + ' · ' + priceText(p.price) + '\nZeenat Jewels: Rare Jewels, Timeless Elegance';
+  if (navigator.share) { try { await navigator.share({ title: p.name + ' | Zeenat Jewels', text: text, url: url }); } catch (e) {} return; }
+  window.open('https://wa.me/?text=' + encodeURIComponent(text + '\n' + url), '_blank', 'noopener');
+}
+const BLOBS = {};
+function getBlob(url) {
+  if (!BLOBS[url]) BLOBS[url] = fetch(url, { mode: 'cors' }).then(r => { if (!r.ok) throw new Error('fetch'); return r.blob(); }).catch(err => { delete BLOBS[url]; throw err; });
+  return BLOBS[url];
+}
+function currentPhotoUrl() {
+  const imgs = (current && current.images) || [];
+  if (!imgs.length) return null;
+  const g = $('p-gallery');
+  const k = Math.round(g.scrollLeft / Math.max(1, g.clientWidth)) - (current.model_url ? 1 : 0);
+  return imgs[Math.min(imgs.length - 1, Math.max(0, k))];
+}
+function toPng(blob) {
+  return createImageBitmap(blob).then(bm => {
+    const c = document.createElement('canvas'); c.width = bm.width; c.height = bm.height;
+    c.getContext('2d').drawImage(bm, 0, 0);
+    return new Promise(res => c.toBlob(res, 'image/png'));
+  });
+}
+async function sendPhoto(saveOnly) {
+  if (!IS_ADMIN) return;
+  const url = currentPhotoUrl();
+  if (!url) { toast('No photo for this piece yet'); return; }
+  const fname = (current.name || 'zeenat-jewels').replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').toLowerCase() + '.jpg';
+  let blob;
+  try { blob = await getBlob(url); }
+  catch (e) { window.open(url, '_blank', 'noopener'); toast('Photo opened. Press and hold it to save or share.'); return; }
+  const file = new File([blob], fname, { type: blob.type || 'image/jpeg' });
+  if (!saveOnly && navigator.canShare && navigator.canShare({ files: [file] })) {
+    try { await navigator.share({ files: [file], text: current.name + ' · ' + priceText(current.price) + '\n' + (productLink(current) || SITE) }); return; }
+    catch (e) { if (e && e.name === 'AbortError') return; }
+  }
+  if (!saveOnly && window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+    try { await navigator.clipboard.write([new ClipboardItem({ 'image/png': toPng(blob) })]); toast('Photo copied. Paste it in WhatsApp.'); return; } catch (e) {}
+  }
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = fname;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  toast('Photo saved to your downloads');
+}
+const fmtDate = (s) => { try { return new Date(s).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }); } catch (e) { return ''; } };
+let CMTS = [];
+function replyBox(i) {
+  const c = CMTS[i];
+  return '<form class="cform" data-replyform="' + i + '" style="margin-top: 8px"><label class="muted" for="r-' + i + '" style="font-size: 13px">Reply as Zeenat Jewels</label>' +
+    '<textarea id="r-' + i + '" maxlength="1000">' + esc(c.reply || '') + '</textarea>' +
+    '<div style="display: flex; gap: 8px; flex-wrap: wrap"><button class="btn btn-dark" type="submit" style="min-height: 44px">Save reply</button>' +
+    '<button class="btn btn-line" type="button" data-replycancel="' + i + '" style="min-height: 44px">Cancel</button></div></form>';
+}
+function renderComments(rows) {
+  CMTS = rows;
+  $('p-cmt-h').textContent = rows.length ? 'Comments (' + rows.length + ')' : 'Comments';
+  $('p-cmt-list').innerHTML = rows.length ? rows.map((c, i) => '<div class="cmt" data-ci="' + i + '"><b>' + esc(c.name) + '</b><time datetime="' + esc(c.created_at) + '">' + esc(fmtDate(c.created_at)) + '</time><p>' + esc(c.body) + '</p>' +
+      (c.reply ? '<div class="reply"><b>Zeenat Jewels</b><span class="own">Owner</span>' + (c.replied_at ? '<time datetime="' + esc(c.replied_at) + '">' + esc(fmtDate(c.replied_at)) + '</time>' : '') + '<p>' + esc(c.reply) + '</p></div>' : '') +
+      (IS_ADMIN ? '<div class="rbox"><button type="button" class="rbtn" data-reply="' + i + '">' + (c.reply ? 'Edit reply' : 'Reply') + '</button></div>' : '') + '</div>').join('')
+    : '<p class="muted" style="margin: 0">No comments yet. Be the first to say something about this piece.</p>';
+}
+async function loadComments(p) {
+  $('p-cmt-h').textContent = 'Comments';
+  if (!sb || !p.id) { $('p-cmt-list').innerHTML = '<p class="muted" style="margin: 0">Comments will appear here once the shop is online.</p>'; return; }
+  $('p-cmt-list').innerHTML = '<p class="muted" style="margin: 0">Loading comments…</p>';
+  const q = (cols) => sb.from('comments').select(cols).eq('product_id', p.id).order('created_at', { ascending: true }).limit(100);
+  let { data, error } = await q('id,name,body,created_at,reply,replied_at');
+  if (error) ({ data, error } = await q('id,name,body,created_at'));
+  if (current !== p) return;
+  if (error) { $('p-cmt-list').innerHTML = '<p class="muted" style="margin: 0">Comments are not available right now.</p>'; return; }
+  renderComments(data || []);
+}
+async function saveReply(i, text) {
+  const c = CMTS[i]; if (!c || !IS_ADMIN) return;
+  const reply = text.trim() || null;
+  const { error } = await sb.from('comments').update({ reply: reply, replied_at: reply ? new Date().toISOString() : null }).eq('id', c.id);
+  if (error) { toast(/reply/.test(error.message) ? 'Replies are not switched on yet. Run add-replies.sql in Supabase once.' : 'Reply not saved: ' + error.message); return; }
+  toast(reply ? 'Reply posted' : 'Reply removed');
+  loadComments(current);
+}
+document.addEventListener('submit', (e) => {
+  const f = e.target.closest && e.target.closest('[data-replyform]');
+  if (!f) return;
+  e.preventDefault();
+  const i = +f.dataset.replyform;
+  saveReply(i, $('r-' + i).value);
+});
+let lastPost = 0;
+try { $('c-name').value = localStorage.getItem('zj_name') || ''; } catch (e) {}
+$('p-cmt-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const p = current, name = $('c-name').value.trim(), body = $('c-body').value.trim();
+  if (!p || !name || !body) return;
+  if (!sb || !p.id) { toast('Comments work once the shop is online'); return; }
+  if (Date.now() - lastPost < 15000) { toast('Please wait a few seconds before posting again'); return; }
+  $('c-post').disabled = true;
+  const { error } = await sb.from('comments').insert({ product_id: p.id, name: name.slice(0, 40), body: body.slice(0, 500) });
+  $('c-post').disabled = false;
+  if (error) { toast('Comment not posted. Please try again.'); return; }
+  lastPost = Date.now();
+  try { localStorage.setItem('zj_name', name); } catch (err) {}
+  $('c-body').value = '';
+  p.comments_count = (p.comments_count || 0) + 1;
+  refreshSocial(PRODUCTS.indexOf(p));
+  toast('Comment posted. Thank you!');
+  loadComments(p);
+});
 
 function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { t.hidden = true; }, 2200); }
 
@@ -500,6 +701,23 @@ document.addEventListener('click', (e) => {
   if (st) { setFilter('stone', st.dataset.stone); $('shop').scrollIntoView({ behavior: 'smooth' }); return; }
   const f = e.target.closest('[data-ftype]');
   if (f) { setFilter(f.dataset.ftype, f.dataset.fval || null); return; }
+  const rp = e.target.closest('[data-reply]');
+  if (rp) { const i = +rp.dataset.reply; rp.parentElement.innerHTML = replyBox(i); const t = $('r-' + i); if (t) t.focus(); return; }
+  const rc = e.target.closest('[data-replycancel]');
+  if (rc) { renderComments(CMTS); return; }
+  const lk = e.target.closest('[data-like]');
+  if (lk) { toggleLike(+lk.dataset.like); return; }
+  const cm = e.target.closest('[data-cmt]');
+  if (cm) {
+    const i = +cm.dataset.cmt;
+    if ($('product-sheet').hidden || current !== PRODUCTS[i]) openProduct(i);
+    setTimeout(() => $('p-comments').scrollIntoView({ behavior: 'smooth' }), 260);
+    return;
+  }
+  const sh = e.target.closest('[data-share]');
+  if (sh) { shareProduct(+sh.dataset.share); return; }
+  const ph = e.target.closest('[data-photo]');
+  if (ph) { sendPhoto(ph.dataset.photo === 'save'); return; }
   const o = e.target.closest('[data-open]');
   if (o) { openProduct(+o.dataset.open); return; }
   const c = e.target.closest('[data-close]');
@@ -576,6 +794,7 @@ window.handTour = (function () {
 async function load() {
   renderFilters();
   if (!sb) { PRODUCTS = SAMPLES; renderGrid(); renderCats(); openFromLink(); return; }
+  await checkAdmin();
   const cats = await sb.from('categories').select('*').eq('visible', true).order('sort_order', { ascending: true });
   if (!cats.error && cats.data && cats.data.length) { CATS = cats.data; renderCats(); renderFilters(); }
   const { data, error } = await sb.from('products').select('*').eq('visible', true).order('sort_order', { ascending: true }).order('created_at', { ascending: false });

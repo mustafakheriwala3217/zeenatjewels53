@@ -195,6 +195,11 @@ textarea { padding: 12px; min-height: 110px; resize: vertical; }
       <div class="sec-title"><h2 id="list-h">Your Products</h2><span class="muted" id="p-count"></span></div>
       <div class="list" id="plist" style="display: block"><div class="muted" style="padding: 14px">Loading…</div></div>
     </section>
+
+    <section class="panel" aria-labelledby="cm-h">
+      <div class="sec-title"><h2 id="cm-h">Comments</h2><span class="muted" style="font-size: 13px">Newest first. Hide or delete any comment.</span></div>
+      <div class="list" id="cmlist" style="display: block"><div class="muted" style="padding: 14px">Loading…</div></div>
+    </section>
   </div>
 </main>
 
@@ -235,7 +240,7 @@ function show(session) {
   $('signout').hidden = !email;
   if (email) {
     if (CFG.ADMIN_EMAIL && email.toLowerCase() !== CFG.ADMIN_EMAIL.toLowerCase()) toast('Signed in as ' + email + ', which is not the owner email. Changes may be refused.');
-    loadCats().then(() => { loadStats(); loadProducts(); }); renderPhotos();
+    loadCats().then(() => { loadStats(); loadProducts().then(loadComments); }); renderPhotos();
   }
 }
 
@@ -270,7 +275,7 @@ document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click
   document.querySelectorAll('.tabs button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
   loadStats();
 }));
-$('refresh').addEventListener('click', () => { loadCats(); loadStats(); loadProducts(); });
+$('refresh').addEventListener('click', () => { loadCats(); loadStats(); loadProducts().then(loadComments); });
 
 /* ---------- Photos ---------- */
 function renderPhotos() {
@@ -603,7 +608,8 @@ async function loadProducts() {
   $('plist').innerHTML = products.length ? products.map((p, i) =>
     '<div class="prow"><div class="thumb">' + (p.images && p.images[0] ? '<img src="' + esc(p.images[0]) + '" alt="">' : '') + '</div><div>' +
     '<h3>' + esc(p.name) + (p.visible ? '' : '<span class="pill off">Hidden</span>') + (p.is_new ? '<span class="pill">New</span>' : '') + '</h3>' +
-    '<div class="meta">' + esc(CATS[p.category] || p.category) + ' · ' + (p.price == null ? 'Price on request' : '₹ ' + Number(p.price).toLocaleString('en-IN')) + ' · ' + (p.images ? p.images.length : 0) + ' photo(s)' + (p.model_url ? ' · 3D model' : '') + '</div>' +
+    '<div class="meta">' + esc(CATS[p.category] || p.category) + ' · ' + (p.price == null ? 'Price on request' : '₹ ' + Number(p.price).toLocaleString('en-IN')) + ' · ' + (p.images ? p.images.length : 0) + ' photo(s)' + (p.model_url ? ' · 3D model' : '') +
+    (p.likes ? ' · ' + p.likes + (p.likes === 1 ? ' like' : ' likes') : '') + (p.comments_count ? ' · ' + p.comments_count + (p.comments_count === 1 ? ' comment' : ' comments') : '') + '</div>' +
     '<div class="acts"><button class="btn btn-line btn-sm" data-edit="' + i + '">Edit</button>' +
     '<button class="btn btn-line btn-sm" data-vis="' + i + '">' + (p.visible ? 'Hide' : 'Show') + '</button>' +
     '<button class="btn btn-line btn-sm" data-del="' + i + '" style="color: var(--bad); border-color: var(--bad)">Delete</button></div></div></div>'
@@ -629,6 +635,52 @@ $('plist').addEventListener('click', async (e) => {
     if (paths.length) sb.storage.from('products').remove(paths).then(() => {}, () => {});
     if (editId === p.id) resetForm();
     toast('Deleted'); loadProducts();
+  }
+});
+
+/* ---------- Comments ---------- */
+let comments = [], replyReady = false;
+async function loadComments() {
+  const q = (cols) => sb.from('comments').select(cols).order('created_at', { ascending: false }).limit(200);
+  let { data, error } = await q('id,product_id,name,body,visible,created_at,reply,replied_at');
+  replyReady = !error;
+  if (error) ({ data, error } = await q('id,product_id,name,body,visible,created_at'));
+  if (error) { $('cmlist').innerHTML = '<div class="muted" style="padding: 14px">Comments are not switched on yet. Run add-social.sql in Supabase once, then press Refresh.</div>'; return; }
+  comments = data || [];
+  const pname = (id) => { const p = products.find(x => x.id === id); return p ? p.name : 'Deleted product'; };
+  const when = (s) => { try { return new Date(s).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; } };
+  $('cmlist').innerHTML = comments.length ? comments.map((c, i) =>
+    '<div style="display: block"><div class="meta" style="font-size: 13px; color: var(--muted)">' + esc(pname(c.product_id)) + ' · ' + esc(when(c.created_at)) + (c.visible ? '' : '<span class="pill off">Hidden</span>') + '</div>' +
+    '<div style="margin-top: 4px"><b style="font-weight: 500">' + esc(c.name) + '</b>: <span style="white-space: pre-line; overflow-wrap: anywhere">' + esc(c.body) + '</span></div>' +
+    (c.reply ? '<div style="margin: 8px 0 0 10px; padding-left: 10px; border-left: 2px solid var(--gold)"><b style="font-weight: 500">Your reply</b>: <span style="white-space: pre-line; overflow-wrap: anywhere">' + esc(c.reply) + '</span></div>' : '') +
+    (replyReady ? '<div class="field" style="margin-top: 8px"><label for="rp-' + i + '" style="font-size: 13px">' + (c.reply ? 'Edit your reply' : 'Reply as Zeenat Jewels') + '</label><textarea id="rp-' + i + '" maxlength="1000" style="min-height: 64px">' + esc(c.reply || '') + '</textarea></div>' : '<div class="muted" style="font-size: 13px; margin-top: 6px">To reply, run add-replies.sql in Supabase once.</div>') +
+    '<div class="acts" style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap">' + (replyReady ? '<button class="btn btn-dark btn-sm" data-cmreply="' + i + '">Save reply</button>' : '') + '<button class="btn btn-line btn-sm" data-cmvis="' + i + '">' + (c.visible ? 'Hide' : 'Show') + '</button>' +
+    '<button class="btn btn-line btn-sm" data-cmdel="' + i + '" style="color: var(--bad); border-color: var(--bad)">Delete</button></div></div>'
+  ).join('') : '<div class="muted" style="padding: 14px">No comments yet.</div>';
+}
+$('cmlist').addEventListener('click', async (e) => {
+  const rb = e.target.closest('[data-cmreply]');
+  if (rb) {
+    const i = +rb.dataset.cmreply, c = comments[i];
+    const reply = ($('rp-' + i).value || '').trim() || null;
+    const { error } = await sb.from('comments').update({ reply: reply, replied_at: reply ? new Date().toISOString() : null }).eq('id', c.id);
+    toast(error ? 'Reply not saved: ' + error.message : (reply ? 'Reply posted on the website' : 'Reply removed'));
+    loadComments(); return;
+  }
+  const vs = e.target.closest('[data-cmvis]');
+  if (vs) {
+    const c = comments[+vs.dataset.cmvis];
+    const { error } = await sb.from('comments').update({ visible: !c.visible }).eq('id', c.id);
+    toast(error ? 'Could not update: ' + error.message : (c.visible ? 'Comment hidden' : 'Comment showing'));
+    loadComments(); return;
+  }
+  const dl = e.target.closest('[data-cmdel]');
+  if (dl) {
+    const c = comments[+dl.dataset.cmdel];
+    if (!window.confirm('Delete this comment by ' + c.name + '?')) return;
+    const { error } = await sb.from('comments').delete().eq('id', c.id);
+    toast(error ? 'Could not delete: ' + error.message : 'Comment deleted');
+    loadComments();
   }
 });
 </script>
