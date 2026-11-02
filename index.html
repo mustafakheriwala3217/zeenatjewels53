@@ -580,12 +580,17 @@ async function toggleLike(i) {
   if (error) { flip(!on); toast('Could not save your like. Please try again.'); return; }
   if (typeof data === 'number') { p.likes = data; refreshSocial(i); }
 }
+// Every shared message ends with the shop details link, so whoever it is forwarded to gets the full contact details
+const DETAILS = SITE + '/details';
+function shareText(p) {
+  return '*' + p.name + '* · ' + priceText(p.price) + '\n' + (productLink(p) || SITE) +
+    '\n\nDetails of Zeenat Jewels: ' + DETAILS;
+}
 async function shareProduct(i) {
   const p = PRODUCTS[i];
-  const url = productLink(p) || SITE;
-  const text = p.name + ' · ' + priceText(p.price) + '\nZeenat Jewels: Rare Jewels, Timeless Elegance';
-  if (navigator.share) { try { await navigator.share({ title: p.name + ' | Zeenat Jewels', text: text, url: url }); } catch (e) {} return; }
-  window.open('https://wa.me/?text=' + encodeURIComponent(text + '\n' + url), '_blank', 'noopener');
+  const text = shareText(p);
+  if (navigator.share) { try { await navigator.share({ title: p.name + ' | Zeenat Jewels', text: text }); } catch (e) {} return; }
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
 }
 const BLOBS = {};
 function getBlob(url) {
@@ -616,7 +621,7 @@ async function sendPhoto(saveOnly) {
   catch (e) { window.open(url, '_blank', 'noopener'); toast('Photo opened. Press and hold it to save or share.'); return; }
   const file = new File([blob], fname, { type: blob.type || 'image/jpeg' });
   if (!saveOnly && navigator.canShare && navigator.canShare({ files: [file] })) {
-    try { await navigator.share({ files: [file], text: current.name + ' · ' + priceText(current.price) + '\n' + (productLink(current) || SITE) }); return; }
+    try { await navigator.share({ files: [file], text: shareText(current) }); return; }
     catch (e) { if (e && e.name === 'AbortError') return; }
   }
   if (!saveOnly && window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
@@ -810,6 +815,7 @@ async function load() {
   if (!seen) track('view', null);
 }
 function openFromHash() {
+  if (location.hash === '#contact') { setTimeout(() => $('contact').scrollIntoView(), 120); return; }
   const c = /^#c-([a-z0-9-]+)$/i.exec(location.hash || '');
   if (c) { showCategory(c[1]); return; }
   const m = /^#p-([0-9a-f-]{36})$/i.exec(location.hash || '');
