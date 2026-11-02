@@ -499,7 +499,7 @@ function orderMsg(p, size) {
     '*' + p.name + '*\n' +
     (money(p.price) !== null ? 'Price: ' + priceText(p.price) + '\n' : '') +
     (p.stone ? 'Stone: ' + p.stone + '\n' : '') +
-    (p.is_ring && size ? 'Ring size: ' + size + '\n' : '') +
+    (p.is_ring && size && !$('p-size-field').hidden ? 'Ring size: ' + size + '\n' : '') +
     (link ? '\nPhoto: ' + link + '\n' : '') +
     '\nI want to buy this product, please give payment details and courier charges.';
 }
@@ -520,7 +520,9 @@ function openProduct(i) {
   $('p-price').textContent = priceText(current.price);
   $('p-desc').textContent = current.description || '';
   $('p-desc').hidden = !current.description;
-  $('p-size-field').hidden = !current.is_ring;
+  // Ring size only for ring categories, even if the box was ticked by mistake
+  const ringCat = ['gold', 'silver'].includes(current.category) || /ring/i.test(catName(current.category));
+  $('p-size-field').hidden = !(current.is_ring && ringCat);
   $('p-size').value = '';
   $('p-wa').href = wa(orderText());
   const rows = [['Metal', current.metal], ['Stone', current.stone], ['Category', catName(current.category)]].filter(r => r[1]);

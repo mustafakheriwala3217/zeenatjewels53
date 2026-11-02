@@ -415,7 +415,11 @@ $('f-dtpl').addEventListener('change', () => {
   if (cur && cur !== autoDesc && cur !== t && !window.confirm('Replace the description you typed with the saved one?')) return;
   $('f-desc').value = t; autoDesc = t;
 });
-$('f-cat').addEventListener('change', () => { if (!editId) { $('f-ring').checked = ['gold', 'silver'].includes($('f-cat').value); applyCategoryDesc(); } });
+$('f-cat').addEventListener('change', () => {
+  const c = $('f-cat').value;
+  $('f-ring').checked = ['gold', 'silver'].includes(c) || /ring/i.test(CATS[c] || '');
+  if (!editId) applyCategoryDesc();
+});
 
 function resetForm() {
   editId = null;
